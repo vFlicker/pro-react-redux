@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import Header from '../header';
 import RandomPlanet from '../random-planet';
-import ItemList from '../item-list';
-import PersonDetails from '../person-details';
+import PeoplePage from '../people-page';
 import './app.css';
 
 export default class App extends Component {
@@ -21,9 +20,9 @@ export default class App extends Component {
   render() {
     const planet = this.state.showRandomPlanet ? <RandomPlanet /> : null;
 
-  return (
-    <div>
-      <Header />
+    return (
+      <div>
+        <Header />
         { planet }
 
         <button
@@ -32,15 +31,8 @@ export default class App extends Component {
           Toggle Random Planet
         </button>
 
-      <div className="row mb2">
-        <div className="col-md-6">
-          <ItemList />
-        </div>
-        <div className="col-md-6">
-          <PersonDetails />
-        </div>
+        <PeoplePage />
       </div>
-    </div>
-  );
+    );
   }
 };
