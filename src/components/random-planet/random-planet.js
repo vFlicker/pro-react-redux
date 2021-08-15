@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import Api from '../../api';
 import Spinner from '../spinner';
 import ErrorIndicator from '../error-indicator';
+import Api from '../../api';
 import './random-planet.css';
 
 export default class RandomPlanet extends Component {
   api = new Api();
 
   state = {
-    planet: {},
+    planet: null,
     loading: true,
     error: false,
   };
@@ -16,6 +16,10 @@ export default class RandomPlanet extends Component {
   componentDidMount() {
     this.updatePlanet();
     this.intervalId = setInterval(this.updatePlanet, 6000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.intervalId);
   }
 
   onPlanetLoaded = (planet) => {
@@ -26,7 +30,7 @@ export default class RandomPlanet extends Component {
     });
   };
 
-  onLoadError = (err) => {
+  onError = (err) => {
     this.setState({
       loading: false,
       error: true,
@@ -39,7 +43,7 @@ export default class RandomPlanet extends Component {
     this.api
       .getPlanet(id)
       .then(this.onPlanetLoaded)
-      .catch(this.onLoadError);
+      .catch(this.onError);
   }
 
   render() {
