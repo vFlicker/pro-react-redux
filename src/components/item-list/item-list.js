@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import Spinner from '../spinner';
-import Api from '../../api';
 import './item-list.css';
 
 export default class ItemList extends Component {
-  api = new Api();
-
   state = {
     items: null,
   }
@@ -15,8 +12,9 @@ export default class ItemList extends Component {
   };
 
   componentDidMount() {
-    this.api
-      .getAllPeople()
+    const { getData } = this.props;
+
+    getData()
       .then(this.onItemsLoaded);
   }
 

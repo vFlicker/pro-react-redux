@@ -3,9 +3,12 @@ import ItemList from '../item-list';
 import PersonDetails from '../person-details';
 import ErrorIndicator from '../error-indicator';
 import Row from '../row';
+import Api from '../../api';
 import './people-page.css';
 
 export default class PeoplePage extends Component {
+  api = new Api();
+
   state = {
     personId: null,
     hasError: false,
@@ -25,7 +28,10 @@ export default class PeoplePage extends Component {
     }
 
     const itemList = (
-      <ItemList onItemSelected={this.onPersonSelected} />
+      <ItemList
+        onItemSelected={this.onPersonSelected}
+        getData={this.api.getAllPeople}
+      />
     );
 
     const personDetails = (
