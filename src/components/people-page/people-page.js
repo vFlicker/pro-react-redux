@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ItemList from '../item-list';
-import PersonDetails from '../person-details';
+import ItemDetails from '../item-details';
 import ErrorBoundary from '../error-boundary';
 import Row from '../row';
 import Api from '../../api';
@@ -27,7 +27,10 @@ export default class PeoplePage extends Component {
     );
 
     const personDetails = (
-      <PersonDetails personId={this.state.personId} />
+      <ItemDetails
+        itemId={this.state.personId}
+        getData={this.api.getPerson}
+      />
     );
 
     return (

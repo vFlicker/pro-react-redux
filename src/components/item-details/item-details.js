@@ -1,65 +1,63 @@
 import React, { Component } from 'react';
 import Spinner from '../spinner';
 import ErrorButton from '../error-button/error-button';
-import Api from '../../api';
-import './person-details.css';
+import './item-details.css';
 
-export default class PersonDetails extends Component {
-  api = new Api();
-
+export default class ItemDetails extends Component {
   state = {
-    person: null,
+    item: null,
     loaded: true,
   }
 
   componentDidMount() {
-    this.updatePerson();
+    this.updateItem();
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.personId !== prevProps.personId) {
+    if (this.props.itemId !== prevProps.itemId) {
       this.setState({ loaded: true })
-      this.updatePerson();
+      this.updateItem();
     }
   }
 
-  onPersonLoaded = (person) => {
+  onItemLoaded = (item) => {
     this.setState({
-      person,
+      item,
       loaded: false,
     });
   }
 
-  updatePerson() {
-    const { personId } = this.props;
+  updateItem() {
+    const { itemId, getData } = this.props;
 
-    if (!personId) {
+    if (!itemId) {
       return;
     }
 
-    this.api
-      .getPerson(personId)
-      .then(this.onPersonLoaded);
+    getData(itemId)
+      .then(this.onItemLoaded);
   }
 
   render() {
-    if (!this.state.person) {
+    const {loaded, item} = this.state;
+
+    if (!item) {
       return <span>Select a person from a list</span>;
     }
 
-    const spinner = this.state.loaded ? <Spinner /> : null;
-    const person = !this.state.loaded ? personItem(this.state.person) : null;
+    const spinner = loaded ? <Spinner /> : null;
+    const itemElement = !loaded ? renderItemElement(item) : null;
 
     return (
       <div className="person-details card">
         {spinner}
-        {person}
+        {itemElement}
       </div>
     );
   }
 }
 
-const personItem = ({ id, name, gender, birthYear, eyeColor }) => {
+const renderItemElement = ({ id, name, gender, birthYear, eyeColor }) => {
   return (
     <React.Fragment>
       <img
