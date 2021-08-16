@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ItemList from '../item-list';
 import PersonDetails from '../person-details';
-import ErrorIndicator from '../error-indicator';
+import ErrorBoundary from '../error-boundary';
 import Row from '../row';
 import Api from '../../api';
 import './people-page.css';
@@ -11,11 +11,6 @@ export default class PeoplePage extends Component {
 
   state = {
     personId: null,
-    hasError: false,
-  }
-
-  componentDidCatch() {
-    this.setState({ hasError: true });
   }
 
   onPersonSelected = (personId) => {
@@ -23,10 +18,6 @@ export default class PeoplePage extends Component {
   }
 
   render() {
-    if (this.state.hasError) {
-      return <ErrorIndicator />
-    }
-
     const itemList = (
       <ItemList
         onItemSelected={this.onPersonSelected}
@@ -40,7 +31,9 @@ export default class PeoplePage extends Component {
     );
 
     return (
-      <Row left={itemList} right={personDetails} />
+      <ErrorBoundary>
+        <Row left={itemList} right={personDetails} />
+      </ ErrorBoundary>
     )
   }
 }
