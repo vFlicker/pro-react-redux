@@ -21,12 +21,12 @@ export default class App extends Component {
     const planet = this.state.showRandomPlanet ? <RandomPlanet /> : null;
 
     return (
-      <div>
+      <div className="container">
         <Header />
         { planet }
 
         <button
-          className="toggle-planet btn btn-warning btn-lg"
+          className="toggle-planet btn btn-warning btn-lg mb-3"
           onClick={this.toggleRandomPlanet}>
           Toggle Random Planet
         </button>
