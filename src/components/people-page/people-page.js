@@ -25,7 +25,7 @@ export default class PeoplePage extends Component {
     }
 
     const itemList = (
-      <ItemList onPersonSelected={this.onPersonSelected} />
+      <ItemList onItemSelected={this.onPersonSelected} />
     );
 
     const personDetails = (

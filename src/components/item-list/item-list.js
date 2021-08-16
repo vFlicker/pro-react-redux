@@ -7,26 +7,26 @@ export default class ItemList extends Component {
   api = new Api();
 
   state = {
-    peopleList: null,
+    items: null,
   }
 
-  onPeopleListLoaded = (peopleList) => {
-    this.setState({ peopleList });
+  onItemsLoaded = (items) => {
+    this.setState({ items });
   };
 
   componentDidMount() {
     this.api
       .getAllPeople()
-      .then(this.onPeopleListLoaded);
+      .then(this.onItemsLoaded);
   }
 
-  renderPeople(people) {
-    return people.map(({ id, name }) => {
+  renderItems(items) {
+    return items.map(({ id, name }) => {
       return (
         <li
           className="list-group-item"
           key={id}
-          onClick={ this.props.onPersonSelected.bind(null, id) }>
+          onClick={ this.props.onItemSelected.bind(null, id) }>
           { name }
         </li>
       );
@@ -34,17 +34,17 @@ export default class ItemList extends Component {
   }
 
   render() {
-    const { peopleList } = this.state;
+    const { items } = this.state;
 
-    if (!peopleList) {
+    if (!items) {
       return <Spinner />
     }
 
-    const people = this.renderPeople(peopleList);
+    const itemList = this.renderItems(items);
 
     return (
       <ul className="item-list list-group">
-        {people}
+        {itemList}
       </ul>
     );
   }
