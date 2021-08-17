@@ -17,21 +17,12 @@ export default class PeoplePage extends Component {
   }
 
   render() {
-    const itemList = (
-      <PersonList
-        onItemSelected={this.onPersonSelected}
-        renderItem={(item) => `${item.name} (${item.birthYear})`}
-      />
-    );
-
-
-    const personDetails = (
-      <PersonDetails itemId={this.state.personId} />
-    );
-
     return (
       <ErrorBoundary>
-        <Row left={itemList} right={personDetails} />
+        <Row
+          left={<PersonList onItemSelected={this.onPersonSelected} />}
+          right={<PersonDetails itemId={this.state.personId} />}
+        />
       </ ErrorBoundary>
     )
   }

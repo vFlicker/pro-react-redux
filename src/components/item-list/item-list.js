@@ -1,10 +1,10 @@
 import React from 'react';
 import './item-list.css';
 
-const ItemList = ({ data, renderItem, onItemSelected }) => {
+const ItemList = ({ data, onItemSelected, children: renderLabel }) => {
   const itemList = data.map((item) => {
     const { id } = item;
-    const label = renderItem(item);
+    const label = renderLabel(item);
 
     return (
       <li
