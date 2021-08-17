@@ -1,7 +1,7 @@
 import React from 'react';
 import ItemList from '../item-list';
 import withData from '../hoc-halper';
-import Api from '../../api';
+import Api from '../../services/api';
 
 const api = new Api();
 

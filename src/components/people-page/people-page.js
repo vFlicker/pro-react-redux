@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { PersonDetails, PersonList } from '../sw-components';
 import ErrorBoundary from '../error-boundary';
 import Row from '../row';
-import Api from '../../api';
+import Api from '../../services/api';
 import './people-page.css';
 
 export default class PeoplePage extends Component {

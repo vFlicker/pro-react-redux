@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Spinner from '../spinner';
 import ErrorIndicator from '../error-indicator';
-import Api from '../../api';
+import Api from '../../services/api';
 import './random-planet.css';
 
 export default class RandomPlanet extends Component {
