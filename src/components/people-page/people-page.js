@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import ItemList from '../item-list';
-import ItemDetails, { Record } from '../item-details/item-details';
+import { PersonDetails, PersonList } from '../sw-components';
 import ErrorBoundary from '../error-boundary';
 import Row from '../row';
 import Api from '../../api';
@@ -19,24 +18,15 @@ export default class PeoplePage extends Component {
 
   render() {
     const itemList = (
-      <ItemList
+      <PersonList
         onItemSelected={this.onPersonSelected}
-        getData={this.api.getAllPeople}
         renderItem={(item) => `${item.name} (${item.birthYear})`}
       />
     );
 
+
     const personDetails = (
-      <ItemDetails
-        itemId={this.state.personId}
-        getData={this.api.getPerson}
-        getImageUrl={this.api.getPersonImage}>
-
-        <Record field="gender" label="Gender" />
-        <Record field="birthYear" label="Birth Year" />
-        <Record field="eyeColor" label="Eye Color" />
-
-      </ItemDetails>
+      <PersonDetails itemId={this.state.personId} />
     );
 
     return (

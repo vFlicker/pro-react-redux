@@ -59,7 +59,7 @@ export default class ItemDetails extends Component {
     })
 
     const spinner = loaded ? <Spinner /> : null;
-    const itemElement = !loaded ? renderItemElement(item, image, itemList) : null;
+    const itemElement = !loaded ? renderItemElement(item.name, image, itemList) : null;
 
     return (
       <div className="person-details card">
@@ -70,7 +70,7 @@ export default class ItemDetails extends Component {
   }
 }
 
-const renderItemElement = ({ name }, image, itemList) => {
+const renderItemElement = (name, image, itemList) => {
   return (
     <React.Fragment>
       <img

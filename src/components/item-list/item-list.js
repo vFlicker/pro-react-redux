@@ -1,6 +1,4 @@
 import React from 'react';
-import withData from '../hoc-halper';
-import Api from '../../api';
 import './item-list.css';
 
 const ItemList = ({ data, renderItem, onItemSelected }) => {
@@ -16,7 +14,7 @@ const ItemList = ({ data, renderItem, onItemSelected }) => {
         { label }
       </li>
     );
-  });;
+  });
 
   return (
     <ul className="item-list list-group">
@@ -25,6 +23,4 @@ const ItemList = ({ data, renderItem, onItemSelected }) => {
   );
 }
 
-const { getAllPeople } = new Api();
-
-export default withData(ItemList, getAllPeople);
+export default ItemList;
