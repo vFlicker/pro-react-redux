@@ -2,15 +2,9 @@ import React from 'react';
 import ItemDetails, { Record } from '../item-details/item-details';
 import { withApi } from '../hoc-halper';
 
-const StarshipDetails = ({ itemId, api }) => {
-  const { getStarship, getStarshipImage } = api;
-
+const StarshipDetails = (props) => {
   return (
-    <ItemDetails
-      itemId={itemId}
-      getData={getStarship}
-      getImageUrl={getStarshipImage}>
-
+    <ItemDetails { ...props } >
       <Record field="model" label="Model" />
       <Record field="length" label="Length" />
       <Record field="costInCredits" label="cost" />
@@ -18,4 +12,11 @@ const StarshipDetails = ({ itemId, api }) => {
   );
 };
 
-export default withApi(StarshipDetails);
+const mapMethodsToProps = (api) => {
+  return {
+    getData: api.getStarship,
+    getImageUrl: api.getStarshipImage,
+  };
+};
+
+export default withApi(StarshipDetails, mapMethodsToProps);

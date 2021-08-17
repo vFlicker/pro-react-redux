@@ -2,15 +2,9 @@ import React from 'react';
 import ItemDetails, { Record } from '../item-details/item-details';
 import { withApi } from '../hoc-halper';
 
-const PersonDetails = ({ itemId, api }) => {
-  const { getPerson, getPersonImage } = api;
-
+const PersonDetails = (props) => {
   return (
-    <ItemDetails
-      itemId={itemId}
-      getData={getPerson}
-      getImageUrl={getPersonImage}>
-
+    <ItemDetails { ...props }>
       <Record field="gender" label="Gender" />
       <Record field="birthYear" label="Birth Year" />
       <Record field="eyeColor" label="Eye Color" />
@@ -18,5 +12,12 @@ const PersonDetails = ({ itemId, api }) => {
   );
 };
 
-export default withApi(PersonDetails);
+const mapMethodsToProps = (api) => {
+  return {
+    getData: api.getPerson,
+    getImageUrl: api.getPersonImage,
+  };
+};
+
+export default withApi(PersonDetails, mapMethodsToProps);
 

@@ -2,15 +2,9 @@ import React from 'react';
 import ItemDetails, { Record } from '../item-details/item-details';
 import { withApi } from '../hoc-halper';
 
-const PlanetDetails = ({ itemId, api }) => {
-  const { getPlanet, getPlanetImage } = api;
-
+const PlanetDetails = (props) => {
   return (
-    <ItemDetails
-      itemId={itemId}
-      getData={getPlanet}
-      getImageUrl={getPlanetImage}>
-
+    <ItemDetails { ...props }>
       <Record field="population" label="Population" />
       <Record field="rotationPeriod" label="Rotation Period" />
       <Record field="diameter" label="Diameter" />
@@ -18,4 +12,11 @@ const PlanetDetails = ({ itemId, api }) => {
   )
 };
 
-export default withApi(PlanetDetails);
+const mapMethodsToProps = (api) => {
+  return {
+    getData: api.getPlanet,
+    getImageUrl: api.getPlanetImage,
+  };
+};
+
+export default withApi(PlanetDetails, mapMethodsToProps);

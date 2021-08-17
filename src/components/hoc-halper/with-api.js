@@ -1,14 +1,16 @@
 import React from 'react';
 import { ApiConsumer } from '../api-context';
 
-const withApi = (Wrapped) => {
+const withApi = (Wrapped, mapMethodsToProps) => {
   return (props) => {
     return (
       <ApiConsumer>
         {
           (api) => {
+            const apiProps = mapMethodsToProps(api);
+
             return (
-              <Wrapped { ...props } api={api} />
+              <Wrapped { ...props } { ...apiProps } />
             );
           }
         }
