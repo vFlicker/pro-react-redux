@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import Header from '../header';
 import RandomPlanet from '../random-planet';
 import PeoplePage from '../people-page';
-// import Api from '../../services/api';
-import DummyApi from '../../services/dummy-api';
+import Api from '../../services/api';
 import { ApiProvider } from '../api-context';
 import './app.css';
 
 export default class App extends Component {
-  api = new DummyApi();
+  api = new Api();
 
   state = {
     showRandomPlanet: true,
