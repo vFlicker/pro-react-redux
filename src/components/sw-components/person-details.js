@@ -19,5 +19,5 @@ const mapMethodsToProps = (api) => {
   };
 };
 
-export default withApi(PersonDetails, mapMethodsToProps);
+export default withApi(mapMethodsToProps)(PersonDetails);
 

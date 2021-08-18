@@ -2,7 +2,7 @@ import React from 'react';
 import ItemList from '../item-list';
 import { withData, withApi } from '../hoc-halper';
 
-const withChildFunction = (Wrapped, fn) => {
+const withChildFunction = (fn) => (Wrapped) => {
   return (props) => {
     return (
       <Wrapped {...props}>
@@ -34,26 +34,17 @@ const mapStarshipMethodsToProps = (api) => {
   };
 };
 
-const PersonList = withApi(
+const PersonList = withApi(mapPersonMethodsToProps)(
   withData(
-    withChildFunction(ItemList, renderNameAndYear)
-  ),
-  mapPersonMethodsToProps
-);
+    withChildFunction(renderNameAndYear)(ItemList)));
 
-const PlanetList = withApi(
+const PlanetList = withApi(mapPlanetMethodsToProps)(
   withData(
-    withChildFunction(ItemList, renderName)
-  ),
-  mapPlanetMethodsToProps
-);
+    withChildFunction(renderName)(ItemList)));
 
-const StarshipList = withApi(
+const StarshipList = withApi(mapStarshipMethodsToProps)(
   withData(
-    withChildFunction(ItemList, renderNameAndCost)
-  ),
-  mapStarshipMethodsToProps
-);
+    withChildFunction(renderNameAndCost)(ItemList)));
 
 export {
   PersonList,
