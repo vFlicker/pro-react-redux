@@ -1,16 +1,11 @@
 import React from 'react';
 import ItemList from '../item-list';
-import { withData, withApi } from '../hoc-halper';
-
-const withChildFunction = (fn) => (Wrapped) => {
-  return (props) => {
-    return (
-      <Wrapped {...props}>
-        {fn}
-      </Wrapped>
-    )
-  }
-};
+import {
+  withData,
+  withApi,
+  withChildFunction,
+  compose
+} from '../hoc-halper';
 
 const renderName = ({ name }) => <span>{name}</span>;
 const renderNameAndYear = ({ name, birthYear }) => <span>{name} ({birthYear})</span>;
@@ -34,17 +29,23 @@ const mapStarshipMethodsToProps = (api) => {
   };
 };
 
-const PersonList = withApi(mapPersonMethodsToProps)(
-  withData(
-    withChildFunction(renderNameAndYear)(ItemList)));
+const PersonList = compose(
+  withApi(mapPersonMethodsToProps),
+  withData,
+  withChildFunction(renderNameAndYear)
+)(ItemList);
 
-const PlanetList = withApi(mapPlanetMethodsToProps)(
-  withData(
-    withChildFunction(renderName)(ItemList)));
+const PlanetList = compose(
+  withApi(mapPlanetMethodsToProps),
+  withData,
+  withChildFunction(renderName)
+)(ItemList);
 
-const StarshipList = withApi(mapStarshipMethodsToProps)(
-  withData(
-    withChildFunction(renderNameAndCost)(ItemList)));
+const StarshipList = compose(
+  withApi(mapStarshipMethodsToProps),
+  withData,
+  withChildFunction(renderNameAndCost)
+)(ItemList);
 
 export {
   PersonList,
