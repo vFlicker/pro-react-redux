@@ -2,17 +2,26 @@ import React, { Component } from 'react';
 import Header from '../header';
 import RandomPlanet from '../random-planet';
 import PeoplePage from '../people-page';
-// import Api from '../../services/api';
+import Api from '../../services/api';
 import DummyApi from '../../services/dummy-api';
 import { ApiProvider } from '../api-context';
 import './app.css';
 
 export default class App extends Component {
-  api = new DummyApi();
-
   state = {
     showRandomPlanet: true,
-  }
+    api: new DummyApi()
+  };
+
+  onServiceChange = () => {
+    this.setState(({ api }) => {
+      const Service = api instanceof Api ? DummyApi : Api;
+
+      return {
+        api: new Service()
+      }
+    });
+  };
 
   toggleRandomPlanet = () => {
     this.setState((state) => {
@@ -20,15 +29,15 @@ export default class App extends Component {
         showRandomPlanet: !state.showRandomPlanet
       }
     });
-  }
+  };
 
   render() {
     const planet = this.state.showRandomPlanet ? <RandomPlanet /> : null;
 
     return (
-      <ApiProvider value={this.api}>
+      <ApiProvider value={this.state.api}>
         <div className="container">
-          <Header />
+          <Header onServiceChange={this.onServiceChange} />
           { planet }
 
           <button
