@@ -12,6 +12,7 @@ const withChildFunction = (Wrapped, fn) => {
   }
 };
 
+const renderName = ({ name }) => <span>{name}</span>;
 const renderNameAndYear = ({ name, birthYear }) => <span>{name} ({birthYear})</span>;
 const renderNameAndCost = ({ name, costInCredits }) => <span>{name} ({costInCredits})</span>;
 
@@ -23,13 +24,13 @@ const mapPersonMethodsToProps = (api) => {
 
 const mapPlanetMethodsToProps = (api) => {
   return {
-    getData: api.getAllPeople,
+    getData: api.getAllPlanets,
   };
 };
 
 const mapStarshipMethodsToProps = (api) => {
   return {
-    getData: api.getAllPeople,
+    getData: api.getAllStarships,
   };
 };
 
@@ -42,7 +43,7 @@ const PersonList = withApi(
 
 const PlanetList = withApi(
   withData(
-    withChildFunction(ItemList, renderNameAndYear)
+    withChildFunction(ItemList, renderName)
   ),
   mapPlanetMethodsToProps
 );
