@@ -5,6 +5,10 @@ import Api from '../../services/api';
 import './random-planet.css';
 
 export default class RandomPlanet extends Component {
+  static defaultProps = {
+    updateInterval: 10000,
+  }
+
   api = new Api();
 
   state = {
@@ -38,8 +42,9 @@ export default class RandomPlanet extends Component {
   }
 
   componentDidMount() {
+    const { updateInterval } = this.props;
     this.updatePlanet();
-    this.intervalId = setInterval(this.updatePlanet, 6000);
+    this.intervalId = setInterval(this.updatePlanet, updateInterval);
   }
 
   componentWillUnmount() {
