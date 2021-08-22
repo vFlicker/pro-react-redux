@@ -3,11 +3,15 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Header from '../header';
 import RandomPlanet from '../random-planet';
 import { StarshipDetails } from '../sw-components';
+
 import {
+  LoginPage,
   PeoplePage,
   PlanetsPage,
-  StarshipsPage
+  SecretPage,
+  StarshipsPage,
 } from '../pages';
+
 import Api from '../../services/api';
 import DummyApi from '../../services/dummy-api';
 import { ApiProvider } from '../api-context';
@@ -15,7 +19,14 @@ import './app.css';
 
 export default class App extends Component {
   state = {
-    api: new Api()
+    api: new Api(),
+    isLoggedIn: false,
+  };
+
+  onLogin = () => {
+    this.setState({
+      isLoggedIn: true,
+    });
   };
 
   onServiceChange = () => {
@@ -29,6 +40,8 @@ export default class App extends Component {
   };
 
   render() {
+    const { isLoggedIn } = this.state;
+
     return (
       <ApiProvider value={this.state.api}>
         <Router>
@@ -54,6 +67,20 @@ export default class App extends Component {
                 }
               }
             />
+            <Route
+              path="/secret"
+              render={() => (
+                <SecretPage isLoggedIn={isLoggedIn} />
+              )}
+            />
+            <Route
+              path="/login"
+              render={() => (
+                <LoginPage
+                  isLoggedIn={isLoggedIn}
+                  onLogin={this.onLogin}
+                />
+              )}/>
           </div>
         </Router>
       </ApiProvider>
