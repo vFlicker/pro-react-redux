@@ -55,7 +55,7 @@ export default class ItemDetails extends Component {
     const { image, item, loaded } = this.state;
 
     if (!item) {
-      return <span>Select a person from a list</span>;
+      return <span>Select an item from the list</span>;
     }
 
     const itemList = React.Children.map(this.props.children, (child) => {
