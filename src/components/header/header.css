@@ -1,6 +1,6 @@
 .header {
   padding: 20px 0;
-  background-color: antiquewhite;
+  border-bottom: 1px solid #f1f1f1;
 }
 
 .header__container {
@@ -10,21 +10,25 @@
   padding: 0 20px;
 }
 
-.header__list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.header__logo {
+  margin-bottom: 0;
+  font-size: 28px;
+}
 
+.shopping-cart {
   display: flex;
-  flex-wrap: wrap;
-}
-
-.header__link:not(:last-child) {
-  margin-right: 20px;
-}
-
-.header__link a {
-  color: #000000;
+  align-items: center;
   font-size: 18px;
   font-weight: 500;
+}
+
+.shopping-cart__icon {
+  margin-right: 12px;
+  color: #17A2B8;
+  font-size: 30px;
+  transition: color .15s ease-in-out;
+}
+
+.shopping-cart:hover .shopping-cart__icon {
+  color: #138496;
 }
