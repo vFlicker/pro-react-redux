@@ -5,17 +5,22 @@ import BookItem from '../book-item';
 import withBookstoreService from '../hoc';
 import { booksLoaded } from '../../actions';
 import './book-list.css';
+import Spinner from '../spiner';
 
 class BookList extends Component {
   componentDidMount() {
     const { bookstoreService, booksLoaded } = this.props;
-    const data = bookstoreService.getBooks();
 
-    booksLoaded(data);
+    bookstoreService.getBooks()
+      .then((data) => booksLoaded(data));
   }
 
   render() {
-    const { books } = this.props;
+    const { books, loading } = this.props;
+
+    if (loading) {
+      return <Spinner />
+    }
 
     return (
       <ul className="books-list">
@@ -33,40 +38,15 @@ class BookList extends Component {
   }
 }
 
-const mapStateToProps = ({ books }) => {
-  return { books };
+const mapStateToProps = ({ books, loading }) => {
+  return { books, loading };
 };
 
 const mapDispatchToProps = {
   booksLoaded,
 };
 
-// const mapDispatchToProps = (dispatch) => {
-//   return bindActionCreators({
-//     booksLoaded,
-//   }, dispatch);
-//
-//   return {
-//     booksLoaded: (newBooks) => {
-//       dispatch(bookLoaded(newBooks))
-//     }
-//   };
-//
-//   return {
-//     booksLoaded: (newBooks) => {
-//       dispatch({
-//         type: 'BOOKS_LOADED',
-//         payload: newBooks,
-//       })
-//     }
-//   };
-// };
-
 export default compose(
   withBookstoreService(),
   connect(mapStateToProps, mapDispatchToProps)
 )(BookList);
-
-// export default withBookstoreService()(
-//   connect(mapStateToProps, mapDispatchToProps)(BookList)
-// );
