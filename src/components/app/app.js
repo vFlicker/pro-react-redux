@@ -1,14 +1,17 @@
 import React, { Fragment } from 'react';
-import ErrorIndicator from '../error-indicator/error-indicator';
-import Spinner from '../spiner';
+import { Route, Switch } from 'react-router-dom';
+import Header from '../header';
+import { CardPage, HomePage } from '../pages';
 import './app.css';
 
 const App = () => {
   return (
     <Fragment>
-      <h1>React App!</h1>
-      <ErrorIndicator />
-      <Spinner />
+      <Header />
+      <Switch>
+        <Route path="/" component={HomePage} exact />
+        <Route path="/card" component={CardPage} />
+      </Switch>
     </Fragment>
   );
 }
