@@ -19,20 +19,19 @@ const initialState = {
   error: null,
 };
 
-const updateCartItem = (oldItem, book) => {
-  if (oldItem) {
-    return {
-      ...oldItem,
-      count: oldItem.count + 1,
-      total: oldItem.total + book.price,
-    };
-  }
+const updateCartItem = (book, oldItem = {}) => {
+  const {
+    id = book.id,
+    title = book.title,
+    count = 0,
+    total = 0
+  } = oldItem;
 
   return {
-    id: book.id,
-    title: book.title,
-    count: 1,
-    total: book.price,
+    id,
+    title,
+    count: count + 1,
+    total: total + book.price
   };
 };
 
@@ -80,7 +79,7 @@ const reducer = (state = initialState, action) => {
       const index = state.cartItems.findIndex((item) => item.id === id);
       const oldItem = state.cartItems[index];
 
-      const newItem = updateCartItem(oldItem, book);
+      const newItem = updateCartItem(book, oldItem);
 
       return {
         ...state,
