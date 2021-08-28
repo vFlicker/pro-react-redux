@@ -12,14 +12,14 @@ const ShoppingCartTable = (props) => {
   } = props;
 
   const renderRow = (item, index) => {
-    const { id, title, count, price } = item;
+    const { id, title, count, total } = item;
 
     return (
       <tr key={id}>
         <td>{index + 1}</td>
         <td>{title}</td>
         <td>{count}</td>
-        <td>${price}</td>
+        <td>${total}</td>
         <td>
           <button
             className="btn btn-outline-warning btn-sm"
@@ -50,7 +50,7 @@ const ShoppingCartTable = (props) => {
             <th>#</th>
             <th>Item</th>
             <th>Count</th>
-            <th>Price</th>
+            <th>Total</th>
             <th>Action</th>
           </tr>
         </thead>
