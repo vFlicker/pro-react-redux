@@ -1,14 +1,15 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+
 import { StarshipList } from '../sw-components';
 import ErrorBoundary from '../error-boundary';
 
-const StarshipsPage = ({ history }) => {
+export const StarshipsPage = () => {
+  const history = useHistory();
+
   return (
     <ErrorBoundary>
-      <StarshipList onItemSelected={ (id) => history.push(id) } />
-    </ ErrorBoundary>
+      <StarshipList onItemSelected={(id) => history.push(id)} />
+    </ErrorBoundary>
   )
 }
-
-export default withRouter(StarshipsPage);

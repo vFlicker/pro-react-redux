@@ -1,10 +1,8 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 
-const LoginPage = ({ isLoggedIn, onLogin }) => {
-  if (isLoggedIn) {
-    return <Redirect to="/" />
-  }
+export const LoginPage = ({ isLoggedIn, onLogin }) => {
+  if (isLoggedIn) return <Redirect to="/" />;
 
   return (
     <div className="jumbotron">
@@ -17,5 +15,3 @@ const LoginPage = ({ isLoggedIn, onLogin }) => {
     </div>
   );
 };
-
-export default LoginPage;
