@@ -12,44 +12,32 @@ const renderName = ({ name }) => <span>{name}</span>;
 const renderNameAndYear = ({ name, birthYear }) => <span>{name} ({birthYear})</span>;
 const renderNameAndCost = ({ name, costInCredits }) => <span>{name} ({costInCredits})</span>;
 
-const mapPersonMethodsToProps = (api) => {
-  return {
-    getData: api.getAllPeople,
-  };
-};
+const mapPersonMethodsToProps = (api) => ({
+  getData: api.getAllPeople,
+});
 
-const mapPlanetMethodsToProps = (api) => {
-  return {
-    getData: api.getAllPlanets,
-  };
-};
+const mapPlanetMethodsToProps = (api) => ({
+  getData: api.getAllPlanets,
+});
 
-const mapStarshipMethodsToProps = (api) => {
-  return {
-    getData: api.getAllStarships,
-  };
-};
+const mapStarshipMethodsToProps = (api) => ({
+  getData: api.getAllStarships,
+});
 
-const PersonList = compose(
+export const PersonList = compose(
   withApi(mapPersonMethodsToProps),
   withData,
   withChildFunction(renderNameAndYear)
 )(ItemList);
 
-const PlanetList = compose(
+export const PlanetList = compose(
   withApi(mapPlanetMethodsToProps),
   withData,
   withChildFunction(renderName)
 )(ItemList);
 
-const StarshipList = compose(
+export const StarshipList = compose(
   withApi(mapStarshipMethodsToProps),
   withData,
   withChildFunction(renderNameAndCost)
 )(ItemList);
-
-export {
-  PersonList,
-  PlanetList,
-  StarshipList
-}
