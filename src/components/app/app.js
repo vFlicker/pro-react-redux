@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Api, DummyApi } from '../../services';
 import { ApiProvider } from '../api-context';
 import { Header } from '../header';
-import RandomPlanet from '../random-planet';
+import { RandomPlanet } from '../random-planet';
 import { StarshipDetails } from '../sw-components';
 import {
   LoginPage,

@@ -1,78 +1,67 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 
 import { Api } from '../../services';
 import Spinner from '../spinner';
 import ErrorIndicator from '../error-indicator';
 import './random-planet.css';
 
-export default class RandomPlanet extends Component {
-  static defaultProps = {
-    updateInterval: 12000,
-  }
-
-  static propTypes = {
-    updateInterval: PropTypes.number,
-  }
-
-  api = new Api();
-
-  state = {
+export const RandomPlanet = ({ updateInterval }) => {
+  const [data, setData] = useState({
     planet: null,
     loading: true,
     error: false,
-  };
+  });
 
-  onPlanetLoaded = (planet) => {
-    this.setState({
-      planet,
-      loading: false,
-      error: false,
-    });
-  };
+  const onPlanetLoaded = (planet) => setData({
+    planet,
+    loading: false,
+    error: false,
+  });
 
-  onError = (err) => {
-    this.setState({
-      loading: false,
-      error: true,
-    });
-  }
+  const onError = () => setData({
+    planet: null,
+    loading: false,
+    error: true,
+  });
 
-  updatePlanet = () => {
+  const api = useMemo(() => new Api(), []);
+
+  const updatePlanet = useCallback(async () => {
     const id = Math.floor(Math.random() * 20) + 1;
 
-    this.api
-      .getPlanet(id)
-      .then(this.onPlanetLoaded)
-      .catch(this.onError);
-  }
+    try {
+      const planet = await api.getPlanet(id);
+      onPlanetLoaded(planet);
+    } catch (err) {
+      onError();
+    }
+  }, [api]);
 
-  componentDidMount() {
-    const { updateInterval } = this.props;
-    this.updatePlanet();
-    this.intervalId = setInterval(this.updatePlanet, updateInterval);
-  }
+  useEffect(() => {
+    updatePlanet();
+    const intervalId = setInterval(updatePlanet, updateInterval);
 
-  componentWillUnmount() {
-    clearInterval(this.intervalId);
-  }
+    return () => clearInterval(intervalId);
+  }, [updateInterval, updatePlanet]);
 
-  render() {
-    const { planet, loading, error } = this.state;
+  const { planet, loading, error } = data;
 
-    const hasData = !(loading || error);
-    const spinner = loading ? <Spinner /> : null;
-    const content = hasData ? <PlanetView planet={planet} /> : null;
-    const errorMessage = error ? <ErrorIndicator /> : null;
+  const hasData = !(loading || error);
+  const spinner = loading && <Spinner />;
+  const content = hasData && <PlanetView planet={planet} />;
+  const errorMessage = error && <ErrorIndicator />;
 
-    return (
-      <div className="random-planet jumbotron rounded">
-        {spinner}
-        {content}
-        {errorMessage}
-      </div>
-    );
-  }
+  return (
+    <div className="random-planet jumbotron rounded">
+      {spinner}
+      {content}
+      {errorMessage}
+    </div>
+  );
+}
+
+RandomPlanet.defaultProps = {
+  updateInterval: 12000,
 }
 
 const PlanetView = ({ planet }) => {
