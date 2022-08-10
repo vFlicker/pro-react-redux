@@ -1,11 +1,4 @@
-import React from 'react';
+import { createContext } from 'react';
 
-const {
-  Provider: ApiProvider,
-  Consumer: ApiConsumer
-} = React.createContext();
-
-export {
-  ApiProvider,
-  ApiConsumer
-};
+export const ApiContext = createContext();
+export const ApiProvider = ApiContext.Provider;

@@ -1,22 +1,11 @@
-import React from 'react';
-import { ApiConsumer } from '../api-context';
+import React, { useContext } from 'react';
 
-const withApi = (mapMethodsToProps) => (Wrapped) => {
+import { ApiContext } from '../api-context';
+
+export const withApi = (mapMethodsToProps) => (Wrapped) => {
   return (props) => {
-    return (
-      <ApiConsumer>
-        {
-          (api) => {
-            const apiProps = mapMethodsToProps(api);
-
-            return (
-              <Wrapped { ...props } { ...apiProps } />
-            );
-          }
-        }
-      </ ApiConsumer>
-    )
-  }
+    const api = useContext(ApiContext);
+    const apiProps = mapMethodsToProps(api);
+    return <Wrapped { ...props } { ...apiProps } />;
+   };
 };
-
-export default withApi;
