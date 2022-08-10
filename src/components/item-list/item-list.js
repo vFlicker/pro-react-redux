@@ -1,8 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+
 import './item-list.css';
 
-const ItemList = ({ data, onItemSelected, children: renderLabel }) => {
+export const ItemList = ({ data, onItemSelected, children: renderLabel }) => {
   const itemList = data.map((item) => {
     const { id } = item;
     const label = renderLabel(item);
@@ -23,11 +23,3 @@ const ItemList = ({ data, onItemSelected, children: renderLabel }) => {
     </ul>
   );
 };
-
-ItemList.propTypes = {
-  onItemSelected: PropTypes.func.isRequired,
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
-  children: PropTypes.func.isRequired,
-};
-
-export default ItemList;

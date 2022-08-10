@@ -2,8 +2,8 @@ import React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 
 import { PersonDetails, PersonList } from '../sw-components';
-import ErrorBoundary from '../error-boundary';
-import Row from '../row';
+import { ErrorBoundary } from '../error-boundary';
+import { Row } from '../row';
 
 export const PeoplePage = () => {
   const { id } = useParams();

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
 import { PlanetDetails, PlanetList } from '../sw-components';
-import ErrorBoundary from '../error-boundary';
-import Row from '../row';
+import { ErrorBoundary } from '../error-boundary';
+import { Row } from '../row';
 
 export const PlanetsPage = () => {
   const [planetId, setPlanetId] = useState(null);

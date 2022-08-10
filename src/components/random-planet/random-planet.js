@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 
 import { Api } from '../../services';
-import Spinner from '../spinner';
-import ErrorIndicator from '../error-indicator';
+import { Spinner } from '../spinner';
+import { ErrorIndicator } from '../error-indicator';
 import './random-planet.css';
 
 export const RandomPlanet = ({ updateInterval }) => {

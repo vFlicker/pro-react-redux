@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
-import Spinner from '../spinner';
-import ErrorButton from '../error-button/error-button';
+
+import { Spinner } from '../spinner';
+import { ErrorButton } from '../error-button/error-button';
 import './item-details.css';
 
-export const Record = ({ item, field, label }) => {
-  return (
-    <li className="list-group-item">
-      <span className="term">{label}</span>
-      <span>{item[field]}</span>
-    </li>
-  )
-};
+export const Record = ({ item, field, label }) => (
+  <li className="list-group-item">
+    <span className="term">{label}</span>
+    <span>{item[field]}</span>
+  </li>
+);
 
 export default class ItemDetails extends Component {
   state = {

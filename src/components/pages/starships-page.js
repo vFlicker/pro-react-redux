@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { StarshipList } from '../sw-components';
-import ErrorBoundary from '../error-boundary';
+import { ErrorBoundary } from '../error-boundary';
 
 export const StarshipsPage = () => {
   const history = useHistory();

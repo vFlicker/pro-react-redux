@@ -1,5 +1,6 @@
 import React from 'react';
-import ItemList from '../item-list';
+
+import { ItemList } from '../item-list';
 import {
   withData,
   withApi,
