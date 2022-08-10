@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import { Api, DummyApi } from '../../services';
 import { ApiProvider } from '../api-context';
-import Header from '../header';
+import { Header } from '../header';
 import RandomPlanet from '../random-planet';
 import { StarshipDetails } from '../sw-components';
 import {
@@ -15,7 +15,7 @@ import {
 } from '../pages';
 import './app.css';
 
-export function App() {
+export const App = () => {
   const [api, setApi] = useState(new Api());
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 

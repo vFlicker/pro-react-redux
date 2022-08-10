@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './header.css';
 
-const Header = ({ onServiceChange }) => {
+export const Header = ({ onServiceChange }) => {
   return (
     <div className="header d-flex">
       <h3>
@@ -33,5 +33,3 @@ const Header = ({ onServiceChange }) => {
     </div>
   );
 };
-
-export default Header;
