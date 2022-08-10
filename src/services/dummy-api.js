@@ -1,4 +1,4 @@
-export default class DummyApi {
+export class DummyApi {
   _people = [
     {
       id: 1,

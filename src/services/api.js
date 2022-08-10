@@ -1,4 +1,4 @@
-export default class Api {
+export class Api {
   _apiBase = 'https://swapi.dev/api';
   _imageBase = 'https://starwars-visualguide.com/assets/img';
 

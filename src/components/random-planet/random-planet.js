@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+
+import { Api } from '../../services';
 import Spinner from '../spinner';
 import ErrorIndicator from '../error-indicator';
-import Api from '../../services/api';
 import './random-planet.css';
 
 export default class RandomPlanet extends Component {
