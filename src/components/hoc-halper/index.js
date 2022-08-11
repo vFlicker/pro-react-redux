@@ -1,11 +1,4 @@
-import withData from './with-data';
-import { withApi } from './with-api';
-import withChildFunction from './with-child-function';
-import compose from './compose';
-
-export {
-  withData,
-  withApi,
-  withChildFunction,
-  compose
-};
+export * from './with-data';
+export * from './with-api';
+export * from './with-child-function';
+export * from './compose';

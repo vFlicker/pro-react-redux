@@ -3,6 +3,7 @@ import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { Api } from '../../services';
 import { Spinner } from '../spinner';
 import { ErrorIndicator } from '../error-indicator';
+import { PlanetView } from '../planet-view';
 import './random-planet.css';
 
 export const RandomPlanet = ({ updateInterval }) => {
@@ -63,34 +64,3 @@ export const RandomPlanet = ({ updateInterval }) => {
 RandomPlanet.defaultProps = {
   updateInterval: 12000,
 }
-
-const PlanetView = ({ planet }) => {
-  const { id, name, population, rotationPeriod, diameter } = planet;
-
-  return (
-    <React.Fragment>
-      <img
-        className="planet-image"
-        src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`}
-        alt={name}
-      />
-      <div>
-        <h4>{name}</h4>
-        <ul className="list-group list-group-flush">
-          <li className="list-group-item">
-            <span className="term">Population</span>
-            <span>{population}</span>
-          </li>
-          <li className="list-group-item">
-            <span className="term">Rotation Period</span>
-            <span>{rotationPeriod}</span>
-          </li>
-          <li className="list-group-item">
-            <span className="term">Diameter</span>
-            <span>{diameter}</span>
-          </li>
-        </ul>
-      </div>
-    </React.Fragment>
-  )
-};

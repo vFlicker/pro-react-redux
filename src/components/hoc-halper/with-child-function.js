@@ -1,4 +1,6 @@
-const withChildFunction = (fn) => (Wrapped) => {
+import React from "react";
+
+export const withChildFunction = (fn) => (Wrapped) => {
   return (props) => {
     return (
       <Wrapped {...props}>
@@ -7,5 +9,3 @@ const withChildFunction = (fn) => (Wrapped) => {
     )
   }
 };
-
-export default withChildFunction;
