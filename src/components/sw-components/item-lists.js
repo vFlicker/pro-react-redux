@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { ItemList } from '../item-list';
+import { compose } from '../../utils';
 import {
   withData,
   withApi,
   withChildFunction,
-  compose
-} from '../hoc-halper';
+} from '../../HOCs';
+import { ItemList } from '../item-list';
 
 const renderName = ({ name }) => <span>{name}</span>;
 const renderNameAndYear = ({ name, birthYear }) => <span>{name} ({birthYear})</span>;

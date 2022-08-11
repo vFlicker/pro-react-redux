@@ -1,7 +1,7 @@
 import React from 'react';
 
 import ItemDetails, { Record } from '../item-details/item-details';
-import { withApi } from '../hoc-halper';
+import { withApi } from '../../HOCs';
 
 const StarshipDetails = (props) => (
   <ItemDetails { ...props } >

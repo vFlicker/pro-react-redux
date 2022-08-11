@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { useData } from '../../hooks/use-data';
-import { Spinner } from '../spinner';
-import { ErrorIndicator } from '../error-indicator';
+import { useData } from '../hooks/use-data';
+import { Spinner } from '../components/spinner';
+import { ErrorIndicator } from '../components/error-indicator';
 
 export const withData = (View) => (props) => {
   const { data, loading, error } = useData(props);

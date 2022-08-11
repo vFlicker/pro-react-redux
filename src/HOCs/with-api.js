@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 
-import { ApiContext } from '../api-context';
+import { ApiContext } from '../components/api-context';
 
 export const withApi = (mapMethodsToProps) => (Wrapped) => {
   return (props) => {
