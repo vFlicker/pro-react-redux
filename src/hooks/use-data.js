@@ -1,6 +1,6 @@
 import { useMemo, useState, useEffect } from 'react';
 
-export const useData = (api, id) => {
+export const useData = (getData) => {
   const initialState = useMemo(() => ({
     data: null,
     loading: true,
@@ -26,14 +26,14 @@ export const useData = (api, id) => {
 
     setDataState(initialState);
 
-    api.getData(id)
+    getData()
       .then((data) => !cancelled && onDataLoaded(data))
       .catch(() => !cancelled && onError());
 
     return () => {
       cancelled = true;
     };
-  }, [api, initialState, id]);
+  }, [getData, initialState]);
 
   return dateState;
 }
