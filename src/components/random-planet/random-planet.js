@@ -5,6 +5,7 @@ import { useData } from '../../hooks';
 import { Spinner } from '../spinner';
 import { ErrorIndicator } from '../error-indicator';
 import { PlanetView } from '../planet-view';
+
 import './random-planet.css';
 
 const RandomPlanet = ({ updateInterval, getPlanet }) => {
@@ -18,6 +19,7 @@ const RandomPlanet = ({ updateInterval, getPlanet }) => {
   const getRandomPlanet = useCallback(() => {
     const id = Math.floor(Math.random() * 20) + 1;
     return getPlanet(id);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getPlanet, time]);
 
   const { data, loading, error } = useData(getRandomPlanet);
