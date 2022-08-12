@@ -18,25 +18,40 @@ export class Api {
   };
 
   getPerson = async (id) => {
-    const person = await this.#getResource(`/people/${id}/`);
+    const [person, imageUrl] = await Promise.all([
+      this.#getResource(`/people/${id}/`),
+      this.#getPersonImage(id),
+    ]);
+
+    person.imageUrl = imageUrl;
     return this.#transformPerson(person);
   };
 
   getPlanet = async (id) => {
-    const planet = await this.#getResource(`/planets/${id}/`);
+    const [planet, imageUrl] = await Promise.all([
+      this.#getResource(`/planets/${id}/`),
+      this.#getPlanetImage(id),
+    ]);
+
+    planet.imageUrl = imageUrl;
     return this.#transformPlanet(planet);
   };
 
   getStarship = async (id) => {
-    const starship = await this.#getResource(`/starships/${id}/`)
+    const [starship, imageUrl] = await Promise.all([
+      this.#getResource(`/starships/${id}/`),
+      this.#getStarshipImage(id),
+    ]);
+
+    starship.imageUrl = imageUrl;
     return this.#transformStarship(starship);
   };
 
-  getPersonImage = (id) => `${this.#imageBase}/characters/${id}.jpg`;
+  #getPersonImage = (id) => `${this.#imageBase}/characters/${id}.jpg`;
 
-  getPlanetImage = (id) => `${this.#imageBase}/planets/${id}.jpg`;
+  #getPlanetImage = (id) => `${this.#imageBase}/planets/${id}.jpg`;
 
-  getStarshipImage = (id) => `${this.#imageBase}/starships/${id}.jpg`;
+  #getStarshipImage = (id) => `${this.#imageBase}/starships/${id}.jpg`;
 
   #getResource = async (url) => {
     const res = await fetch(`${this.#apiBase}${url}`);
@@ -58,7 +73,8 @@ export class Api {
     name: person.name,
     gender: person.gender,
     birthYear: person.birth_year,
-    eyeColor: person.eye_color
+    eyeColor: person.eye_color,
+    imageUrl: person.imageUrl,
   });
 
   #transformPlanet = (planet) => ({
@@ -67,6 +83,7 @@ export class Api {
     population: planet.population,
     rotationPeriod: planet.rotation_period,
     diameter: planet.diameter,
+    imageUrl: planet.imageUrl,
   });
 
   #transformStarship = (starship) => ({
@@ -78,6 +95,7 @@ export class Api {
     length: starship.length,
     crew: starship.crew,
     passengers: starship.passengers,
-    cargoCapacity: starship.cargo_capacity
+    cargoCapacity: starship.cargo_capacity,
+    imageUrl: starship.imageUrl,
   });
 }

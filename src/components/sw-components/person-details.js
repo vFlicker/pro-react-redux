@@ -13,7 +13,6 @@ const PersonDetails = (props) => (
 
 const mapMethodsToProps = (api) => ({
   getData: api.getPerson,
-  getImageUrl: api.getPersonImage,
 });
 
 export default withApi(mapMethodsToProps)(PersonDetails);

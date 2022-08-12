@@ -13,7 +13,6 @@ const StarshipDetails = (props) => (
 
 const mapMethodsToProps = (api) => ({
   getData: api.getStarship,
-  getImageUrl: api.getStarshipImage,
 });
 
 export default withApi(mapMethodsToProps)(StarshipDetails);

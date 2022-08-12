@@ -12,9 +12,8 @@ export const Record = ({ item, field, label }) => (
   </li>
 );
 
-export const ItemDetails = ({ itemId, getData, getImageUrl, children }) => {
+export const ItemDetails = ({ itemId, getData, children }) => {
   const [stateData, setStateData] = useState({
-    image: null,
     item: null,
     loaded: true,
     error: null,
@@ -29,13 +28,11 @@ export const ItemDetails = ({ itemId, getData, getImageUrl, children }) => {
 
     getData(itemId)
       .then((item) => !cancelled && setStateData({
-        image: getImageUrl(itemId),
         item,
         loaded: false,
         error: null,
       }))
       .catch(() => !cancelled && setStateData({
-        image: null,
         item: null,
         loaded: true,
         error: true,
@@ -44,9 +41,9 @@ export const ItemDetails = ({ itemId, getData, getImageUrl, children }) => {
     return () => {
       cancelled = true;
     };
-  }, [itemId, getData, getImageUrl]);
+  }, [itemId, getData]);
 
-  const { image, item, loaded, error } = stateData;
+  const { item, loaded, error } = stateData;
 
   if (!item) return <span>Select an item from the list</span>;
 
@@ -58,7 +55,7 @@ export const ItemDetails = ({ itemId, getData, getImageUrl, children }) => {
 
   const spinner = loaded && <Spinner />;
   const itemElement = !loaded && (
-    <ItemElement name={item.name} image={image} itemList={itemList} />
+    <ItemElement name={item.name} image={item.imageUrl} itemList={itemList} />
   );
 
   return (

@@ -13,7 +13,6 @@ const PlanetDetails = (props) => (
 
 const mapMethodsToProps = (api) => ({
   getData: api.getPlanet,
-  getImageUrl: api.getPlanetImage,
 });
 
 export default withApi(mapMethodsToProps)(PlanetDetails);
