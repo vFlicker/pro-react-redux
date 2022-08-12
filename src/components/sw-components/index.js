@@ -1,11 +1,5 @@
-import PersonDetails from './person-details';
-import PlanetDetails from './planet-details';
-import StarshipDetails from './starship-details';
-
 export * from './item-lists'
 
-export {
-  PersonDetails,
-  PlanetDetails,
-  StarshipDetails,
-}
+export { default as PlanetDetails } from './planet-details';
+export { default as StarshipDetails } from './starship-details';
+export { default as PersonDetails } from './person-details';

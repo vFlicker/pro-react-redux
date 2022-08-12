@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { Spinner } from '../spinner';
-import { ErrorButton } from '../error-button/error-button';
+import { ErrorButton } from '../error-button';
 import './item-details.css';
 
 export const Record = ({ item, field, label }) => (
@@ -11,7 +11,7 @@ export const Record = ({ item, field, label }) => (
   </li>
 );
 
-export default class ItemDetails extends Component {
+export class ItemDetails extends Component {
   state = {
     image: null,
     item: null,

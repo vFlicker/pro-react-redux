@@ -1,42 +1,38 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
-import { Api } from '../../services';
+import { withApi } from '../../HOCs';
 import { Spinner } from '../spinner';
 import { ErrorIndicator } from '../error-indicator';
 import { PlanetView } from '../planet-view';
+
 import './random-planet.css';
 
-export const RandomPlanet = ({ updateInterval }) => {
+const RandomPlanet = ({ updateInterval, getPlanet }) => {
   const [data, setData] = useState({
     planet: null,
     loading: true,
     error: false,
   });
 
-  const onPlanetLoaded = (planet) => setData({
-    planet,
-    loading: false,
-    error: false,
-  });
-
-  const onError = () => setData({
-    planet: null,
-    loading: false,
-    error: true,
-  });
-
-  const api = useMemo(() => new Api(), []);
-
   const updatePlanet = useCallback(async () => {
     const id = Math.floor(Math.random() * 20) + 1;
 
     try {
-      const planet = await api.getPlanet(id);
-      onPlanetLoaded(planet);
+      const planet = await getPlanet(id);
+
+      setData({
+        planet,
+        loading: false,
+        error: false,
+      });
     } catch (err) {
-      onError();
+      setData({
+        planet: null,
+        loading: false,
+        error: true,
+      });
     }
-  }, [api]);
+  }, [getPlanet]);
 
   useEffect(() => {
     updatePlanet();
@@ -64,3 +60,9 @@ export const RandomPlanet = ({ updateInterval }) => {
 RandomPlanet.defaultProps = {
   updateInterval: 12000,
 }
+
+const mapRandomPlanetMethodsToProps = (api) => ({
+  getPlanet: (id) => api.getPlanet(id),
+});
+
+export default withApi(mapRandomPlanetMethodsToProps)(RandomPlanet);
