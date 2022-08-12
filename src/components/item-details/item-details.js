@@ -1,61 +1,34 @@
-import React, { Children, useEffect, useState, cloneElement } from 'react';
+import React, { Children, useCallback, cloneElement } from 'react';
 
+import { useData } from '../../hooks';
 import { Spinner } from '../spinner';
 import { ItemElement } from '../item-element';
 
 import './item-details.css';
 
-export const Record = ({ item, field, label }) => (
+export const Record = ({ data, field, label }) => (
   <li className="list-group-item">
     <span className="term">{label}</span>
-    <span>{item[field]}</span>
+    <span>{data[field]}</span>
   </li>
 );
 
 export const ItemDetails = ({ itemId, getData, children }) => {
-  const [stateData, setStateData] = useState({
-    item: null,
-    loaded: true,
-    error: null,
-  });
+  const getDataById = useCallback(() => getData(itemId), [getData, itemId]);
 
-  useEffect(() => {
-    let cancelled = false;
+  const { data, loading, error } = useData(getDataById);
 
-    setStateData((prevState) => ({...prevState, loaded: false}));
-
-    if (!itemId) return;
-
-    getData(itemId)
-      .then((item) => !cancelled && setStateData({
-        item,
-        loaded: false,
-        error: null,
-      }))
-      .catch(() => !cancelled && setStateData({
-        item: null,
-        loaded: true,
-        error: true,
-      }));
-
-    return () => {
-      cancelled = true;
-    };
-  }, [itemId, getData]);
-
-  const { item, loaded, error } = stateData;
-
-  if (!item) return <span>Select an item from the list</span>;
+  if (!data) return <span>Select an item from the list</span>;
 
   if (error) return <span>Error</span>;
 
   const itemList = Children.map(children, (child) => {
-    return cloneElement(child, { item });
+    return cloneElement(child, { data });
   })
 
-  const spinner = loaded && <Spinner />;
-  const itemElement = !loaded && (
-    <ItemElement name={item.name} image={item.imageUrl} itemList={itemList} />
+  const spinner = loading && <Spinner />;
+  const itemElement = !loading && (
+    <ItemElement name={data.name} image={data.imageUrl} itemList={itemList} />
   );
 
   return (
