@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { withApi } from '../../HOCs';
-import { ItemDetails, Record } from '../item-details/item-details';
+import { ItemDetails, Record } from '../item-details';
 
 const PlanetDetails = (props) => (
   <ItemDetails { ...props }>

@@ -1,51 +1,30 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
 import { withApi } from '../../HOCs';
+import { useData } from '../../hooks';
 import { Spinner } from '../spinner';
 import { ErrorIndicator } from '../error-indicator';
 import { PlanetView } from '../planet-view';
-
 import './random-planet.css';
 
 const RandomPlanet = ({ updateInterval, getPlanet }) => {
-  const [data, setData] = useState({
-    planet: null,
-    loading: true,
-    error: false,
-  });
-
-  const updatePlanet = useCallback(async () => {
-    const id = Math.floor(Math.random() * 20) + 1;
-
-    try {
-      const planet = await getPlanet(id);
-
-      setData({
-        planet,
-        loading: false,
-        error: false,
-      });
-    } catch (err) {
-      setData({
-        planet: null,
-        loading: false,
-        error: true,
-      });
-    }
-  }, [getPlanet]);
+  const [time, setTime] = useState(Date.now());
 
   useEffect(() => {
-    updatePlanet();
-    const intervalId = setInterval(updatePlanet, updateInterval);
+    const interval = setInterval(() => setTime(Date.now()), updateInterval);
+    return () => clearInterval(interval);
+  }, [updateInterval]);
 
-    return () => clearInterval(intervalId);
-  }, [updateInterval, updatePlanet]);
+  const getRandomPlanet = useCallback(() => {
+    const id = Math.floor(Math.random() * 20) + 1;
+    return getPlanet(id);
+  }, [getPlanet, time]);
 
-  const { planet, loading, error } = data;
+  const { data, loading, error } = useData(getRandomPlanet);
 
   const hasData = !(loading || error);
   const spinner = loading && <Spinner />;
-  const content = hasData && <PlanetView planet={planet} />;
+  const content = hasData && <PlanetView planet={data} />;
   const errorMessage = error && <ErrorIndicator />;
 
   return (
