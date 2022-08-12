@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import { Spinner } from '../spinner';
 import { ErrorButton } from '../error-button';
+
 import './item-details.css';
 
 export const Record = ({ item, field, label }) => (

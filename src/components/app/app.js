@@ -13,10 +13,11 @@ import {
   SecretPage,
   StarshipsPage,
 } from '../pages';
+
 import './app.css';
 
 export const App = () => {
-  const [api, setApi] = useState(new Api());
+  const [api, setApi] = useState(new Api() || new DummyApi());
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const onServiceChange = () => setApi((prevApi) => {

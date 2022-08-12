@@ -8,9 +8,17 @@ import {
 } from '../../HOCs';
 import { ItemList } from '../item-list';
 
-const renderName = ({ name }) => <span>{name}</span>;
-const renderNameAndYear = ({ name, birthYear }) => <span>{name} ({birthYear})</span>;
-const renderNameAndCost = ({ name, costInCredits }) => <span>{name} ({costInCredits})</span>;
+const renderName = ({ name }) => {
+  return <span>{name}</span>;
+};
+
+const renderNameAndYear = ({ name, birthYear }) => {
+  return <span>{name} ({birthYear})</span>
+};
+
+const renderNameAndCost = ({ name, costInCredits }) => {
+  return <span>{name} ({costInCredits})</span>
+};
 
 const mapPersonMethodsToProps = (api) => ({
   getData: api.getAllPeople,
