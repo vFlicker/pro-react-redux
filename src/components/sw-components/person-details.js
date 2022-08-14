@@ -11,9 +11,9 @@ const PersonDetails = (props) => (
   </ItemDetails>
 );
 
-const mapMethodsToProps = (api) => ({
+const mapApiMethodsToProps = (api) => ({
   getData: api.getPerson,
 });
 
-export default withApi(mapMethodsToProps)(PersonDetails);
+export default withApi(mapApiMethodsToProps)(PersonDetails);
 

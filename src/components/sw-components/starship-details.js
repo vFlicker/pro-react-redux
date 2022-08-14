@@ -11,8 +11,8 @@ const StarshipDetails = (props) => (
   </ItemDetails>
 );
 
-const mapMethodsToProps = (api) => ({
+const mapApiMethodsToProps = (api) => ({
   getData: api.getStarship,
 });
 
-export default withApi(mapMethodsToProps)(StarshipDetails);
+export default withApi(mapApiMethodsToProps)(StarshipDetails);

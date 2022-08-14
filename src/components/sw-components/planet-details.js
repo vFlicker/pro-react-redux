@@ -11,8 +11,8 @@ const PlanetDetails = (props) => (
   </ItemDetails>
 )
 
-const mapMethodsToProps = (api) => ({
+const mapApiMethodsToProps = (api) => ({
   getData: api.getPlanet,
 });
 
-export default withApi(mapMethodsToProps)(PlanetDetails);
+export default withApi(mapApiMethodsToProps)(PlanetDetails);

@@ -8,15 +8,15 @@ import {
 } from '../../HOCs';
 import { ItemList } from '../item-list';
 
-const renderName = ({ name }) => {
-  return <span>{name}</span>;
-};
-
-const renderNameAndYear = ({ name, birthYear }) => {
+const renderPersonData = ({ name, birthYear }) => {
   return <span>{name} ({birthYear})</span>
 };
 
-const renderNameAndCost = ({ name, costInCredits }) => {
+const renderPlanetData = ({ name }) => {
+  return <span>{name}</span>;
+};
+
+const renderStarshipData = ({ name, costInCredits }) => {
   return <span>{name} ({costInCredits})</span>
 };
 
@@ -35,17 +35,17 @@ const mapStarshipMethodsToProps = (api) => ({
 export const PersonList = compose(
   withApi(mapPersonMethodsToProps),
   withData,
-  withChildFunction(renderNameAndYear)
+  withChildFunction(renderPersonData)
 )(ItemList);
 
 export const PlanetList = compose(
   withApi(mapPlanetMethodsToProps),
   withData,
-  withChildFunction(renderName)
+  withChildFunction(renderPlanetData)
 )(ItemList);
 
 export const StarshipList = compose(
   withApi(mapStarshipMethodsToProps),
   withData,
-  withChildFunction(renderNameAndCost)
+  withChildFunction(renderStarshipData)
 )(ItemList);
