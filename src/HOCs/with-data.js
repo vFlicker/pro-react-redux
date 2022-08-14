@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import { useData } from '../hooks';
 import { Spinner } from '../components/spinner';
 import { ErrorIndicator } from '../components/error-indicator';
 
 export const withData = (View) => {
-  return ({ getData, ...props }) => {
-    const { data, loading, error } = useData(getData);
+  return ({ getData, itemId, ...props }) => {
+    const getDataById = useCallback(() => getData(itemId), [getData, itemId]);
+
+    const { data, loading, error } = useData(itemId ? getDataById : getData);
 
     if (loading) return <Spinner />;
 

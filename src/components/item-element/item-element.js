@@ -4,11 +4,11 @@ import { ErrorButton } from "../error-button";
 
 import './item-element.css';
 
-export const ItemElement = ({ name, image, itemList }) => (
+export const ItemElement = ({ name, imageUrl, itemList }) => (
   <Fragment>
     <img
       className="person-image"
-      src={image}
+      src={imageUrl}
       alt={name}
     />
     <div className="card-body">

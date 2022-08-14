@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { withApi } from '../../HOCs';
+import { compose } from '../../utils';
+import { withApi, withData } from '../../HOCs';
 import { ItemDetails, Record } from '../item-details';
 
 const PlanetDetails = (props) => (
@@ -15,4 +16,7 @@ const mapApiMethodsToProps = (api) => ({
   getData: api.getPlanet,
 });
 
-export default withApi(mapApiMethodsToProps)(PlanetDetails);
+export default compose(
+  withApi(mapApiMethodsToProps),
+  withData,
+)(PlanetDetails);
