@@ -48,7 +48,7 @@ const updateOrder = (state, bookId, quantity) => {
 
 };
 
-const updateShoppingCart = (state, action) => {
+export const updateShoppingCart = (state, action) => {
   if (state === undefined) {
     return {
       cartItems: [],
@@ -71,5 +71,3 @@ const updateShoppingCart = (state, action) => {
       return state.shoppingCart;
   }
 }
-
-export default updateShoppingCart;

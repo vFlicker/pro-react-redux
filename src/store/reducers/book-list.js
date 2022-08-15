@@ -1,4 +1,4 @@
-const updateBookList = (state, action) => {
+export const updateBookList = (state, action) => {
   if (state === undefined) {
     return {
       books: [],
@@ -33,5 +33,3 @@ const updateBookList = (state, action) => {
       return state.bookList;
   }
 };
-
-export default updateBookList;

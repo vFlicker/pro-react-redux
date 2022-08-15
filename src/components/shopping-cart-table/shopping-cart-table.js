@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bookAddedToCart, bookRemovedFormCart, allBookRemovedFormCart } from '../../actions';
-import './shopping-cart-table.css';
+import './shopping-cart-table.css';../../store/actions
 
 const ShoppingCartTable = (props) => {
   const {
