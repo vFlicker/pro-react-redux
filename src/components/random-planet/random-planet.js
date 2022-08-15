@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
 import { withApi } from '../../HOCs';
-import { useData } from '../../hooks';
+import { useRequest } from '../../hooks';
 import { Spinner } from '../spinner';
 import { ErrorIndicator } from '../error-indicator';
 import { PlanetView } from '../planet-view';
@@ -22,7 +22,7 @@ const RandomPlanet = ({ updateInterval, getPlanet }) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getPlanet, time]);
 
-  const { data, loading, error } = useData(getRandomPlanet);
+  const { data, loading, error } = useRequest(getRandomPlanet);
 
   const hasData = !(loading || error);
   const spinner = loading && <Spinner />;
