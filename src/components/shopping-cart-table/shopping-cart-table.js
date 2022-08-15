@@ -1,17 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { bookAddedToCart, bookRemovedFormCart, allBookRemovedFormCart } from '../../actions';
-import './shopping-cart-table.css';../../store/actions
 
-const ShoppingCartTable = (props) => {
-  const {
-    items,
-    total,
-    onDecrease,
-    onIncrease,
-    onDelete
-  } = props;
+import {
+  bookAddedToCart,
+  bookRemovedFormCart,
+  allBookRemovedFormCart,
+} from '../../store';
 
+import './shopping-cart-table.css';
+
+const ShoppingCartTable = ({
+  items,
+  total,
+  onDecrease,
+  onIncrease,
+  onDelete
+}) => {
   const renderRow = (item, index) => {
     const { id, title, count, total } = item;
 
@@ -68,7 +72,9 @@ const ShoppingCartTable = (props) => {
   );
 };
 
-const mapStateToProps = ({ shoppingCart: { cartItems, orderTotal } }) => {
+const mapStateToProps = ({ shoppingCart }) => {
+  const { cartItems, orderTotal } = shoppingCart;
+
   return {
     items: cartItems,
     total: orderTotal,
@@ -81,4 +87,7 @@ const mapDispatchToProps = {
   onDelete: allBookRemovedFormCart,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCartTable);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ShoppingCartTable);

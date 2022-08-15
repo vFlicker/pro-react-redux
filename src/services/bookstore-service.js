@@ -1,5 +1,5 @@
-export default class BookstoreService {
-  data = [
+export class BookstoreService {
+  #data = [
     {
       id: 1,
       title: 'Production-Ready Microservices',
@@ -20,7 +20,7 @@ export default class BookstoreService {
       setTimeout(() => {
         Math.random() > 0.75
           ? reject(new Error('description...'))
-          : resolve(this.data);
+          : resolve(this.#data);
 
       }, 700);
     });

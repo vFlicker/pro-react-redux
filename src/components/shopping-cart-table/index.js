@@ -1,3 +1,1 @@
-import ShoppingCartTable from './shopping-cart-table';
-
-export default ShoppingCartTable;
+export { default as ShoppingCartTable} from './shopping-cart-table';

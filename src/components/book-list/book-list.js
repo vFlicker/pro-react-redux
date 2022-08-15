@@ -1,31 +1,27 @@
 import React, { Component } from 'react';
 import { bindActionCreators, compose } from 'redux';
 import { connect } from 'react-redux';
-import BookItem from '../book-item';
-import Spinner from '../spiner';../../store/actions
-import ErrorIndicator from '../error-indicator';
-import withBookstoreService from '../hoc';
-import { bookAddedToCart, fetchBooks } from '../../actions';
+
+import { bookAddedToCart, fetchBooks } from '../../store';
+import { withBookstoreService } from '../hoc';
+import { BookItem } from '../book-item';
+import { Spinner } from '../spiner';
+import { ErrorIndicator } from '../error-indicator';
+
 import './book-list.css';
 
-const BookList = ({ books, onAddedToCart }) => {
-  return (
-    <ul className="books-list">
-      {
-        books.map(({ id, ...book }) => {
-          return (
-            <li key={id}>
-              <BookItem
-                book={book}
-                onAddedToCart={() => onAddedToCart(id)}
-              />
-            </li>
-          );
-        })
-      }
-    </ul>
-  );
-};
+const BookList = ({ books, onAddedToCart }) => (
+  <ul className="books-list">
+    {books.map(({ id, ...book }) => (
+      <li key={id}>
+        <BookItem
+          book={book}
+          onAddedToCart={() => onAddedToCart(id)}
+        />
+      </li>
+    ))}
+  </ul>
+);
 
 class BookListContainer extends Component {
   componentDidMount() {
@@ -35,23 +31,17 @@ class BookListContainer extends Component {
   render() {
     const { books, loading, error, onAddedToCart } = this.props;
 
-    if (loading) {
-      return <Spinner />
-    }
+    if (loading) return <Spinner />;
 
-    if (error) {
-      return <ErrorIndicator error={error} />
-    }
+    if (error) return <ErrorIndicator />;
 
-    return <BookList
-      books={books}
-      onAddedToCart={onAddedToCart}
-    />
+    return <BookList books={books} onAddedToCart={onAddedToCart} />
   }
 }
 
-const mapStateToProps = ({ bookList: { books, loading, error } }) => {
-  return { books, loading, error };
+const mapStateToProps = ({ bookList }) => {
+  const { books, loading, error } = bookList;
+  return {  books, loading, error};
 };
 
 const mapDispatchToProps = (dispatch, { bookstoreService }) => {

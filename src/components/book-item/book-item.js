@@ -1,7 +1,8 @@
 import React from 'react';
+
 import './book-item.css';
 
-const BookItem = ({ book, onAddedToCart }) => {
+export const BookItem = ({ book, onAddedToCart }) => {
   const { title, author, price, coverImage } = book;
 
   return (
@@ -22,5 +23,3 @@ const BookItem = ({ book, onAddedToCart }) => {
     </div>
   );
 };
-
-export default BookItem;

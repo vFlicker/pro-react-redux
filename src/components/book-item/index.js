@@ -1,3 +1,1 @@
-import BookItem from './book-item';
-
-export default BookItem;
+export * from './book-item';
