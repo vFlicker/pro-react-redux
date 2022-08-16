@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { bookAddedToCart, fetchBooks } from '../../store';
@@ -12,7 +12,7 @@ export const BookList = () => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     dispatch(fetchBooks())
   }, [dispatch]);
 
