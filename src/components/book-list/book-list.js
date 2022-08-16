@@ -1,53 +1,33 @@
-import React, { Component } from 'react';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { bookAddedToCart, fetchBooks } from '../../store';
 import { BookItem } from '../book-item';
-import { Spinner } from '../spiner';
-import { ErrorIndicator } from '../error-indicator';
+import { QueryResult } from '../query-result';
 
 import './book-list.css';
 
-const BookList = ({ books, onAddedToCart }) => (
-  <ul className="books-list">
-    {books.map(({ id, ...book }) => (
-      <li key={id}>
-        <BookItem
-          book={book}
-          onAddedToCart={() => onAddedToCart(id)}
-        />
-      </li>
-    ))}
-  </ul>
-);
+export const BookList = () => {
+  const { books, loading, error} = useSelector((state) => state.bookList);
 
-class BookListContainer extends Component {
-  componentDidMount() {
-    this.props.fetchBooks();
-  }
+  const dispatch = useDispatch();
 
-  render() {
-    const { books, loading, error, onAddedToCart } = this.props;
+  useEffect(() => {
+    dispatch(fetchBooks())
+  }, [dispatch]);
 
-    if (loading) return <Spinner />;
-
-    if (error) return <ErrorIndicator />;
-
-    return <BookList books={books} onAddedToCart={onAddedToCart} />
-  }
-}
-
-const mapStateToProps = ({ bookList }) => {
-  const { books, loading, error } = bookList;
-  return { books, loading, error};
+  return (
+    <QueryResult error={error} loading={loading} data={books}>
+      <ul className="books-list">
+        {books.map(({ id, ...book }) => (
+          <li key={id}>
+            <BookItem
+              book={book}
+              onAddedToCart={() => dispatch(bookAddedToCart(id))}
+            />
+          </li>
+        ))}
+      </ul>
+    </QueryResult>
+  )
 };
-
-const mapDispatchToProps = {
-  fetchBooks,
-  onAddedToCart: bookAddedToCart,
-}
-
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps)
-)(BookListContainer);
