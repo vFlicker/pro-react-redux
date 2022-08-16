@@ -1,1 +1,1 @@
-export { default as ShoppingCartTable} from './shopping-cart-table';
+export * from './shopping-cart-table';

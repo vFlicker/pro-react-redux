@@ -1,19 +1,17 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import {
-  bookAddedToCart,
   bookRemovedFormCart,
+  bookAddedToCart,
   allBookRemovedFormCart,
 } from '../../store';
 
 import './shopping-cart-table.css';
 
-const ShoppingCartTable = ({
-  items,
-  total,
-  ...actions
-}) => {
+export const ShoppingCartTable = () => {
+  const { cartItems, orderTotal } = useSelector((state) => state.shoppingCart);
+
   return (
     <div className="shopping-cart-table">
       <h2>Your Order</h2>
@@ -29,21 +27,23 @@ const ShoppingCartTable = ({
         </thead>
 
         <tbody>
-          {items.map((item, index) => (
-            <Row item={item} index={index} {...actions} />
+          {cartItems.map((item, index) => (
+            <Row item={item} index={index} />
           ))}
         </tbody>
       </table>
 
       <div className="total">
-        Total: ${total}
+        Total: ${orderTotal}
       </div>
     </div>
   );
 };
 
-const Row = ({ item, index, onDecrease, onIncrease, onDelete }) => {
+const Row = ({ item, index }) => {
   const { id, title, count, total } = item;
+
+  const dispatch = useDispatch();
 
   return (
     <tr key={id}>
@@ -54,40 +54,20 @@ const Row = ({ item, index, onDecrease, onIncrease, onDelete }) => {
       <td>
         <button
           className="btn btn-outline-warning btn-sm"
-          onClick={() => onDecrease(id)}>
+          onClick={() => dispatch(bookRemovedFormCart(id))}>
           <i className="fa fa-minus-circle" />
         </button>
         <button
           className="btn btn-outline-success btn-sm"
-          onClick={() => onIncrease(id)}>
+          onClick={() => dispatch(bookAddedToCart(id))}>
           <i className="fa fa-plus-circle" />
         </button>
         <button
           className="btn btn-outline-danger btn-sm"
-          onClick={() => onDelete(id)}>
+          onClick={() => dispatch(allBookRemovedFormCart(id))}>
           <i className="fa fa-trash-o" />
         </button>
       </td>
     </tr>
   );
 }
-
-const mapStateToProps = ({ shoppingCart }) => {
-  const { cartItems, orderTotal } = shoppingCart;
-
-  return {
-    items: cartItems,
-    total: orderTotal,
-  };
-};
-
-const mapDispatchToProps = {
-  onDecrease: bookRemovedFormCart,
-  onIncrease: bookAddedToCart,
-  onDelete: allBookRemovedFormCart,
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ShoppingCartTable);
