@@ -1,106 +1,49 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import Spinner from '../spinner';
-import ErrorIndicator from '../error-indicator';
-import Api from '../../services/api';
+import React, { useState, useEffect, useCallback } from 'react';
+
+import { withApi } from '../../HOCs';
+import { useRequest } from '../../hooks';
+import { Spinner } from '../spinner';
+import { ErrorIndicator } from '../error-indicator';
+import { PlanetView } from '../planet-view';
+
 import './random-planet.css';
 
-export default class RandomPlanet extends Component {
-  static defaultProps = {
-    updateInterval: 12000,
-  }
+const RandomPlanet = ({ updateInterval, getPlanet }) => {
+  const [time, setTime] = useState(Date.now());
 
-  static propTypes = {
-    updateInterval: PropTypes.number,
-  }
+  useEffect(() => {
+    const interval = setInterval(() => setTime(Date.now()), updateInterval);
+    return () => clearInterval(interval);
+  }, [updateInterval]);
 
-  api = new Api();
-
-  state = {
-    planet: null,
-    loading: true,
-    error: false,
-  };
-
-  onPlanetLoaded = (planet) => {
-    this.setState({
-      planet,
-      loading: false,
-      error: false,
-    });
-  };
-
-  onError = (err) => {
-    this.setState({
-      loading: false,
-      error: true,
-    });
-  }
-
-  updatePlanet = () => {
+  const getRandomPlanet = useCallback(() => {
     const id = Math.floor(Math.random() * 20) + 1;
+    return getPlanet(id);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [getPlanet, time]);
 
-    this.api
-      .getPlanet(id)
-      .then(this.onPlanetLoaded)
-      .catch(this.onError);
-  }
+  const { data, loading, error } = useRequest(getRandomPlanet);
 
-  componentDidMount() {
-    const { updateInterval } = this.props;
-    this.updatePlanet();
-    this.intervalId = setInterval(this.updatePlanet, updateInterval);
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.intervalId);
-  }
-
-  render() {
-    const { planet, loading, error } = this.state;
-
-    const hasData = !(loading || error);
-    const spinner = loading ? <Spinner /> : null;
-    const content = hasData ? <PlanetView planet={planet} /> : null;
-    const errorMessage = error ? <ErrorIndicator /> : null;
-
-    return (
-      <div className="random-planet jumbotron rounded">
-        {spinner}
-        {content}
-        {errorMessage}
-      </div>
-    );
-  }
-}
-
-const PlanetView = ({ planet }) => {
-  const { id, name, population, rotationPeriod, diameter } = planet;
+  const hasData = !(loading || error);
+  const spinner = loading && <Spinner />;
+  const content = hasData && <PlanetView planet={data} />;
+  const errorMessage = error && <ErrorIndicator />;
 
   return (
-    <React.Fragment>
-      <img
-        className="planet-image"
-        src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`}
-        alt={name}
-      />
-      <div>
-        <h4>{name}</h4>
-        <ul className="list-group list-group-flush">
-          <li className="list-group-item">
-            <span className="term">Population</span>
-            <span>{population}</span>
-          </li>
-          <li className="list-group-item">
-            <span className="term">Rotation Period</span>
-            <span>{rotationPeriod}</span>
-          </li>
-          <li className="list-group-item">
-            <span className="term">Diameter</span>
-            <span>{diameter}</span>
-          </li>
-        </ul>
-      </div>
-    </React.Fragment>
-  )
-};
+    <div className="random-planet jumbotron rounded">
+      {spinner}
+      {content}
+      {errorMessage}
+    </div>
+  );
+}
+
+RandomPlanet.defaultProps = {
+  updateInterval: 12000,
+}
+
+const mapRandomPlanetMethodsToProps = (api) => ({
+  getPlanet: (id) => api.getPlanet(id),
+});
+
+export default withApi(mapRandomPlanetMethodsToProps)(RandomPlanet);

@@ -1,22 +1,22 @@
 import React from 'react';
-import ItemDetails, { Record } from '../item-details/item-details';
-import { withApi } from '../hoc-halper';
 
-const PlanetDetails = (props) => {
-  return (
-    <ItemDetails { ...props }>
-      <Record field="population" label="Population" />
-      <Record field="rotationPeriod" label="Rotation Period" />
-      <Record field="diameter" label="Diameter" />
-    </ItemDetails>
-  )
-};
+import { compose } from '../../utils';
+import { withApi, withData } from '../../HOCs';
+import { ItemDetails, Record } from '../item-details';
 
-const mapMethodsToProps = (api) => {
-  return {
-    getData: api.getPlanet,
-    getImageUrl: api.getPlanetImage,
-  };
-};
+const PlanetDetails = (props) => (
+  <ItemDetails { ...props }>
+    <Record field="population" label="Population" />
+    <Record field="rotationPeriod" label="Rotation Period" />
+    <Record field="diameter" label="Diameter" />
+  </ItemDetails>
+)
 
-export default withApi(mapMethodsToProps)(PlanetDetails);
+const mapApiMethodsToProps = (api) => ({
+  getData: api.getPlanet,
+});
+
+export default compose(
+  withApi(mapApiMethodsToProps),
+  withData,
+)(PlanetDetails);

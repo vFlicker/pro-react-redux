@@ -1,23 +1,23 @@
 import React from 'react';
-import ItemDetails, { Record } from '../item-details/item-details';
-import { withApi } from '../hoc-halper';
 
-const PersonDetails = (props) => {
-  return (
-    <ItemDetails { ...props }>
-      <Record field="gender" label="Gender" />
-      <Record field="birthYear" label="Birth Year" />
-      <Record field="eyeColor" label="Eye Color" />
-    </ItemDetails>
-  );
-};
+import { compose } from '../../utils';
+import { withApi, withData } from '../../HOCs';
+import { ItemDetails, Record } from '../item-details';
 
-const mapMethodsToProps = (api) => {
-  return {
-    getData: api.getPerson,
-    getImageUrl: api.getPersonImage,
-  };
-};
+const PersonDetails = (props) => (
+  <ItemDetails { ...props }>
+    <Record field="gender" label="Gender" />
+    <Record field="birthYear" label="Birth Year" />
+    <Record field="eyeColor" label="Eye Color" />
+  </ItemDetails>
+);
 
-export default withApi(mapMethodsToProps)(PersonDetails);
+const mapApiMethodsToProps = (api) => ({
+  getData: api.getPerson,
+});
+
+export default compose(
+  withApi(mapApiMethodsToProps),
+  withData,
+)(PersonDetails);
 

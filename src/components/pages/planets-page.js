@@ -1,25 +1,18 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
+
 import { PlanetDetails, PlanetList } from '../sw-components';
-import ErrorBoundary from '../error-boundary';
-import Row from '../row';
+import { ErrorBoundary } from '../error-boundary';
+import { Row } from '../row';
 
-export default class PlanetsPage extends Component {
-  state = {
-    planetId: null,
-  }
+export const PlanetsPage = () => {
+  const [planetId, setPlanetId] = useState(null);
 
-  onPlanetSelected = (planetId) => {
-    this.setState({ planetId })
-  }
-
-  render() {
-    return (
-      <ErrorBoundary>
-        <Row
-          left={<PlanetList onItemSelected={this.onPlanetSelected} />}
-          right={<PlanetDetails itemId={this.state.planetId} />}
-        />
-      </ ErrorBoundary>
-    )
-  }
+  return (
+    <ErrorBoundary>
+      <Row
+        left={<PlanetList onItemSelected={(id) => setPlanetId(id)} />}
+        right={<PlanetDetails itemId={planetId} />}
+      />
+    </ ErrorBoundary>
+  )
 }

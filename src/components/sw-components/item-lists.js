@@ -1,54 +1,51 @@
 import React from 'react';
-import ItemList from '../item-list';
+
+import { compose } from '../../utils';
 import {
   withData,
   withApi,
   withChildFunction,
-  compose
-} from '../hoc-halper';
+} from '../../HOCs';
+import { ItemList } from '../item-list';
 
-const renderName = ({ name }) => <span>{name}</span>;
-const renderNameAndYear = ({ name, birthYear }) => <span>{name} ({birthYear})</span>;
-const renderNameAndCost = ({ name, costInCredits }) => <span>{name} ({costInCredits})</span>;
-
-const mapPersonMethodsToProps = (api) => {
-  return {
-    getData: api.getAllPeople,
-  };
+const renderPersonItem = ({ name, birthYear }) => {
+  return <span>{name} ({birthYear})</span>;
 };
 
-const mapPlanetMethodsToProps = (api) => {
-  return {
-    getData: api.getAllPlanets,
-  };
+const renderPlanetItem = ({ name }) => {
+  return <span>{name}</span>;
 };
 
-const mapStarshipMethodsToProps = (api) => {
-  return {
-    getData: api.getAllStarships,
-  };
+const renderStarshipItem = ({ name, costInCredits }) => {
+  return <span>{name} ({costInCredits})</span>;
 };
 
-const PersonList = compose(
+const mapPersonMethodsToProps = (api) => ({
+  getData: api.getAllPeople,
+});
+
+const mapPlanetMethodsToProps = (api) => ({
+  getData: api.getAllPlanets,
+});
+
+const mapStarshipMethodsToProps = (api) => ({
+  getData: api.getAllStarships,
+});
+
+export const PersonList = compose(
   withApi(mapPersonMethodsToProps),
   withData,
-  withChildFunction(renderNameAndYear)
+  withChildFunction(renderPersonItem)
 )(ItemList);
 
-const PlanetList = compose(
+export const PlanetList = compose(
   withApi(mapPlanetMethodsToProps),
   withData,
-  withChildFunction(renderName)
+  withChildFunction(renderPlanetItem)
 )(ItemList);
 
-const StarshipList = compose(
+export const StarshipList = compose(
   withApi(mapStarshipMethodsToProps),
   withData,
-  withChildFunction(renderNameAndCost)
+  withChildFunction(renderStarshipItem)
 )(ItemList);
-
-export {
-  PersonList,
-  PlanetList,
-  StarshipList
-}

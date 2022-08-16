@@ -1,5 +1,5 @@
-export default class DummyApi {
-  _people = [
+export class DummyApi {
+  #people = [
     {
       id: 1,
       name: 'Bilbo Baggins [TEST DATA]',
@@ -17,7 +17,7 @@ export default class DummyApi {
     }
   ];
 
-  _planets = [
+  #planets = [
     {
       id: 1,
       name: 'Earth [TEST DATA]',
@@ -34,7 +34,7 @@ export default class DummyApi {
     }
   ];
 
-  _starships = [
+  #starships = [
     {
       id: 1,
       name: 'USS Enterprise [TEST DATA]',
@@ -48,39 +48,21 @@ export default class DummyApi {
     }
   ];
 
-  getAllPeople = async () => {
-    return this._people;
-  };
+  getAllPeople = async () => this.#people;
 
-  getAllPlanets = async () => {
-    return this._planets;
-  };
+  getAllPlanets = async () => this.#planets;
 
-  getAllStarships = async () => {
-    return this._starships;
-  };
+  getAllStarships = async () => this.#starships;
 
-  getPerson = async () => {
-    return this._people[0];
-  };
+  getPerson = async () => this.#people[0];
 
-  getPlanet = async () => {
-    return this._planets[0]
-  };
+  getPlanet = async () => this.#planets[0]
 
-  getStarship = async () => {
-    return this._starships[0];
-  };
+  getStarship = async () => this.#starships[0];
 
-  getPersonImage = () => {
-    return `https://placeimg.com/400/500/people`
-  };
+  getPersonImage = () => `https://placeimg.com/400/500/people`
 
-  getStarshipImage = () => {
-    return `https://placeimg.com/600/400/tech`;
-  };
+  getStarshipImage = () => `https://placeimg.com/600/400/tech`;
 
-  getPlanetImage = () => {
-    return `https://placeimg.com/400/400/nature`
-  };
+  getPlanetImage = () => `https://placeimg.com/400/400/nature`
 }
