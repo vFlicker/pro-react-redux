@@ -12,40 +12,8 @@ import './shopping-cart-table.css';
 const ShoppingCartTable = ({
   items,
   total,
-  onDecrease,
-  onIncrease,
-  onDelete
+  ...actions
 }) => {
-  const renderRow = (item, index) => {
-    const { id, title, count, total } = item;
-
-    return (
-      <tr key={id}>
-        <td>{index + 1}</td>
-        <td>{title}</td>
-        <td>{count}</td>
-        <td>${total}</td>
-        <td>
-          <button
-            className="btn btn-outline-warning btn-sm"
-            onClick={() => onDecrease(id)}>
-            <i className="fa fa-minus-circle" />
-          </button>
-          <button
-            className="btn btn-outline-success btn-sm"
-            onClick={() => onIncrease(id)}>
-            <i className="fa fa-plus-circle" />
-          </button>
-          <button
-            className="btn btn-outline-danger btn-sm"
-            onClick={() => onDelete(id)}>
-            <i className="fa fa-trash-o" />
-          </button>
-        </td>
-      </tr>
-    );
-  }
-
   return (
     <div className="shopping-cart-table">
       <h2>Your Order</h2>
@@ -61,7 +29,9 @@ const ShoppingCartTable = ({
         </thead>
 
         <tbody>
-          {items.map(renderRow)}
+          {items.map((item, index) => (
+            <Row item={item} index={index} {...actions} />
+          ))}
         </tbody>
       </table>
 
@@ -71,6 +41,36 @@ const ShoppingCartTable = ({
     </div>
   );
 };
+
+const Row = ({ item, index, onDecrease, onIncrease, onDelete }) => {
+  const { id, title, count, total } = item;
+
+  return (
+    <tr key={id}>
+      <td>{index + 1}</td>
+      <td>{title}</td>
+      <td>{count}</td>
+      <td>${total}</td>
+      <td>
+        <button
+          className="btn btn-outline-warning btn-sm"
+          onClick={() => onDecrease(id)}>
+          <i className="fa fa-minus-circle" />
+        </button>
+        <button
+          className="btn btn-outline-success btn-sm"
+          onClick={() => onIncrease(id)}>
+          <i className="fa fa-plus-circle" />
+        </button>
+        <button
+          className="btn btn-outline-danger btn-sm"
+          onClick={() => onDelete(id)}>
+          <i className="fa fa-trash-o" />
+        </button>
+      </td>
+    </tr>
+  );
+}
 
 const mapStateToProps = ({ shoppingCart }) => {
   const { cartItems, orderTotal } = shoppingCart;
