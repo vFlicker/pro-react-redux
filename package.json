@@ -2,6 +2,7 @@
   "name": "pro-react-redux",
   "private": true,
   "dependencies": {
+    "@reduxjs/toolkit": "^1.8.4",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
@@ -40,6 +41,7 @@
     ]
   },
   "devDependencies": {
-    "@types/react": "^18.0.17"
+    "@types/react": "^18.0.17",
+    "redux-devtools-extension": "^2.13.9"
   }
 }

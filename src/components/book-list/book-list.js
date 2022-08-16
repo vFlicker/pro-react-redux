@@ -8,7 +8,7 @@ import { QueryResult } from '../query-result';
 import './book-list.css';
 
 export const BookList = () => {
-  const { books, loading, error} = useSelector((state) => state.bookList);
+  const { books, loading, error} = useSelector((state) => state.shoppingCart);
 
   const dispatch = useDispatch();
 
@@ -19,7 +19,7 @@ export const BookList = () => {
   return (
     <QueryResult error={error} loading={loading} data={books}>
       <ul className="books-list">
-        {books.map(({ id, ...book }) => (
+        {books?.map(({ id, ...book }) => (
           <li key={id}>
             <BookItem
               book={book}

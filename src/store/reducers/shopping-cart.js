@@ -1,3 +1,17 @@
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+
+export const fetchBooks = createAsyncThunk(
+  'SHOPPING_CART',
+  async (_, { extra: apiService, rejectWithValue }) => {
+    try {
+      const data = await apiService.getBooks();
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  },
+);
+
 const updateCartItem = (book, item = {}, quantity) => {
   const {
     id = book.id,
@@ -15,59 +29,64 @@ const updateCartItem = (book, item = {}, quantity) => {
 };
 
 const updateCartItems = (cartItems, item, index) => {
-  if (item.count === 0) {
-    return [
-      ...cartItems.slice(0, index),
-      ...cartItems.slice(index + 1),
-    ];
-  }
+  if (item.count === 0) return cartItems.splice(index, 1);
 
-  if (index === -1) {
-    return [...cartItems, item];
-  }
+  if (index === -1) return cartItems.push(item);
 
-  return [
-    ...cartItems.slice(0, index),
-    item,
-    ...cartItems.slice(index + 1),
-  ];
+  return cartItems.splice(index, 1, item);
 };
 
 const updateOrder = (state, bookId, quantity) => {
-  const { bookList: { books }, shoppingCart: { cartItems } } = state;
+  const { books, cartItems } = state;
   const book = books.find(({ id }) => id === bookId);
   const index = cartItems.findIndex((item) => item.id === bookId);
   const oldItem = cartItems[index];
 
   const newItem = updateCartItem(book, oldItem, quantity);
 
-  return {
-    cartItems: updateCartItems(cartItems, newItem, index),
-    orderTotal: 0,
-  };
-
+  updateCartItems(cartItems, newItem, index);
 };
 
-export const updateShoppingCart = (state, action) => {
-  if (state === undefined) {
-    return {
-      cartItems: [],
-      orderTotal: 0,
-    };
-  }
-
-  switch (action.type) {
-    case 'BOOK_ADDED_TO_CART':
-      return updateOrder(state, action.payload, 1);
-
-    case 'BOOK_REMOVED_FORM_CART':
-      return updateOrder(state, action.payload, -1);
-
-    case 'ALL_BOOK_REMOVED_FORM_CART':
-      const item = state.shoppingCart.cartItems.find(({ id }) => id === action.payload);
-      return updateOrder(state, action.payload, -item.count);
-
-    default:
-      return state.shoppingCart;
-  }
+const initialState = {
+  books: [],
+  cartItems: [],
+  orderTotal: 0,
+  loading: true,
+  error: null,
 }
+
+const slice = createSlice({
+  name: 'shopping_cart',
+  initialState,
+  reducers: {
+    bookAddedToCart: (state, action) => {
+      updateOrder(state, action.payload, 1)
+    },
+    bookRemovedFormCart: (state, action) => {
+      updateOrder(state, action.payload, -1);
+    },
+    allBookRemovedFormCart: (state, action) => {
+      const item = state.cartItems.find(({ id }) => id === action.payload);
+      updateOrder(state, action.payload, -item.count);
+    },
+  },
+  extraReducers: ((builder) => {
+    builder
+      .addCase(fetchBooks.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchBooks.fulfilled, (state, action) => {
+        state.books = action.payload;
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(fetchBooks.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
+  }),
+});
+
+export const { bookAddedToCart, bookRemovedFormCart, allBookRemovedFormCart } = slice.actions;
+export default slice;
