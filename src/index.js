@@ -6,20 +6,20 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { store } from './store';
 import { App } from './components/app';
 import { ErrorBoundary } from './components/error-boundary';
-import { BookstoreService } from './services/bookstore-service';
-import { BookstoreServiceProvider } from './components/bookstore-service-context';
+import { ApiService } from './services/api-service';
+import { ApiProvider } from './components/api-context';
 
-const bookstoreService = new BookstoreService();
+const apiService = new ApiService();
 
 ReactDOM.render(
   <StrictMode>
     <Provider store={store}>
       <ErrorBoundary>
-        <BookstoreServiceProvider value={bookstoreService}>
+        <ApiProvider value={apiService}>
           <Router>
             <App />
           </Router>
-        </BookstoreServiceProvider>
+        </ApiProvider>
       </ErrorBoundary>
     </Provider>
   </StrictMode>,

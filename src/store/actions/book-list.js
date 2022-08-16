@@ -18,10 +18,10 @@ const booksError = (error) => {
   };
 };
 
-export const fetchBooks = (bookstoreService) => () => (dispatch) => {
+export const fetchBooks = (apiService) => () => (dispatch) => {
   dispatch(booksRequested());
 
-  bookstoreService.getBooks()
+  apiService.getBooks()
     .then((data) => dispatch(booksLoaded(data)))
     .catch((err) => dispatch(booksError(err)));
 };

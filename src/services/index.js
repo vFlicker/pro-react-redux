@@ -1,1 +1,1 @@
-export * from './bookstore-service';
+export * from './api-service';

@@ -1,4 +1,4 @@
-export class BookstoreService {
+export class ApiService {
   #data = [
     {
       id: 1,
@@ -15,13 +15,12 @@ export class BookstoreService {
     },
   ];
 
-  getBooks() {
+  async getBooks() {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         Math.random() > 0.75
           ? reject(new Error('description...'))
           : resolve(this.#data);
-
       }, 700);
     });
   }
