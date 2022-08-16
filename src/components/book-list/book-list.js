@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { bindActionCreators, compose } from 'redux';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 
 import { bookAddedToCart, fetchBooks } from '../../store';
-import { withapiService } from '../../HOCs';
 import { BookItem } from '../book-item';
 import { Spinner } from '../spiner';
 import { ErrorIndicator } from '../error-indicator';
@@ -41,17 +40,14 @@ class BookListContainer extends Component {
 
 const mapStateToProps = ({ bookList }) => {
   const { books, loading, error } = bookList;
-  return {  books, loading, error};
+  return { books, loading, error};
 };
 
-const mapDispatchToProps = (dispatch, { apiService }) => {
-  return bindActionCreators({
-    fetchBooks: fetchBooks(apiService),
-    onAddedToCart: bookAddedToCart,
-  }, dispatch);
-};
+const mapDispatchToProps = {
+  fetchBooks,
+  onAddedToCart: bookAddedToCart,
+}
 
 export default compose(
-  withapiService(),
   connect(mapStateToProps, mapDispatchToProps)
 )(BookListContainer);

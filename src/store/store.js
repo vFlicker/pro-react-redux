@@ -1,10 +1,13 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 
-import { reducer } from './reducers';
+import { ApiService } from '../services';
+import { rootReducer } from './reducers';
+
+const apiService = new ApiService();
 
 export const store = createStore(
-  reducer,
-  applyMiddleware(thunkMiddleware)
+  rootReducer,
+  applyMiddleware(thunkMiddleware.withExtraArgument(apiService))
 );
 

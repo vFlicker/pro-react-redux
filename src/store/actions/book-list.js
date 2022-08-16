@@ -18,7 +18,7 @@ const booksError = (error) => {
   };
 };
 
-export const fetchBooks = (apiService) => () => (dispatch) => {
+export const fetchBooks = () => (dispatch, _, apiService) => {
   dispatch(booksRequested());
 
   apiService.getBooks()
