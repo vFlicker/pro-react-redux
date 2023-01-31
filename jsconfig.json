@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
-    "moduleResolution": "Node",
     "target": "ESNext",
+    "moduleResolution": "Node",
     "baseUrl": ".",
     "checkJs": true,
-    "jsx": "react"
+    "jsx": "react-jsx"
   }
 }

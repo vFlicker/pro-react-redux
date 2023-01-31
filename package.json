@@ -1,5 +1,5 @@
 {
-  "name": "ReStore",
+  "name": "github",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.4",

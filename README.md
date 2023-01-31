@@ -1,4 +1,4 @@
-# ReStore
+# GitHub
 
 ## Downloading
 
