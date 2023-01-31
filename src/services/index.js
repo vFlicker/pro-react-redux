@@ -1,2 +1,1 @@
-export * from './api'
-export * from './dummy-api'
+export * from './api-service';

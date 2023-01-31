@@ -4,15 +4,16 @@ import { ErrorIndicator } from '../error-indicator';
 
 export class ErrorBoundary extends Component {
   state = {
-    hasError: false,
-  }
+    hasError: false
+  };
 
   componentDidCatch() {
     this.setState({ hasError: true });
   }
 
   render() {
-    if (this.state.hasError) return <ErrorIndicator />
+    if (this.state.hasError) return <ErrorIndicator />;
+
     return this.props.children;
   }
 }

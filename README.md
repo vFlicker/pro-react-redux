@@ -1,4 +1,4 @@
-# StarDB
+# ReStore
 
 ## Downloading
 
@@ -17,3 +17,4 @@ npm install
 ```
 npm start
 ```
+

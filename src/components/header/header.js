@@ -3,32 +3,18 @@ import { Link } from 'react-router-dom';
 
 import './header.css';
 
-export const Header = ({ onServiceChange }) => (
-  <div className="header d-flex">
-    <h3>
-      <Link to="/">Star DB</Link>
-    </h3>
-    <ul className="d-flex">
-      <li>
-        <Link to="/people/">People</Link>
-      </li>
-      <li>
-        <Link to="/planets/">Planets</Link>
-      </li>
-      <li>
-        <Link to="/starships/">Starships</Link>
-      </li>
-      <li>
-        <Link to="/secret">Secret</Link>
-      </li>
-      <li>
-        <Link to="/login">Login</Link>
-      </li>
-    </ul>
-    <button
-      className="btn btn-primary btn-sm"
-      onClick={onServiceChange}>
-      Change Service
-    </button>
-  </div>
+export const Header = ({ numItems, total }) => (
+  <header className="header">
+    <div className="container  header__container">
+      <Link to="/">
+        <h1 className="header__logo">ReStore</h1>
+      </Link>
+      <Link to="/cart">
+        <div className="shopping-cart">
+          <i className="shopping-cart__icon fa fa-shopping-cart" />
+          {numItems} items (${total})
+        </div>
+      </Link>
+    </div>
+  </header>
 );
