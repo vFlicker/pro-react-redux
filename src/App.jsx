@@ -1,28 +1,19 @@
 import { useState } from "react";
 
+import { SearchList } from "./components/SearchList";
 import { UserDetails } from "./components/UserDetails";
-import { Search } from "./components/Search";
-import { UserList } from "./components/UserList";
+
 import styles from "./App.module.css";
 
-const DEFAULT_USER_NAME = "IT-KAMASUTRA";
-
 export function App() {
-  const [searchTerm, setSearchTerm] = useState(DEFAULT_USER_NAME);
   const [selectedUser, setSelectedUser] = useState(null);
 
   return (
     <div className={styles.container}>
       <div>
-        <Search
-          value={searchTerm}
-          onFind={setSearchTerm}
-          onReset={() => setSearchTerm(DEFAULT_USER_NAME)}
-        />
-        <UserList
-          searchTerm={searchTerm}
+        <SearchList
           selectedUser={selectedUser}
-          onUserSelect={setSelectedUser}
+          setSelectedUser={setSelectedUser}
         />
       </div>
       <div>

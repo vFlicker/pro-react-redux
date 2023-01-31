@@ -17,13 +17,15 @@ export function UserDetails({ selectedUser }) {
   if (!userDetails) return null;
 
   return (
-    <>
-      <Timer />
-      <h2>{userDetails.login}</h2>
-      <img src={userDetails.avatar_url} alt={userDetails.login} />
-      <div>
-        {userDetails.login}, followers: {userDetails.followers}
-      </div>
-    </>
+    userDetails && (
+      <>
+        <Timer id={userDetails.id} callback={() => setUserDetails(null)} />
+        <h2>{userDetails.login}</h2>
+        <img src={userDetails.avatar_url} alt={userDetails.login} />
+        <div>
+          {userDetails.login}, followers: {userDetails.followers}
+        </div>
+      </>
+    )
   );
 }
