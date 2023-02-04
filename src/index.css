@@ -33,6 +33,7 @@ figure {
 /* Theme */
 :root {
   --main-color: #764abc;
+  --border-color: #cbbdda;
 
   --main-font: -apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica, Arial, sans-serif;
 }

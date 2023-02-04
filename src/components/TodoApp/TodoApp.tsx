@@ -1,3 +1,10 @@
+import { Checkbox } from '../Checkbox';
+
 export function TodoApp(): JSX.Element {
-  return <div>App</div>;
+  return (
+    <div>
+      <div>App</div>
+      <Checkbox label="Clean house" />
+    </div>
+  );
 }
