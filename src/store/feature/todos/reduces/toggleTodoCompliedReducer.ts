@@ -12,7 +12,7 @@ type Payload = {
 export const toggleTodoCompletedReducer = (
   state: State,
   action: PayloadAction<Payload>,
-) => {
+): void => {
   const { todos } = state;
   const { todo, isCompleted } = action.payload;
 

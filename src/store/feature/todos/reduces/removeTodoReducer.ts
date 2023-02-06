@@ -11,7 +11,7 @@ type Payload = {
 export const removeTodoReducer = (
   state: State,
   action: PayloadAction<Payload>,
-) => {
+): void => {
   const { todos } = state;
   const { todo } = action.payload;
 

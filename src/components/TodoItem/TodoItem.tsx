@@ -37,7 +37,11 @@ export function TodoItem({ todo }: TodoItemProps): JSX.Element {
             dispatch(changeTodoColor({ todo, color }));
           }}
         />
-        <RemoveButton onClick={() => dispatch(removeTodo({ todo }))} />
+        <RemoveButton
+          onClick={() => {
+            dispatch(removeTodo({ todo }));
+          }}
+        />
       </div>
     </div>
   );

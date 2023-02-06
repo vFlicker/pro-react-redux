@@ -38,3 +38,7 @@ export const updateTodos = (todos: Todo[], todo: Todo): Todo[] => {
   const index = todos.findIndex(({ id }) => id === todo.id);
   return [...todos.slice(0, index), todo, ...todos.slice(index + 1)];
 };
+
+export const clearCompletedTodos = (todos: Todo[]) => {
+  return todos.filter((todo) => todo.isCompleted === false);
+};
