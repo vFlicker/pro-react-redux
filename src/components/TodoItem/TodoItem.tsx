@@ -1,6 +1,10 @@
 import { Todo } from '~/domain/todos';
 import { useAppDispatch } from '~/store';
-import { changeColor, toggleComplied } from '~/store/feature/todos/todosSlice';
+import {
+  changeTodoColor,
+  toggleTodoComplied,
+  removeTodo,
+} from '~/store/feature/todos/todosSlice';
 
 import { RemoveButton } from '../Button';
 import { Checkbox } from '../Checkbox';
@@ -22,7 +26,7 @@ export function TodoItem({ todo }: TodoItemProps): JSX.Element {
         label={title}
         checked={isCompleted}
         onChange={() => {
-          dispatch(toggleComplied({ todo, isCompleted: !isCompleted }));
+          dispatch(toggleTodoComplied({ todo, isCompleted: !isCompleted }));
         }}
       />
 
@@ -30,10 +34,10 @@ export function TodoItem({ todo }: TodoItemProps): JSX.Element {
         <ColorSelector
           color={color}
           onChange={(color) => {
-            dispatch(changeColor({ todo, color }));
+            dispatch(changeTodoColor({ todo, color }));
           }}
         />
-        <RemoveButton />
+        <RemoveButton onClick={() => dispatch(removeTodo({ todo }))} />
       </div>
     </div>
   );

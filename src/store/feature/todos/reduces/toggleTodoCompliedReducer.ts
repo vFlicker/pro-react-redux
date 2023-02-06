@@ -9,7 +9,7 @@ type Payload = {
   isCompleted: boolean;
 };
 
-export const toggleCompletedReducer = (
+export const toggleTodoCompletedReducer = (
   state: State,
   action: PayloadAction<Payload>,
 ) => {

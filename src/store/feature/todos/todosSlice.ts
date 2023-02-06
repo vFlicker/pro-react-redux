@@ -3,8 +3,9 @@ import { createSlice } from '@reduxjs/toolkit';
 import { todos } from '~/services/mockData';
 
 import { RootState } from '../..';
-import { changeColorReducer } from './reduces/changeColorReducer';
-import { toggleCompletedReducer } from './reduces/toggleCompliedReducer';
+import { changeTodoColorReducer } from './reduces/changeTodoColorReducer';
+import { removeTodoReducer } from './reduces/removeTodoReducer';
+import { toggleTodoCompletedReducer } from './reduces/toggleTodoCompliedReducer';
 import { State } from './types';
 
 const initialState: State = {
@@ -15,12 +16,14 @@ const todosSlice = createSlice({
   name: 'todos',
   initialState,
   reducers: {
-    changeColor: changeColorReducer,
-    toggleComplied: toggleCompletedReducer,
+    changeTodoColor: changeTodoColorReducer,
+    toggleTodoComplied: toggleTodoCompletedReducer,
+    removeTodo: removeTodoReducer,
   },
 });
 
-export const { changeColor, toggleComplied } = todosSlice.actions;
+export const { changeTodoColor, toggleTodoComplied, removeTodo } =
+  todosSlice.actions;
 
 export const selectTodos = (state: RootState) => state.TODOS.todos;
 

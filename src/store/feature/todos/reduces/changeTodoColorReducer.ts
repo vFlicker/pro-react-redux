@@ -10,7 +10,7 @@ type Payload = {
   color: Color;
 };
 
-export const changeColorReducer = (
+export const changeTodoColorReducer = (
   state: State,
   action: PayloadAction<Payload>,
 ) => {
