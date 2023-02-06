@@ -1,0 +1,44 @@
+.select {
+  width: 90px;
+  height: 30px;
+  padding: 0.16rem 0 0.16rem 0.64rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+
+  background-image: url(../../assets/arrow.png);
+  background-position: right center;
+  background-repeat: no-repeat;
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.option {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.option[value='green'] {
+  color: green;
+}
+
+.option[value='blue'] {
+  color: blue;
+}
+
+.option[value='orange'] {
+  color: orange;
+}
+
+.option[value='purple'] {
+  color: purple;
+}
+
+.option[value='red'] {
+  color: red;
+}
+
+.label {
+  margin-right: 2rem;
+  font-size: 2.4rem;
+}

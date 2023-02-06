@@ -1,11 +1,12 @@
 import { Header } from '../components/Header';
 import { TodoPage } from '../pages/TodoPage';
+import classes from './App.module.css';
 
 export function App(): JSX.Element {
   return (
-    <div className="wrapper">
+    <div className={classes.wrapper}>
       <Header />
-      <main>
+      <main className={classes.main}>
         <TodoPage />
       </main>
     </div>

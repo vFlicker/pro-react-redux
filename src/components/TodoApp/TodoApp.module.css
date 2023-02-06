@@ -1,0 +1,4 @@
+.wrapper {
+  box-shadow: var(--box-shadow-color);
+  background-color: white;
+}

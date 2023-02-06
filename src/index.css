@@ -32,10 +32,16 @@ figure {
 
 /* Theme */
 :root {
-  --main-color: #764abc;
-  --border-color: #cbbdda;
-
   --main-font: -apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica, Arial, sans-serif;
+
+  --main-color: #764abc;
+  --accent-blue-color: #0250bc;
+  --blue-color: #1976d2;
+
+  --border-color: #cbbdda;
+  --background-color: #f5f5f5;
+  --box-shadow-color: 0 2px 4px 0 rgb(0 0 0 / 20%), 0 25px 50px 0 rgb(0 0 0 / 10%);
+
 }
 
 /* Typography */
@@ -80,7 +86,7 @@ button {
 
 .container {
   width: 100%;
-  max-width: 800px;
+  max-width: 848px;
   margin-inline: auto;
   padding: 0 2.4rem;
 }

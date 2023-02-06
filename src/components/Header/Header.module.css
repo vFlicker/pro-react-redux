@@ -5,6 +5,7 @@
 }
 
 .title {
-  color: white;
   margin-inline: auto;
+  color: white;
+  text-align: center;
 }
