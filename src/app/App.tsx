@@ -1,5 +1,5 @@
 import { Header } from '../components/Header';
-import { TodoPage } from '../pages/TodoPage';
+import { TodoApp } from '../components/TodoApp';
 import classes from './App.module.css';
 
 export function App(): JSX.Element {
@@ -7,7 +7,10 @@ export function App(): JSX.Element {
     <div className={classes.wrapper}>
       <Header />
       <main className={classes.main}>
-        <TodoPage />
+        <div className="container">
+          <h2 className={classes.title}>Todos</h2>
+          <TodoApp />
+        </div>
       </main>
     </div>
   );

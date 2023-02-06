@@ -8,3 +8,11 @@
   background-color: var(--background-color);
   flex-grow: 1;
 }
+
+.title {
+  margin: 0 0 24px 0;
+
+  font-size: 50px;
+  font-weight: 200;
+  text-align: center;
+}

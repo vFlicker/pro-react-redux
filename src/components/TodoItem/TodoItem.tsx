@@ -1,21 +1,26 @@
-import { useState } from 'react';
-
 import { colors } from '~/domain/filter';
+import { Todo } from '~/domain/todos';
 
 import { RemoveButton } from '../Button';
 import { Checkbox } from '../Checkbox';
 import { Option, Select } from '../Select';
 import classes from './TodoItem.module.css';
 
-export function TodoItem(): JSX.Element {
-  const [color, setColor] = useState('');
+type TodoItemProps = {
+  todo: Todo;
+};
+
+export function TodoItem({ todo }: TodoItemProps): JSX.Element {
+  const { color, isChecked, title } = todo;
+
+  const style = color ? { color } : undefined;
 
   return (
     <div className={classes.wrapper}>
-      <Checkbox label="Clean house" />
+      <Checkbox label={title} checked={isChecked} />
 
       <div className={classes.actions}>
-        <Select style={{ color }} onChange={setColor}>
+        <Select style={style} onChange={() => console.log('set color')}>
           <Option value=""></Option>
           {Object.entries(colors).map(([value, text]) => (
             <Option key={value} value={value}>
@@ -23,6 +28,7 @@ export function TodoItem(): JSX.Element {
             </Option>
           ))}
         </Select>
+
         <RemoveButton />
       </div>
     </div>
