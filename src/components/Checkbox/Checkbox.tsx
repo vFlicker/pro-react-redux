@@ -8,10 +8,10 @@ type Props = {
 
 type CheckboxProps = Props & Omit<HTMLProps<HTMLInputElement>, keyof Props>;
 
-export function Checkbox({ label }: CheckboxProps): JSX.Element {
+export function Checkbox({ label, ...props }: CheckboxProps): JSX.Element {
   return (
     <label className={classes.checkbox}>
-      <input type="checkbox" className={classes.input} />
+      <input type="checkbox" className={classes.input} {...props} />
       <span className={classes.box}></span>
       <span className={classes.label}>{label}</span>
     </label>

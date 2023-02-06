@@ -1,41 +1,26 @@
-import { CSSProperties, PropsWithChildren } from 'react';
+import { ComponentPropsWithoutRef } from 'react';
 
 import classes from './Select.module.css';
 
-type SelectProps = PropsWithChildren<{
-  label?: string;
-  style?: CSSProperties;
-  onChange: (color: string) => void;
-}>;
+type SelectProps = ComponentPropsWithoutRef<'select'> & {
+  onChange: (data: string) => void;
+};
 
-type OptionProps = PropsWithChildren<{
-  id?: string;
-  value: string;
-}>;
+type OptionProps = ComponentPropsWithoutRef<'option'>;
 
-export function Select({
-  label,
-  style,
-  children,
-  onChange,
-}: SelectProps): JSX.Element {
+export function Select({ children, ...props }: SelectProps): JSX.Element {
   return (
     <label>
-      {label && <span className={classes.label}>{label}</span>}
-      <select
-        style={style}
-        className={classes.select}
-        onChange={(evt) => onChange(evt.target.value)}
-      >
+      <select className={classes.select} {...props}>
         {children}
       </select>
     </label>
   );
 }
 
-export function Option({ id, value, children }: OptionProps): JSX.Element {
+export function Option({ children, ...props }: OptionProps): JSX.Element {
   return (
-    <option key={id || value} className={classes.option} value={value}>
+    <option className={classes.option} {...props}>
       {children}
     </option>
   );

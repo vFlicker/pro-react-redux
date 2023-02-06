@@ -1,9 +1,10 @@
-import { colors } from '~/domain/filter';
 import { Todo } from '~/domain/todos';
+import { useAppDispatch } from '~/store';
+import { changeColor, toggleComplied } from '~/store/feature/todos/todosSlice';
 
 import { RemoveButton } from '../Button';
 import { Checkbox } from '../Checkbox';
-import { Option, Select } from '../Select';
+import { ColorSelector } from '../ColorSelector';
 import classes from './TodoItem.module.css';
 
 type TodoItemProps = {
@@ -11,24 +12,27 @@ type TodoItemProps = {
 };
 
 export function TodoItem({ todo }: TodoItemProps): JSX.Element {
-  const { color, isChecked, title } = todo;
+  const { color, isCompleted, title } = todo;
 
-  const style = color ? { color } : undefined;
+  const dispatch = useAppDispatch();
 
   return (
     <div className={classes.wrapper}>
-      <Checkbox label={title} checked={isChecked} />
+      <Checkbox
+        label={title}
+        checked={isCompleted}
+        onChange={() => {
+          dispatch(toggleComplied({ todo, isCompleted: !isCompleted }));
+        }}
+      />
 
       <div className={classes.actions}>
-        <Select style={style} onChange={() => console.log('set color')}>
-          <Option value=""></Option>
-          {Object.entries(colors).map(([value, text]) => (
-            <Option key={value} value={value}>
-              {text}
-            </Option>
-          ))}
-        </Select>
-
+        <ColorSelector
+          color={color}
+          onChange={(color) => {
+            dispatch(changeColor({ todo, color }));
+          }}
+        />
         <RemoveButton />
       </div>
     </div>
