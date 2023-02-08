@@ -42,3 +42,7 @@ export const updateTodos = (todos: Todo[], todo: Todo): Todo[] => {
 export const clearCompletedTodos = (todos: Todo[]) => {
   return todos.filter((todo) => todo.isCompleted === false);
 };
+
+export const markTodosCompleted = (todos: Todo[]) => {
+  return todos.map((todo) => ({ ...todo, isCompleted: true }));
+};
