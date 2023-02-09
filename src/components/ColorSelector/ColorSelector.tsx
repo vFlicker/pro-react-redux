@@ -1,6 +1,6 @@
 import { ChangeEvent } from 'react';
 
-import { Color, colorDictionary } from '~/domain/filter';
+import { Color, FilterByColor } from '~/domain/filter';
 
 import { Option, Select } from '../Select';
 
@@ -19,10 +19,11 @@ export function ColorSelector({
       value={color}
       onChange={(evt) => {
         const { target } = evt as ChangeEvent<HTMLSelectElement>;
-        onChange(target.value as Color);
+        const color = target.value as Color;
+        onChange(color);
       }}
     >
-      {Object.entries(colorDictionary).map(([value, text]) => (
+      {Object.entries(FilterByColor).map(([value, text]) => (
         <Option key={value} id={value} value={value}>
           {text}
         </Option>

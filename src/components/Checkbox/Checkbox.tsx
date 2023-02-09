@@ -1,9 +1,9 @@
-import { HTMLProps } from 'react';
+import { HTMLProps, ReactNode } from 'react';
 
 import classes from './Checkbox.module.css';
 
 type Props = {
-  label: React.ReactNode;
+  label: ReactNode;
 };
 
 type CheckboxProps = Props & Omit<HTMLProps<HTMLInputElement>, keyof Props>;
