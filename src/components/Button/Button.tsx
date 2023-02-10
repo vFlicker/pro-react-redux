@@ -5,9 +5,18 @@ import classes from './Button.module.css';
 
 export type ButtonProps = ComponentPropsWithoutRef<'button'>;
 
-export function Button({ children, onClick }: ButtonProps): JSX.Element {
+export function Button({
+  className,
+  children,
+  onClick,
+  ...props
+}: ButtonProps): JSX.Element {
   return (
-    <button className={classes.button} onClick={onClick}>
+    <button
+      className={classNames(classes.button, className)}
+      onClick={onClick}
+      {...props}
+    >
       {children}
     </button>
   );

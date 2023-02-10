@@ -1,10 +1,77 @@
 .footer {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 15px;
+  border-top: 1px solid #e6e6e6;
+}
+
+.title {
+  text-align: center;
 }
 
 .filterList {
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+}
+
+.actionButton:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.remainingTodos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.remainingTodos b {
+  font-weight: 600;
+}
+
+.filterByColorItem {
+  margin-bottom: 5px;
+}
+
+.filterByColorLabel {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.inputColor {
+  margin: 0 10px 0 0;
+}
+
+span[data-color]::before {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 12px;
+
+  margin-right: 5px;
+}
+
+span[data-color='green']::before {
+  background-color: green;
+}
+
+span[data-color='blue']::before {
+  background-color: blue;
+}
+
+span[data-color='orange']::before {
+  background-color: orange;
+}
+
+span[data-color='purple']::before {
+  background-color: purple;
+}
+
+span[data-color='red']::before {
+  background-color: red;
 }

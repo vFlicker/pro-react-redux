@@ -18,7 +18,7 @@ export function TodoList(): JSX.Element {
   return (
     <ul className={classes.list}>
       {todos.map((todo) => (
-        <li key={todo.id}>
+        <li key={todo.id} className={classes.item}>
           <TodoItem todo={todo} />
         </li>
       ))}

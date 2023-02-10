@@ -6,7 +6,7 @@ import { pickRandomItem } from './pickRandomItem';
 
 export const makeTodo = (): Todo => ({
   id: faker.database.mongodbObjectId(),
-  title: faker.hacker.phrase(),
+  title: faker.lorem.words(3),
   color: pickRandomItem(colors) as Color,
   isCompleted: faker.datatype.boolean(),
 });

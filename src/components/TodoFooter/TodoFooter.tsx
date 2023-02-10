@@ -27,33 +27,35 @@ export function TodoFooter(): JSX.Element {
 
   return (
     <footer className={classes.footer}>
-      <div className="col">
-        <h5>Actions</h5>
+      <div className={classes.actions}>
+        <h5 className={classes.title}>Actions</h5>
         <Button
+          className={classes.actionButton}
           onClick={() => {
             dispatch(markTodosCompleted());
           }}
         >
-          Mark all completed
+          Mark All Completed
         </Button>
         <Button
+          className={classes.actionButton}
           onClick={() => {
             dispatch(clearCompletedTodos());
           }}
         >
-          Clear completed
+          Clear Completed
         </Button>
       </div>
 
-      <div className="col">
-        <h5>Remaining Todos</h5>
+      <div className={classes.remainingTodos}>
+        <h5 className={classes.title}>Remaining Todos</h5>
         <div>
           <b>{todosLeft}</b> items left
         </div>
       </div>
 
-      <div className="col">
-        <h5>Filter by Status</h5>
+      <div className={classes.filterByStatus}>
+        <h5 className={classes.title}>Filter by Status</h5>
         <ul className={classes.filterList}>
           {Object.entries(FilterByStatus).map(([value, text]) => (
             <li key={value}>
@@ -73,16 +75,17 @@ export function TodoFooter(): JSX.Element {
         </ul>
       </div>
 
-      <div className="col">
-        <h5>Filter by Color</h5>
+      <div className={classes.filterByColor}>
+        <h5 className={classes.title}>Filter by Color</h5>
         <ul className={classes.filterList}>
           {Object.entries(FilterByColor).map(([value, text]) => {
             return (
               text && (
-                <li key={value}>
-                  <label>
+                <li key={value} className={classes.filterByColorItem}>
+                  <label className={classes.filterByColorLabel}>
                     <input
                       type="checkbox"
+                      className={classes.inputColor}
                       value={value}
                       checked={filtersByColor.includes(value as Color)}
                       onChange={(evt) => {
@@ -90,7 +93,7 @@ export function TodoFooter(): JSX.Element {
                         dispatch(changeFilterByColors({ color }));
                       }}
                     />
-                    <span>{text}</span>
+                    <span data-color={value}>{text}</span>
                   </label>
                 </li>
               )
