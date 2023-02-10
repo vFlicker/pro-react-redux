@@ -7,6 +7,13 @@ export type Todo = {
   color: Color;
 };
 
+export const createTodo = (title: string): Todo => ({
+  id: new Date().toISOString(),
+  title,
+  isCompleted: false,
+  color: 'transparent',
+});
+
 export const updateCompleted = (todo: Todo, isCompleted: boolean) => {
   return {
     ...todo,

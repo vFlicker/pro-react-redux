@@ -5,6 +5,7 @@ import { filterTodosByColors, filterTodosByStatus, Todo } from '~/domain/todos';
 import { todos } from '~/services/mockData';
 
 import { RootState } from '../..';
+import { addTodoReducer } from './reduces/addTodoReducer';
 import { changeTodoColorReducer } from './reduces/changeTodoColorReducer';
 import { clearCompletedTodosReducer } from './reduces/clearCompletedTodosReducer';
 import { markTodosCompletedReducer } from './reduces/markTodosCompletedReducer';
@@ -20,6 +21,7 @@ const todosSlice = createSlice({
   name: 'todos',
   initialState,
   reducers: {
+    addTodo: addTodoReducer,
     changeTodoColor: changeTodoColorReducer,
     clearCompletedTodos: clearCompletedTodosReducer,
     markTodosCompleted: markTodosCompletedReducer,
@@ -29,6 +31,7 @@ const todosSlice = createSlice({
 });
 
 export const {
+  addTodo,
   changeTodoColor,
   clearCompletedTodos,
   markTodosCompleted,
