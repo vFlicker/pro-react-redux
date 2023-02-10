@@ -1,9 +1,11 @@
 import { ChangeEvent } from 'react';
 
-import { FilterByStatus, Status } from '~/domain/filter';
+import { Color, FilterByColor, FilterByStatus, Status } from '~/domain/filters';
 import { useAppDispatch, useAppSelector } from '~/store';
 import {
   changeFilterByStatus,
+  changeFilterByColors,
+  selectFilterByColors,
   selectFilterByStatus,
 } from '~/store/feature/filters/filtersSlice';
 import {
@@ -21,6 +23,7 @@ export function TodoFooter(): JSX.Element {
 
   const todosLeft = useAppSelector(selectTodosLeftCount);
   const filterByStatus = useAppSelector(selectFilterByStatus);
+  const filtersByColor = useAppSelector(selectFilterByColors);
 
   return (
     <footer className={classes.footer}>
@@ -67,6 +70,32 @@ export function TodoFooter(): JSX.Element {
               </Radio>
             </li>
           ))}
+        </ul>
+      </div>
+
+      <div className="col">
+        <h5>Filter by Color</h5>
+        <ul className={classes.filterList}>
+          {Object.entries(FilterByColor).map(([value, text]) => {
+            return (
+              text && (
+                <li key={value}>
+                  <label>
+                    <input
+                      type="checkbox"
+                      value={value}
+                      checked={filtersByColor.includes(value as Color)}
+                      onChange={(evt) => {
+                        const color = evt.target.value as Color;
+                        dispatch(changeFilterByColors({ color }));
+                      }}
+                    />
+                    <span>{text}</span>
+                  </label>
+                </li>
+              )
+            );
+          })}
         </ul>
       </div>
     </footer>

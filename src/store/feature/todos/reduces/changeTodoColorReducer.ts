@@ -1,6 +1,6 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import { Color } from '~/domain/filter';
 
+import { Color } from '~/domain/filters';
 import { Todo, updateTodos, updateColor } from '~/domain/todos';
 
 import { State } from '../types';

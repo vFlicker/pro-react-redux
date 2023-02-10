@@ -1,6 +1,6 @@
 import { ChangeEvent } from 'react';
 
-import { Color, FilterByColor } from '~/domain/filter';
+import { Color, FilterByColor } from '~/domain/filters';
 
 import { Option, Select } from '../Select';
 

@@ -1,5 +1,5 @@
-import { Status } from '~/domain/filter';
+import { Filters } from '~/domain/filters';
 
 export type State = {
-  status: Status;
+  filters: Filters;
 };

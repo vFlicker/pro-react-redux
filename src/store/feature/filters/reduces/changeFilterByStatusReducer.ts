@@ -1,6 +1,6 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 
-import { Status } from '~/domain/filter';
+import { Status } from '~/domain/filters';
 
 import { State } from '../types';
 
@@ -13,5 +13,5 @@ export const changeFilterByStatusReducer = (
   action: PayloadAction<Payload>,
 ): void => {
   const { status } = action.payload;
-  state.status = status;
+  state.filters.filterByStatus = status;
 };

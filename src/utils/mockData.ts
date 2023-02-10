@@ -1,8 +1,7 @@
 import { faker } from '@faker-js/faker/locale/en_US';
-import { colors } from '~/domain/filter';
 
 import { Todo } from '~/domain/todos';
-import { Color } from '~/domain/filter';
+import { Color, colors } from '~/domain/filters';
 import { pickRandomItem } from './pickRandomItem';
 
 export const makeTodo = (): Todo => ({
