@@ -15,6 +15,9 @@ export const removeTodoReducer = (
   const { todos } = state;
   const { todo } = action.payload;
 
+  /* TODO: якби ми використовували адаптер,
+  ми би просто викликали метод `removeOne` об'єкту `todosAdapter` */
+
   const updatedTodos = removeTodo(todos, todo);
   state.todos = updatedTodos;
 };

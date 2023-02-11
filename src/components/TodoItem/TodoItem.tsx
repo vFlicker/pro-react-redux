@@ -15,10 +15,14 @@ type TodoItemProps = {
   todo: Todo;
 };
 
+/* TODO: props буде id, замість todo */
 export function TodoItem({ todo }: TodoItemProps): JSX.Element {
+  /* TODO: додати selectTodoById */
   const { color, isCompleted, title } = todo;
 
   const dispatch = useAppDispatch();
+
+  /* TODO: винести handlers */
 
   return (
     <div className={classes.wrapper}>
@@ -26,6 +30,7 @@ export function TodoItem({ todo }: TodoItemProps): JSX.Element {
         label={title}
         checked={isCompleted}
         onChange={() => {
+          /* TODO: можна не передавати isCompleted */
           dispatch(toggleTodoComplied({ todo, isCompleted: !isCompleted }));
         }}
       />

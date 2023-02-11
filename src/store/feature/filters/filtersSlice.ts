@@ -26,10 +26,12 @@ const filtersSlice = createSlice({
 export const { changeFilterByColors, changeFilterByStatus } =
   filtersSlice.actions;
 
+/* TODO: Видалите */
 export const selectFilterByColors = (state: RootState): Color[] => {
   return state.FILTERS.filters.filterByColors;
 };
 
+/* TODO: Видалите */
 export const selectFilterByStatus = (state: RootState): Status => {
   return state.FILTERS.filters.filterByStatus;
 };

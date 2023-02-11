@@ -27,8 +27,10 @@ export function TodoFooter(): JSX.Element {
 
   return (
     <footer className={classes.footer}>
+      {/* TODO: Зробити окремий компонент */}
       <div className={classes.actions}>
         <h5 className={classes.title}>Actions</h5>
+        {/* TODO: винести handlers */}
         <Button
           className={classes.actionButton}
           onClick={() => {
@@ -37,6 +39,7 @@ export function TodoFooter(): JSX.Element {
         >
           Mark All Completed
         </Button>
+        {/* TODO: винести handlers */}
         <Button
           className={classes.actionButton}
           onClick={() => {
@@ -47,23 +50,30 @@ export function TodoFooter(): JSX.Element {
         </Button>
       </div>
 
+      {/* TODO: Зробити окремий компонент */}
       <div className={classes.remainingTodos}>
         <h5 className={classes.title}>Remaining Todos</h5>
         <div>
+          {/* TODO: прибрати закінчення `s` якщо маємо 1 item */}
           <b>{todosLeft}</b> items left
         </div>
       </div>
 
+      {/* TODO: Зробити окремий компонент */}
       <div className={classes.filterByStatus}>
         <h5 className={classes.title}>Filter by Status</h5>
         <ul className={classes.filterList}>
+          {/* TODO: [key, value] замість [value, text] */}
           {Object.entries(FilterByStatus).map(([value, text]) => (
             <li key={value}>
               <Radio
                 name="filter"
                 value={value}
+                /* TODO: Винести в зміну */
                 checked={value === filterByStatus}
+                /* TODO: Винести в handler */
                 onChange={(evt: ChangeEvent<HTMLInputElement>) => {
+                  /* TODO: ми знаємо куди ми натиснули і без використання evt */
                   const status = evt.target.value as Status;
                   dispatch(changeFilterByStatus({ status }));
                 }}
@@ -75,6 +85,7 @@ export function TodoFooter(): JSX.Element {
         </ul>
       </div>
 
+      {/* TODO: Зробити окремий компонент */}
       <div className={classes.filterByColor}>
         <h5 className={classes.title}>Filter by Color</h5>
         <ul className={classes.filterList}>
@@ -87,12 +98,18 @@ export function TodoFooter(): JSX.Element {
                       type="checkbox"
                       className={classes.inputColor}
                       value={value}
+                      /* TODO: винести у константу */
                       checked={filtersByColor.includes(value as Color)}
+                      /* TODO: винести у handler */
                       onChange={(evt) => {
+                        /* TODO: щоб не перевіряти по індексу у `changeFilterByColors`
+                        повинні ми додати чи видалити колір, можна скористатися
+                        filtersByColor та пошукати там колір */
                         const color = evt.target.value as Color;
                         dispatch(changeFilterByColors({ color }));
                       }}
                     />
+                    {/* TODO: зробити inline css */}
                     <span data-color={value}>{text}</span>
                   </label>
                 </li>

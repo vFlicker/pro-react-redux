@@ -23,6 +23,7 @@ export function ColorSelector({
         onChange(color);
       }}
     >
+      {/* TODO: використовувати змінні [key, value] */}
       {Object.entries(FilterByColor).map(([value, text]) => (
         <Option key={value} id={value} value={value}>
           {text}
