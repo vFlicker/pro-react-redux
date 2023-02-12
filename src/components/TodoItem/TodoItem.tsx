@@ -24,29 +24,25 @@ export function TodoItem({ todo }: TodoItemProps): JSX.Element {
 
   /* TODO: винести handlers */
 
+  const handleTodoToggleClick = () => {
+    /* TODO: можна не передавати isCompleted */
+    toggleTodoComplied({ todo, isCompleted: !isCompleted });
+  };
+
+  const handleTodoColorChangeClick = () => changeTodoColor({ todo, color });
+  const handleTodoRemoveClick = () => dispatch(removeTodo({ todo }));
+
   return (
     <div className={classes.wrapper}>
       <Checkbox
         label={title}
         checked={isCompleted}
-        onChange={() => {
-          /* TODO: можна не передавати isCompleted */
-          dispatch(toggleTodoComplied({ todo, isCompleted: !isCompleted }));
-        }}
+        onChange={handleTodoToggleClick}
       />
 
       <div className={classes.actions}>
-        <ColorSelector
-          color={color}
-          onChange={(color) => {
-            dispatch(changeTodoColor({ todo, color }));
-          }}
-        />
-        <RemoveButton
-          onClick={() => {
-            dispatch(removeTodo({ todo }));
-          }}
-        />
+        <ColorSelector color={color} onChange={handleTodoColorChangeClick} />
+        <RemoveButton onClick={handleTodoRemoveClick} />
       </div>
     </div>
   );

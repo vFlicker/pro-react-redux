@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, KeyboardEvent, useState } from 'react';
 
 import { useAppDispatch } from '~/store';
 import { addTodo } from '~/store/feature/todos/todosSlice';
@@ -6,29 +6,33 @@ import { addTodo } from '~/store/feature/todos/todosSlice';
 import classes from './AddTodo.module.css';
 
 export function AddTodo(): JSX.Element {
-  /* TODO: Не треба писати todo, бо ми з назви компоненту знаємо,
-  що це текст todo. */
-  const [todoText, setTodoText] = useState('');
+  const [text, setText] = useState('');
 
   const dispatch = useAppDispatch();
+
+  const handleChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    setText(evt.target.value);
+  };
+
+  const handleKeyDown = async (evt: KeyboardEvent<HTMLInputElement>) => {
+    const trimmedText = text.trim();
+
+    if (!trimmedText) return;
+
+    if (evt.key === 'Enter' || evt.code === 'Enter') {
+      await dispatch(addTodo({ title: trimmedText }));
+      setText('');
+    }
+  };
 
   return (
     <input
       type="text"
       className={classes.input}
       placeholder="What needs to be done?"
-      value={todoText}
-      /* TODO: Винести хендлери. */
-      onChange={(evt) => setTodoText(evt.target.value)}
-      onKeyDown={(evt) => {
-        /* TODO: Обрізати текст, щоб не було пробілів. */
-        if (evt.key === 'Enter' || evt.code === 'Enter') {
-          /* TODO: Якби це була санка, то треба було б дочикатся її резолву,
-          тобто написати await */
-          dispatch(addTodo({ title: todoText }));
-          setTodoText('');
-        }
-      }}
+      value={text}
+      onChange={handleChange}
+      onKeyDown={handleKeyDown}
     />
   );
 }

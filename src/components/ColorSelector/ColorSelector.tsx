@@ -13,16 +13,13 @@ export function ColorSelector({
   color,
   onChange,
 }: ColorSelectorProps): JSX.Element {
+  const handleChange = (evt: ChangeEvent<HTMLSelectElement>) => {
+    const color = evt.target.value as Color;
+    onChange(color);
+  };
+
   return (
-    <Select
-      style={{ color }}
-      value={color}
-      onChange={(evt) => {
-        const { target } = evt as ChangeEvent<HTMLSelectElement>;
-        const color = target.value as Color;
-        onChange(color);
-      }}
-    >
+    <Select style={{ color }} value={color} onChange={handleChange}>
       {/* TODO: використовувати змінні [key, value] */}
       {Object.entries(FilterByColor).map(([value, text]) => (
         <Option key={value} id={value} value={value}>

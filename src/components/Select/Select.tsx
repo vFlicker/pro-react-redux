@@ -2,10 +2,7 @@ import { ComponentPropsWithoutRef } from 'react';
 
 import classes from './Select.module.css';
 
-type SelectProps = ComponentPropsWithoutRef<'select'> & {
-  onChange: (data: string) => void;
-};
-
+type SelectProps = ComponentPropsWithoutRef<'select'>;
 type OptionProps = ComponentPropsWithoutRef<'option'>;
 
 export function Select({ children, ...props }: SelectProps): JSX.Element {

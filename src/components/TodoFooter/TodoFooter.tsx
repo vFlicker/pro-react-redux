@@ -25,6 +25,23 @@ export function TodoFooter(): JSX.Element {
   const filterByStatus = useAppSelector(selectFilterByStatus);
   const filtersByColor = useAppSelector(selectFilterByColors);
 
+  const handleMarkCompletedClick = () => dispatch(markTodosCompleted());
+  const handleClearCompletedClick = () => dispatch(clearCompletedTodos());
+
+  const handleChangeFilterClick = (evt: ChangeEvent<HTMLInputElement>) => {
+    /* TODO: Ми знаємо куди ми натиснули і без використання evt */
+    const status = evt.target.value as Status;
+    dispatch(changeFilterByStatus({ status }));
+  };
+
+  const handleChangeColorClick = (evt: ChangeEvent<HTMLInputElement>) => {
+    /* TODO: Щоб не перевіряти по індексу у `changeFilterByColors`
+    повинні ми додати чи видалити колір, можна скористатися
+    filtersByColor та пошукати там колір */
+    const color = evt.target.value as Color;
+    dispatch(changeFilterByColors({ color }));
+  };
+
   return (
     <footer className={classes.footer}>
       {/* TODO: Зробити окремий компонент */}
@@ -33,18 +50,14 @@ export function TodoFooter(): JSX.Element {
         {/* TODO: винести handlers */}
         <Button
           className={classes.actionButton}
-          onClick={() => {
-            dispatch(markTodosCompleted());
-          }}
+          onClick={handleMarkCompletedClick}
         >
           Mark All Completed
         </Button>
         {/* TODO: винести handlers */}
         <Button
           className={classes.actionButton}
-          onClick={() => {
-            dispatch(clearCompletedTodos());
-          }}
+          onClick={handleClearCompletedClick}
         >
           Clear Completed
         </Button>
@@ -72,11 +85,7 @@ export function TodoFooter(): JSX.Element {
                 /* TODO: Винести в зміну */
                 checked={value === filterByStatus}
                 /* TODO: Винести в handler */
-                onChange={(evt: ChangeEvent<HTMLInputElement>) => {
-                  /* TODO: ми знаємо куди ми натиснули і без використання evt */
-                  const status = evt.target.value as Status;
-                  dispatch(changeFilterByStatus({ status }));
-                }}
+                onChange={handleChangeFilterClick}
               >
                 {text}
               </Radio>
@@ -101,13 +110,7 @@ export function TodoFooter(): JSX.Element {
                       /* TODO: винести у константу */
                       checked={filtersByColor.includes(value as Color)}
                       /* TODO: винести у handler */
-                      onChange={(evt) => {
-                        /* TODO: щоб не перевіряти по індексу у `changeFilterByColors`
-                        повинні ми додати чи видалити колір, можна скористатися
-                        filtersByColor та пошукати там колір */
-                        const color = evt.target.value as Color;
-                        dispatch(changeFilterByColors({ color }));
-                      }}
+                      onChange={handleChangeColorClick}
                     />
                     {/* TODO: зробити inline css */}
                     <span data-color={value}>{text}</span>
