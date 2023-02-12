@@ -1,6 +1,7 @@
 import { ChangeEvent } from 'react';
 
-import { Color, FilterByColor } from '~/domain/filters';
+import { Color } from '~/domain/filters';
+import { capitalize } from '~/utils/capitalize';
 
 import { Option, Select } from '../Select';
 
@@ -18,14 +19,15 @@ export function ColorSelector({
     onChange(color);
   };
 
+  const optionList = Object.entries(Color).map(([key, value]) => (
+    <Option key={key} id={key} value={value}>
+      {value && capitalize(value)}
+    </Option>
+  ));
+
   return (
     <Select style={{ color }} value={color} onChange={handleChange}>
-      {/* TODO: використовувати змінні [key, value] */}
-      {Object.entries(FilterByColor).map(([value, text]) => (
-        <Option key={value} id={value} value={value}>
-          {text}
-        </Option>
-      ))}
+      {optionList}
     </Select>
   );
 }

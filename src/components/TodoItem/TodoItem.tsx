@@ -1,3 +1,4 @@
+import { Color } from '~/domain/filters';
 import { Todo } from '~/domain/todos';
 import { useAppDispatch } from '~/store';
 import {
@@ -29,7 +30,10 @@ export function TodoItem({ todo }: TodoItemProps): JSX.Element {
     toggleTodoComplied({ todo, isCompleted: !isCompleted });
   };
 
-  const handleTodoColorChangeClick = () => changeTodoColor({ todo, color });
+  const handleTodoColorChangeClick = (color: Color) => {
+    dispatch(changeTodoColor({ todo, color }));
+  };
+
   const handleTodoRemoveClick = () => dispatch(removeTodo({ todo }));
 
   return (

@@ -11,7 +11,7 @@ export const createTodo = (title: string): Todo => ({
   id: new Date().toISOString(),
   title,
   isCompleted: false,
-  color: 'transparent',
+  color: Color.Transparent,
 });
 
 export const updateCompleted = (todo: Todo, isCompleted: boolean) => {
@@ -56,11 +56,11 @@ export const markTodosCompleted = (todos: Todo[]) => {
 
 export const filterTodosByStatus = (todos: Todo[], filter: Status): Todo[] => {
   switch (filter) {
-    case 'active':
+    case Status.Active:
       return todos.filter((todo) => !todo.isCompleted);
-    case 'all':
+    case Status.All:
       return todos;
-    case 'completed':
+    case Status.Completed:
       return todos.filter((todo) => todo.isCompleted);
   }
 };

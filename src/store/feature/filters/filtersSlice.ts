@@ -10,7 +10,7 @@ import { State } from './types';
 const initialState: State = {
   filters: {
     filterByColors: [],
-    filterByStatus: 'all',
+    filterByStatus: Status.All,
   },
 };
 

@@ -1,6 +1,6 @@
 import { ChangeEvent } from 'react';
 
-import { Color, FilterByColor, FilterByStatus, Status } from '~/domain/filters';
+import { Color, Status } from '~/domain/filters';
 import { useAppDispatch, useAppSelector } from '~/store';
 import {
   changeFilterByStatus,
@@ -13,6 +13,7 @@ import {
   markTodosCompleted,
   selectTodosLeftCount,
 } from '~/store/feature/todos/todosSlice';
+import { capitalize } from '~/utils/capitalize';
 
 import { Button } from '../Button';
 import { Radio } from '../Radio';
@@ -76,18 +77,16 @@ function StatusFilters(): JSX.Element {
     <div className={classes.filterByStatus}>
       <h5 className={classes.title}>Filter by Status</h5>
       <ul className={classes.filterList}>
-        {/* TODO: [key, value] замість [value, text] */}
-        {Object.entries(FilterByStatus).map(([value, text]) => (
-          <li key={value}>
+        {Object.entries(Status).map(([key, value]) => (
+          <li key={key}>
             <Radio
               name="filter"
               value={value}
               /* TODO: Винести в зміну */
               checked={value === filterByStatus}
-              /* TODO: Винести в handler */
               onChange={handleChangeFilterClick}
             >
-              {text}
+              {capitalize(value)}
             </Radio>
           </li>
         ))}
@@ -113,21 +112,21 @@ function ColorFilters(): JSX.Element {
     <div className={classes.filterByColor}>
       <h5 className={classes.title}>Filter by Color</h5>
       <ul className={classes.filterList}>
-        {Object.entries(FilterByColor).map(([value, text]) => {
+        {Object.entries(Color).map(([key, value]) => {
           return (
-            text && (
-              <li key={value} className={classes.filterByColorItem}>
+            value && (
+              <li key={key} className={classes.filterByColorItem}>
                 <label className={classes.filterByColorLabel}>
                   <input
                     type="checkbox"
                     className={classes.inputColor}
                     value={value}
                     /* TODO: винести у константу */
-                    checked={filtersByColor.includes(value as Color)}
+                    checked={filtersByColor.includes(value)}
                     onChange={handleChangeColorClick}
                   />
                   {/* TODO: зробити inline css */}
-                  <span data-color={value}>{text}</span>
+                  <span data-color={value}>{capitalize(value)}</span>
                 </label>
               </li>
             )
