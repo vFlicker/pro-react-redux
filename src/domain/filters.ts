@@ -21,9 +21,9 @@ export type Filters = {
 export const colors = Object.values(Color);
 
 export const changeFilterByColor = (colors: Color[], color: Color): Color[] => {
-  const index = colors.findIndex((item) => item === color);
+  const isIncludes = colors.includes(color);
 
-  if (index === -1) return [...colors, color];
+  if (!isIncludes) return [...colors, color];
 
-  return [...colors.slice(0, index), ...colors.slice(index + 1)];
+  return colors.filter((item) => item !== color);
 };

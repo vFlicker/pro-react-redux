@@ -1,6 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSelector, createSlice } from '@reduxjs/toolkit';
 
-import { Filters } from '~/domain/filters';
 import { filterTodosByColors, filterTodosByStatus, Todo } from '~/domain/todos';
 import { todos } from '~/services/mockData';
 
@@ -42,22 +41,20 @@ export const {
   removeTodo,
 } = todosSlice.actions;
 
-/* TODO: Цей селектор має називатися selectFilteredTodos */
-export const selectTodos = (state: RootState, filters: Filters): Todo[] => {
-  /* TODO: Фільтри зберігаються в state.FILTERS,
-  їх можна не передавати в селектор */
-  const { filterByColors, filterByStatus } = filters;
+const selectTodos = (state: RootState): Todo[] => state.TODOS.todos;
 
-  /* TODO: Тут має бути селектор */
-  const { todos } = state.TODOS;
+export const selectFilteredTodos = createSelector(
+  selectTodos,
+  (state: RootState) => state.FILTERS.filters,
+  (todos, filters) => {
+    const { filterByColors, filterByStatus } = filters;
 
-  /* TODO: Треба написати одну функцію фільтрації */
-  const filteredTodosByStatus = filterTodosByStatus(todos, filterByStatus);
-  return filterTodosByColors(filteredTodosByStatus, filterByColors);
-};
+    const filteredTodosByStatus = filterTodosByStatus(todos, filterByStatus);
+    return filterTodosByColors(filteredTodosByStatus, filterByColors);
+  },
+);
 
-/* TODO: rename to selectTodosRemaining */
-export const selectTodosLeftCount = (state: RootState): number => {
+export const selectRemainingTodos = (state: RootState): number => {
   const completedTasks = state.TODOS.todos.filter(
     (todo) => todo.isCompleted === false,
   );

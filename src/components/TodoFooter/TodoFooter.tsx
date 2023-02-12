@@ -1,5 +1,3 @@
-import { ChangeEvent } from 'react';
-
 import { Color, Status } from '~/domain/filters';
 import { useAppDispatch, useAppSelector } from '~/store';
 import {
@@ -11,7 +9,7 @@ import {
 import {
   clearCompletedTodos,
   markTodosCompleted,
-  selectTodosLeftCount,
+  selectRemainingTodos,
 } from '~/store/feature/todos/todosSlice';
 import { capitalize } from '~/utils/capitalize';
 
@@ -45,8 +43,7 @@ function Actions(): JSX.Element {
 }
 
 function RemainingTodos(): JSX.Element {
-  /* TODO: rename selector */
-  const remainingTodos = useAppSelector(selectTodosLeftCount);
+  const remainingTodos = useAppSelector(selectRemainingTodos);
 
   const suffix = remainingTodos === 1 ? '' : 's';
 
@@ -101,9 +98,6 @@ function ColorFilters(): JSX.Element {
 
   const filterList = Object.entries(Color).map(([key, value]) => {
     const handleChangeColorClick = () => {
-      /* TODO: Щоб не перевіряти по індексу у `changeFilterByColors`
-        повинні ми додати чи видалити колір, можна скористатися
-        filtersByColor та пошукати там колір */
       dispatch(changeFilterByColors({ color: value }));
     };
 

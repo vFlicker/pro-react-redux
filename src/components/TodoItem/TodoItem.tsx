@@ -24,8 +24,7 @@ export function TodoItem({ todo }: TodoItemProps): JSX.Element {
   const dispatch = useAppDispatch();
 
   const handleTodoToggleClick = () => {
-    /* TODO: можна не передавати isCompleted */
-    dispatch(toggleTodoComplied({ todo, isCompleted: !isCompleted }));
+    dispatch(toggleTodoComplied({ todo }));
   };
 
   const handleTodoColorChangeClick = (color: Color) => {

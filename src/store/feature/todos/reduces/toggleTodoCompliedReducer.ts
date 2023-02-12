@@ -6,7 +6,6 @@ import { State } from '../types';
 
 type Payload = {
   todo: Todo;
-  isCompleted: boolean;
 };
 
 export const toggleTodoCompletedReducer = (
@@ -14,7 +13,7 @@ export const toggleTodoCompletedReducer = (
   action: PayloadAction<Payload>,
 ): void => {
   const { todos } = state;
-  const { todo, isCompleted } = action.payload;
+  const { todo } = action.payload;
 
   /* TODO:
     Зараз:
@@ -29,7 +28,7 @@ export const toggleTodoCompletedReducer = (
     Якби ми використовували `createEntityAdapter`,
     ми шукали б todo в об'єкті. Складність алгоритму О(1).
   */
-  const updatedTodo = updateCompleted(todo, isCompleted);
+  const updatedTodo = updateCompleted(todo, !todo.isCompleted);
   const updatedTodos = updateTodos(todos, updatedTodo);
   state.todos = updatedTodos;
 };
