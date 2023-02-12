@@ -8,7 +8,7 @@ type Payload = {
   title: string;
 };
 
-export const addTodoReducer = (
+export const todoAddedReducer = (
   state: State,
   action: PayloadAction<Payload>,
 ): void => {

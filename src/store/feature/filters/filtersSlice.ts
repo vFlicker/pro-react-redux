@@ -3,8 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import { Color, Status } from '~/domain/filters';
 
 import { RootState } from '../..';
-import { changeFilterByStatusReducer } from './reduces/changeFilterByStatusReducer';
-import { changeFilterByColorsReducer } from './reduces/changeFilterByColorsReducer';
+import { filterByStatusChangedReducer } from './reduces/filterByStatusChangedReducer';
+import { filterByColorsChangedReducer } from './reduces/filterByColorsChangedReducer';
 import { State } from './types';
 
 const initialState: State = {
@@ -18,20 +18,18 @@ const filtersSlice = createSlice({
   name: 'filters',
   initialState,
   reducers: {
-    changeFilterByColors: changeFilterByColorsReducer,
-    changeFilterByStatus: changeFilterByStatusReducer,
+    filterByColorChanged: filterByColorsChangedReducer,
+    filterByStatusChanged: filterByStatusChangedReducer,
   },
 });
 
-export const { changeFilterByColors, changeFilterByStatus } =
+export const { filterByColorChanged, filterByStatusChanged } =
   filtersSlice.actions;
 
-/* TODO: Видалите */
 export const selectFilterByColors = (state: RootState): Color[] => {
   return state.FILTERS.filters.filterByColors;
 };
 
-/* TODO: Видалите */
 export const selectFilterByStatus = (state: RootState): Status => {
   return state.FILTERS.filters.filterByStatus;
 };

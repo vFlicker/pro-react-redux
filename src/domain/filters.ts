@@ -20,7 +20,10 @@ export type Filters = {
 
 export const colors = Object.values(Color);
 
-export const changeFilterByColor = (colors: Color[], color: Color): Color[] => {
+export const changeFilterByColors = (
+  colors: Color[],
+  color: Color,
+): Color[] => {
   const isIncludes = colors.includes(color);
 
   if (!isIncludes) return [...colors, color];

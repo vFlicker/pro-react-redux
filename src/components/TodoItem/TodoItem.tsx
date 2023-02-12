@@ -2,9 +2,9 @@ import { Color } from '~/domain/filters';
 import { Todo } from '~/domain/todos';
 import { useAppDispatch } from '~/store';
 import {
-  changeTodoColor,
-  toggleTodoComplied,
-  removeTodo,
+  todoColorChanged,
+  todoCompliedToggled,
+  todoDeleted,
 } from '~/store/feature/todos/todosSlice';
 
 import { RemoveButton } from '../Button';
@@ -24,14 +24,14 @@ export function TodoItem({ todo }: TodoItemProps): JSX.Element {
   const dispatch = useAppDispatch();
 
   const handleTodoToggleClick = () => {
-    dispatch(toggleTodoComplied({ todo }));
+    dispatch(todoCompliedToggled({ todo }));
   };
 
   const handleTodoColorChangeClick = (color: Color) => {
-    dispatch(changeTodoColor({ todo, color }));
+    dispatch(todoColorChanged({ todo, color }));
   };
 
-  const handleTodoRemoveClick = () => dispatch(removeTodo({ todo }));
+  const handleTodoRemoveClick = () => dispatch(todoDeleted({ todo }));
 
   return (
     <div className={classes.wrapper}>

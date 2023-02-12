@@ -1,14 +1,14 @@
 import { Color, Status } from '~/domain/filters';
 import { useAppDispatch, useAppSelector } from '~/store';
 import {
-  changeFilterByStatus,
-  changeFilterByColors,
+  filterByStatusChanged,
+  filterByColorChanged,
   selectFilterByColors,
   selectFilterByStatus,
 } from '~/store/feature/filters/filtersSlice';
 import {
-  clearCompletedTodos,
-  markTodosCompleted,
+  completedTodosCleared,
+  allTodosCompleted,
   selectRemainingTodos,
 } from '~/store/feature/todos/todosSlice';
 import { capitalize } from '~/utils/capitalize';
@@ -20,8 +20,8 @@ import classes from './TodoFooter.module.css';
 function Actions(): JSX.Element {
   const dispatch = useAppDispatch();
 
-  const handleMarkCompletedClick = () => dispatch(markTodosCompleted());
-  const handleClearCompletedClick = () => dispatch(clearCompletedTodos());
+  const handleMarkCompletedClick = () => dispatch(allTodosCompleted());
+  const handleClearCompletedClick = () => dispatch(completedTodosCleared());
 
   return (
     <div className={classes.actions}>
@@ -64,7 +64,7 @@ function StatusFilters(): JSX.Element {
 
   const filterList = Object.entries(Status).map(([key, value]) => {
     const handleChangeFilterClick = () => {
-      dispatch(changeFilterByStatus({ status: value }));
+      dispatch(filterByStatusChanged({ status: value }));
     };
 
     const isChecked = value === filterByStatus;
@@ -98,7 +98,7 @@ function ColorFilters(): JSX.Element {
 
   const filterList = Object.entries(Color).map(([key, value]) => {
     const handleChangeColorClick = () => {
-      dispatch(changeFilterByColors({ color: value }));
+      dispatch(filterByColorChanged({ color: value }));
     };
 
     const isChecked = filtersByColor.includes(value);

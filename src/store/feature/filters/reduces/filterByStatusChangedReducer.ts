@@ -8,11 +8,9 @@ type Payload = {
   status: Status;
 };
 
-export const changeFilterByStatusReducer = (
+export const filterByStatusChangedReducer = (
   state: State,
   action: PayloadAction<Payload>,
 ): void => {
-  /* TODO: Навіщо тут деструктуризація */
-  const { status } = action.payload;
-  state.filters.filterByStatus = status;
+  state.filters.filterByStatus = action.payload.status;
 };

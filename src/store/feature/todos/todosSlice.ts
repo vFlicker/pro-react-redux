@@ -4,12 +4,12 @@ import { filterTodosByColors, filterTodosByStatus, Todo } from '~/domain/todos';
 import { todos } from '~/services/mockData';
 
 import { RootState } from '../..';
-import { addTodoReducer } from './reduces/addTodoReducer';
-import { changeTodoColorReducer } from './reduces/changeTodoColorReducer';
-import { clearCompletedTodosReducer } from './reduces/clearCompletedTodosReducer';
-import { markTodosCompletedReducer } from './reduces/markTodosCompletedReducer';
-import { removeTodoReducer } from './reduces/removeTodoReducer';
-import { toggleTodoCompletedReducer } from './reduces/toggleTodoCompliedReducer';
+import { todoAddedReducer } from './reduces/todoAddedReducer';
+import { todoColorChangedReducer } from './reduces/todoColorChangedReducer';
+import { completedTodosClearedReducer } from './reduces/completedTodosClearedReducer';
+import { allTodosCompletedReducer } from './reduces/allTodosCompletedReducer';
+import { todoDeletedReducer } from './reduces/todoDeletedReducer';
+import { todoCompliedToggledReducer } from './reduces/todoCompliedToggledReducer';
 import { State } from './types';
 
 const initialState: State = {
@@ -20,25 +20,22 @@ const todosSlice = createSlice({
   name: 'todos',
   initialState,
   reducers: {
-    /* TODO: змінити назву на минулий час */
-    addTodo: addTodoReducer,
-    /* TODO: подивитись як працює prepare,
-    ми можемо передавати аргументи замість об'єкт */
-    changeTodoColor: changeTodoColorReducer,
-    clearCompletedTodos: clearCompletedTodosReducer,
-    markTodosCompleted: markTodosCompletedReducer,
-    toggleTodoComplied: toggleTodoCompletedReducer,
-    removeTodo: removeTodoReducer,
+    todoAdded: todoAddedReducer,
+    todoColorChanged: todoColorChangedReducer,
+    completedTodosCleared: completedTodosClearedReducer,
+    allTodosCompleted: allTodosCompletedReducer,
+    todoCompliedToggled: todoCompliedToggledReducer,
+    todoDeleted: todoDeletedReducer,
   },
 });
 
 export const {
-  addTodo,
-  changeTodoColor,
-  clearCompletedTodos,
-  markTodosCompleted,
-  toggleTodoComplied,
-  removeTodo,
+  todoAdded,
+  todoColorChanged,
+  completedTodosCleared,
+  allTodosCompleted,
+  todoCompliedToggled,
+  todoDeleted,
 } = todosSlice.actions;
 
 const selectTodos = (state: RootState): Todo[] => state.TODOS.todos;

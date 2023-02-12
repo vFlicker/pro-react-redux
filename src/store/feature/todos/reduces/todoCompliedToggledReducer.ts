@@ -8,7 +8,7 @@ type Payload = {
   todo: Todo;
 };
 
-export const toggleTodoCompletedReducer = (
+export const todoCompliedToggledReducer = (
   state: State,
   action: PayloadAction<Payload>,
 ): void => {

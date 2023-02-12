@@ -1,7 +1,7 @@
 import { ChangeEvent, KeyboardEvent, useState } from 'react';
 
 import { useAppDispatch } from '~/store';
-import { addTodo } from '~/store/feature/todos/todosSlice';
+import { todoAdded } from '~/store/feature/todos/todosSlice';
 
 import classes from './AddTodo.module.css';
 
@@ -20,7 +20,7 @@ export function AddTodo(): JSX.Element {
     if (!trimmedText) return;
 
     if (evt.key === 'Enter' || evt.code === 'Enter') {
-      await dispatch(addTodo({ title: trimmedText }));
+      await dispatch(todoAdded({ title: trimmedText }));
       setText('');
     }
   };

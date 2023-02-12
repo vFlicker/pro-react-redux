@@ -8,7 +8,7 @@ type Payload = {
   todo: Todo;
 };
 
-export const removeTodoReducer = (
+export const todoDeletedReducer = (
   state: State,
   action: PayloadAction<Payload>,
 ): void => {
