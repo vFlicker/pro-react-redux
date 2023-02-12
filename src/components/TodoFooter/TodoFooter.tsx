@@ -28,14 +28,12 @@ function Actions(): JSX.Element {
   return (
     <div className={classes.actions}>
       <h5 className={classes.title}>Actions</h5>
-      {/* TODO: винести handlers */}
       <Button
         className={classes.actionButton}
         onClick={handleMarkCompletedClick}
       >
         Mark All Completed
       </Button>
-      {/* TODO: винести handlers */}
       <Button
         className={classes.actionButton}
         onClick={handleClearCompletedClick}
@@ -67,30 +65,31 @@ function StatusFilters(): JSX.Element {
 
   const filterByStatus = useAppSelector(selectFilterByStatus);
 
-  const handleChangeFilterClick = (evt: ChangeEvent<HTMLInputElement>) => {
-    /* TODO: Ми знаємо куди ми натиснули і без використання evt */
-    const status = evt.target.value as Status;
-    dispatch(changeFilterByStatus({ status }));
-  };
+  const filterList = Object.entries(Status).map(([key, value]) => {
+    const handleChangeFilterClick = () => {
+      dispatch(changeFilterByStatus({ status: value }));
+    };
+
+    const isChecked = value === filterByStatus;
+
+    return (
+      <li key={key}>
+        <Radio
+          name="filter"
+          value={value}
+          checked={isChecked}
+          onChange={handleChangeFilterClick}
+        >
+          {capitalize(value)}
+        </Radio>
+      </li>
+    );
+  });
 
   return (
     <div className={classes.filterByStatus}>
       <h5 className={classes.title}>Filter by Status</h5>
-      <ul className={classes.filterList}>
-        {Object.entries(Status).map(([key, value]) => (
-          <li key={key}>
-            <Radio
-              name="filter"
-              value={value}
-              /* TODO: Винести в зміну */
-              checked={value === filterByStatus}
-              onChange={handleChangeFilterClick}
-            >
-              {capitalize(value)}
-            </Radio>
-          </li>
-        ))}
-      </ul>
+      <ul className={classes.filterList}>{filterList}</ul>
     </div>
   );
 }
@@ -100,39 +99,38 @@ function ColorFilters(): JSX.Element {
 
   const filtersByColor = useAppSelector(selectFilterByColors);
 
-  const handleChangeColorClick = (evt: ChangeEvent<HTMLInputElement>) => {
-    /* TODO: Щоб не перевіряти по індексу у `changeFilterByColors`
-    повинні ми додати чи видалити колір, можна скористатися
-    filtersByColor та пошукати там колір */
-    const color = evt.target.value as Color;
-    dispatch(changeFilterByColors({ color }));
-  };
+  const filterList = Object.entries(Color).map(([key, value]) => {
+    const handleChangeColorClick = () => {
+      /* TODO: Щоб не перевіряти по індексу у `changeFilterByColors`
+        повинні ми додати чи видалити колір, можна скористатися
+        filtersByColor та пошукати там колір */
+      dispatch(changeFilterByColors({ color: value }));
+    };
+
+    const isChecked = filtersByColor.includes(value);
+
+    return (
+      value && (
+        <li key={key} className={classes.filterByColorItem}>
+          <label className={classes.filterByColorLabel}>
+            <input
+              type="checkbox"
+              className={classes.inputColor}
+              value={value}
+              checked={isChecked}
+              onChange={handleChangeColorClick}
+            />
+            <span data-color={value}>{capitalize(value)}</span>
+          </label>
+        </li>
+      )
+    );
+  });
 
   return (
     <div className={classes.filterByColor}>
       <h5 className={classes.title}>Filter by Color</h5>
-      <ul className={classes.filterList}>
-        {Object.entries(Color).map(([key, value]) => {
-          return (
-            value && (
-              <li key={key} className={classes.filterByColorItem}>
-                <label className={classes.filterByColorLabel}>
-                  <input
-                    type="checkbox"
-                    className={classes.inputColor}
-                    value={value}
-                    /* TODO: винести у константу */
-                    checked={filtersByColor.includes(value)}
-                    onChange={handleChangeColorClick}
-                  />
-                  {/* TODO: зробити inline css */}
-                  <span data-color={value}>{capitalize(value)}</span>
-                </label>
-              </li>
-            )
-          );
-        })}
-      </ul>
+      <ul className={classes.filterList}>{filterList}</ul>
     </div>
   );
 }

@@ -16,16 +16,13 @@ export function TodoList(): JSX.Element {
     selectTodos(state, { filterByColors, filterByStatus }),
   );
 
-  return (
-    <ul className={classes.list}>
-      {/* TODO: Винести в renderedListItems */}
-      {todos.map((todo) => (
-        <li key={todo.id} className={classes.item}>
-          {/* TODO: передавати id замість todo,
-          подивитись як зміниться ререндер */}
-          <TodoItem todo={todo} />
-        </li>
-      ))}
-    </ul>
-  );
+  const todoList = todos.map((todo) => (
+    <li key={todo.id} className={classes.item}>
+      {/* TODO: передавати id замість todo,
+      подивитись як зміниться ререндер */}
+      <TodoItem todo={todo} />
+    </li>
+  ));
+
+  return <ul className={classes.list}>{todoList}</ul>;
 }
