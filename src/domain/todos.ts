@@ -1,4 +1,4 @@
-import { Color, Status } from './filters';
+import { Color, Filters, Status } from './filters';
 
 export type Todo = {
   id: UniqueId;
@@ -54,18 +54,24 @@ export const markTodosCompleted = (todos: Todo[]) => {
   return todos.map((todo) => ({ ...todo, isCompleted: true }));
 };
 
-export const filterTodosByStatus = (todos: Todo[], filter: Status): Todo[] => {
-  switch (filter) {
-    case Status.Active:
-      return todos.filter((todo) => !todo.isCompleted);
-    case Status.All:
-      return todos;
-    case Status.Completed:
-      return todos.filter((todo) => todo.isCompleted);
-  }
-};
+export const filterTodos = (todos: Todo[], filters: Filters) => {
+  const { filterByColors, filterByStatus } = filters;
 
-export const filterTodosByColors = (todos: Todo[], filter: Color[]): Todo[] => {
-  if (filter.length === 0) return todos;
-  return todos.filter((todo) => filter.includes(todo.color));
+  // All cases where filters return all todos
+  const showAllColors = filterByColors.length === 0;
+  const showAllStatuses = filterByStatus === Status.All;
+
+  // If all filters have a value where all todos are returned,
+  // we can return all todos before filtering
+  if (showAllColors && showAllStatuses) return todos;
+
+  const isCompleted = filterByStatus === Status.Completed;
+
+  return todos.filter((todo) => {
+    // Find out if the todo satisfies the filters
+    const colorMatcher = showAllColors || filterByColors.includes(todo.color);
+    const statusMatcher = showAllStatuses || todo.isCompleted === isCompleted;
+
+    return colorMatcher && statusMatcher;
+  });
 };

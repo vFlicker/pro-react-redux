@@ -1,6 +1,6 @@
 import { createSelector, createSlice } from '@reduxjs/toolkit';
 
-import { filterTodosByColors, filterTodosByStatus, Todo } from '~/domain/todos';
+import { filterTodos, Todo } from '~/domain/todos';
 import { todos } from '~/services/mockData';
 
 import { RootState } from '../..';
@@ -44,19 +44,17 @@ export const selectFilteredTodos = createSelector(
   selectTodos,
   (state: RootState) => state.FILTERS.filters,
   (todos, filters) => {
-    const { filterByColors, filterByStatus } = filters;
-
-    const filteredTodosByStatus = filterTodosByStatus(todos, filterByStatus);
-    return filterTodosByColors(filteredTodosByStatus, filterByColors);
+    const filteredTodos = filterTodos(todos, filters);
+    return filteredTodos;
   },
 );
 
 export const selectRemainingTodos = (state: RootState): number => {
-  const completedTasks = state.TODOS.todos.filter(
+  const completedTodos = state.TODOS.todos.filter(
     (todo) => todo.isCompleted === false,
   );
 
-  return completedTasks.length;
+  return completedTodos.length;
 };
 
 export default todosSlice.reducer;
