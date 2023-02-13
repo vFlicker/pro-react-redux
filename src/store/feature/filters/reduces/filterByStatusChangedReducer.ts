@@ -12,5 +12,5 @@ export const filterByStatusChangedReducer = (
   state: State,
   action: PayloadAction<Payload>,
 ): void => {
-  state.filters.filterByStatus = action.payload.status;
+  state.filterByStatus = action.payload.status;
 };

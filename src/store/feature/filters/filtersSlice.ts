@@ -8,10 +8,8 @@ import { filterByColorsChangedReducer } from './reduces/filterByColorsChangedRed
 import { State } from './types';
 
 const initialState: State = {
-  filters: {
-    filterByColors: [],
-    filterByStatus: Status.All,
-  },
+  filterByColors: [],
+  filterByStatus: Status.All,
 };
 
 const filtersSlice = createSlice({
@@ -27,11 +25,11 @@ export const { filterByColorChanged, filterByStatusChanged } =
   filtersSlice.actions;
 
 export const selectFilterByColors = (state: RootState): Color[] => {
-  return state.FILTERS.filters.filterByColors;
+  return state.FILTERS.filterByColors;
 };
 
 export const selectFilterByStatus = (state: RootState): Status => {
-  return state.FILTERS.filters.filterByStatus;
+  return state.FILTERS.filterByStatus;
 };
 
 export default filtersSlice.reducer;

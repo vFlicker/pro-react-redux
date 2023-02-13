@@ -42,7 +42,7 @@ const selectTodos = (state: RootState): Todo[] => state.TODOS.todos;
 
 export const selectFilteredTodos = createSelector(
   selectTodos,
-  (state: RootState) => state.FILTERS.filters,
+  (state: RootState) => state.FILTERS,
   (todos, filters) => {
     const filteredTodos = filterTodos(todos, filters);
     return filteredTodos;

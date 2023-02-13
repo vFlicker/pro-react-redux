@@ -13,6 +13,7 @@ export const filterByColorsChangedReducer = (
   action: PayloadAction<Payload>,
 ): void => {
   const { color } = action.payload;
-  const { filterByColors: filterByColors } = state.filters;
-  state.filters.filterByColors = changeFilterByColors(filterByColors, color);
+  const { filterByColors } = state;
+
+  state.filterByColors = changeFilterByColors(filterByColors, color);
 };
