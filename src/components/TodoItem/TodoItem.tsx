@@ -16,9 +16,7 @@ type TodoItemProps = {
   todo: Todo;
 };
 
-/* TODO: props буде id, замість todo */
 export function TodoItem({ todo }: TodoItemProps): JSX.Element {
-  /* TODO: додати selectTodoById */
   const { color, isCompleted, title } = todo;
 
   const dispatch = useAppDispatch();

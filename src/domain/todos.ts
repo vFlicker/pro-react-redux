@@ -28,10 +28,6 @@ export const updateColor = (todo: Todo, color: Color) => {
   };
 };
 
-export const findTodoById = (todos: Todo[], id: UniqueId): Todo | null => {
-  return todos.find((product) => product.id === id) ?? null;
-};
-
 export const addTodo = (todos: Todo[], todo: Todo): Todo[] => {
   return [...todos, todo];
 };
@@ -55,15 +51,16 @@ export const markTodosCompleted = (todos: Todo[]) => {
 };
 
 export const filterTodos = (todos: Todo[], filters: Filters) => {
-  const { filterByColors, filterByStatus } = filters;
+  const { filterByColors, filterByTerm, filterByStatus } = filters;
 
   // All cases where filters return all todos
   const showAllColors = filterByColors.length === 0;
   const showAllStatuses = filterByStatus === Status.All;
+  const showAllTerms = filterByTerm === '';
 
   // If all filters have a value where all todos are returned,
   // we can return all todos before filtering
-  if (showAllColors && showAllStatuses) return todos;
+  if (showAllColors && showAllStatuses && showAllTerms) return todos;
 
   const isCompleted = filterByStatus === Status.Completed;
 
@@ -71,7 +68,8 @@ export const filterTodos = (todos: Todo[], filters: Filters) => {
     // Find out if the todo satisfies the filters
     const colorMatcher = showAllColors || filterByColors.includes(todo.color);
     const statusMatcher = showAllStatuses || todo.isCompleted === isCompleted;
+    const termMatcher = showAllTerms || todo.title.startsWith(filterByTerm);
 
-    return colorMatcher && statusMatcher;
+    return colorMatcher && statusMatcher && termMatcher;
   });
 };

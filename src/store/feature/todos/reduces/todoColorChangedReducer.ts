@@ -17,14 +17,9 @@ export const todoColorChangedReducer = (
   const { todos } = state;
   const { color, todo } = action.payload;
 
-  /* TODO:
-  замість того
-   1. оновлювати колір у todo
-   2. оновлювати всі todos
-   3. перезаписувати todos
-  можна
-   1. знайти todo за id
-   2. оновити колір todo */
+  // TODO:
+  // 1. Found in the state.todos required todo
+  // 2. Updated the todo that came with the state
 
   const updatedTodo = updateColor(todo, color);
   const updatedTodos = updateTodos(todos, updatedTodo);

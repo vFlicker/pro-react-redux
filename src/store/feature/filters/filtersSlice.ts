@@ -6,9 +6,11 @@ import { RootState } from '../..';
 import { filterByStatusChangedReducer } from './reduces/filterByStatusChangedReducer';
 import { filterByColorsChangedReducer } from './reduces/filterByColorsChangedReducer';
 import { State } from './types';
+import { filterByTermChangedReducer } from './reduces/filterByTermChangedReducer';
 
 const initialState: State = {
   filterByColors: [],
+  filterByTerm: '',
   filterByStatus: Status.All,
 };
 
@@ -18,11 +20,15 @@ const filtersSlice = createSlice({
   reducers: {
     filterByColorChanged: filterByColorsChangedReducer,
     filterByStatusChanged: filterByStatusChangedReducer,
+    filterByTermChanged: filterByTermChangedReducer,
   },
 });
 
-export const { filterByColorChanged, filterByStatusChanged } =
-  filtersSlice.actions;
+export const {
+  filterByColorChanged,
+  filterByStatusChanged,
+  filterByTermChanged,
+} = filtersSlice.actions;
 
 export const selectFilterByColors = (state: RootState): Color[] => {
   return state.FILTERS.filterByColors;

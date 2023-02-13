@@ -1,6 +1,6 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 
-import { Todo, updateTodos, updateCompleted } from '~/domain/todos';
+import { Todo, updateCompleted, updateTodos } from '~/domain/todos';
 
 import { State } from '../types';
 
@@ -15,19 +15,23 @@ export const todoCompliedToggledReducer = (
   const { todos } = state;
   const { todo } = action.payload;
 
-  /* TODO:
-    Зараз:
-     1. Оновили todo який прийшов з payload
-     2. Оновили всі todos новим todo
-     3. Перезаписали всі todos
-
-    Можна в todos які зі state, знайти потрібний todo і оновити тільки його.
-    Мінус в тому, що нам треба буде перебирати весь масив todos.
-    Складність алгоритму О(n).
-
-    Якби ми використовували `createEntityAdapter`,
-    ми шукали б todo в об'єкті. Складність алгоритму О(1).
-  */
+  /**
+   * REMARK.
+   *
+   * Now we:
+   *   1. Updated the todo that came with the payload
+   *   2. Updated all todos with a new todo
+   *   3. Overwrote all todos
+   *
+   * Better:
+   *  1. Found in the state.todos required todo
+   *  2. Updated the todo that came with the state
+   * Cons: the complexity of the algorithm is O(n)
+   *
+   * Best:
+   *  1. Use createEntityAdapter.
+   *  Pluses: the complexity of the algorithm is O(1)
+   */
   const updatedTodo = updateCompleted(todo, !todo.isCompleted);
   const updatedTodos = updateTodos(todos, updatedTodo);
   state.todos = updatedTodos;

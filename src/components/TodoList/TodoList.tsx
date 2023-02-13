@@ -9,8 +9,6 @@ export function TodoList(): JSX.Element {
 
   const todoList = todos.map((todo) => (
     <li key={todo.id} className={classes.item}>
-      {/* TODO: передавати id замість todo,
-      подивитись як зміниться ререндер */}
       <TodoItem todo={todo} />
     </li>
   ));

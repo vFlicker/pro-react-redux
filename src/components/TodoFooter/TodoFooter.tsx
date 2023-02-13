@@ -15,6 +15,7 @@ import { capitalize } from '~/utils/capitalize';
 
 import { Button } from '../Button';
 import { Radio } from '../Radio';
+import { SearchTodo } from '../SearchTodo';
 import classes from './TodoFooter.module.css';
 
 function Actions(): JSX.Element {
@@ -132,10 +133,13 @@ function ColorFilters(): JSX.Element {
 export function TodoFooter(): JSX.Element {
   return (
     <footer className={classes.footer}>
-      <Actions />
-      <RemainingTodos />
-      <StatusFilters />
-      <ColorFilters />
+      <div className={classes.wrapper}>
+        <Actions />
+        <RemainingTodos />
+        <StatusFilters />
+        <ColorFilters />
+      </div>
+      <SearchTodo />
     </footer>
   );
 }

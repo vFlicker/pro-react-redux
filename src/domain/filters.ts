@@ -13,8 +13,11 @@ export enum Status {
   Completed = 'completed',
 }
 
+export type TermString = string;
+
 export type Filters = {
   filterByColors: Color[];
+  filterByTerm: TermString;
   filterByStatus: Status;
 };
 
