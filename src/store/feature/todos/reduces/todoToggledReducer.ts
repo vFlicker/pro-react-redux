@@ -1,15 +1,16 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 
-import { todosAdapter } from '../helpers';
 import { State } from '../types';
 
 type Payload = {
   id: UniqueId;
 };
 
-export const todoDeletedReducer = (
+export const todoToggledReducer = (
   state: State,
   action: PayloadAction<Payload>,
 ): void => {
-  todosAdapter.removeOne(state, action.payload.id);
+  const todo = state.entities[action.payload.id];
+
+  if (todo) todo.isCompleted = !todo.isCompleted;
 };

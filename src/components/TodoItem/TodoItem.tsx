@@ -1,9 +1,10 @@
 import { Color } from '~/domain/filters';
 import { Todo } from '~/domain/todos';
-import { useAppDispatch } from '~/store';
+import { useAppDispatch, useAppSelector } from '~/store';
 import {
+  selectTodoById,
   todoColorChanged,
-  todoCompliedToggled,
+  todoToggled,
   todoDeleted,
 } from '~/store/feature/todos/todosSlice';
 
@@ -13,23 +14,25 @@ import { ColorSelector } from '../ColorSelector';
 import classes from './TodoItem.module.css';
 
 type TodoItemProps = {
-  todo: Todo;
+  id: UniqueId;
 };
 
-export function TodoItem({ todo }: TodoItemProps): JSX.Element {
-  const { color, isCompleted, title } = todo;
-
+export function TodoItem({ id }: TodoItemProps): JSX.Element {
   const dispatch = useAppDispatch();
 
+  const { color, isCompleted, title } = useAppSelector((state) =>
+    selectTodoById(state, id),
+  ) as Todo;
+
   const handleTodoToggleClick = () => {
-    dispatch(todoCompliedToggled({ todo }));
+    dispatch(todoToggled({ id }));
   };
 
   const handleTodoColorChangeClick = (color: Color) => {
-    dispatch(todoColorChanged({ todo, color }));
+    dispatch(todoColorChanged({ id, color }));
   };
 
-  const handleTodoRemoveClick = () => dispatch(todoDeleted({ todo }));
+  const handleTodoRemoveClick = () => dispatch(todoDeleted({ id }));
 
   return (
     <div className={classes.wrapper}>

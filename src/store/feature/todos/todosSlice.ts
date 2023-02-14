@@ -1,19 +1,30 @@
 import { createSelector, createSlice } from '@reduxjs/toolkit';
+import { normalize, schema } from 'normalizr';
 
 import { filterTodos, Todo } from '~/domain/todos';
 import { todos } from '~/services/mockData';
 
 import { RootState } from '../..';
 import { todoAddedReducer } from './reduces/todoAddedReducer';
-import { todoColorChangedReducer } from './reduces/todoColorChangedReducer';
-import { completedTodosClearedReducer } from './reduces/completedTodosClearedReducer';
 import { allTodosCompletedReducer } from './reduces/allTodosCompletedReducer';
+import { completedTodosClearedReducer } from './reduces/completedTodosClearedReducer';
+import { todoColorChangedReducer } from './reduces/todoColorChangedReducer';
 import { todoDeletedReducer } from './reduces/todoDeletedReducer';
-import { todoCompliedToggledReducer } from './reduces/todoCompliedToggledReducer';
+import { todoToggledReducer } from './reduces/todoToggledReducer';
 import { State } from './types';
+import { todosAdapter } from './helpers';
+
+type NormalizeData = {
+  todos: { [key: string]: Todo };
+};
+
+const todoSchema = new schema.Entity<Todo>('todos');
+const todoListSchema = new schema.Array(todoSchema);
+const normalizedData = normalize<Todo[], NormalizeData>(todos, todoListSchema);
 
 const initialState: State = {
-  todos,
+  entities: normalizedData.entities.todos,
+  ids: normalizedData.result,
 };
 
 const todosSlice = createSlice({
@@ -24,7 +35,7 @@ const todosSlice = createSlice({
     todoColorChanged: todoColorChangedReducer,
     completedTodosCleared: completedTodosClearedReducer,
     allTodosCompleted: allTodosCompletedReducer,
-    todoCompliedToggled: todoCompliedToggledReducer,
+    todoToggled: todoToggledReducer,
     todoDeleted: todoDeletedReducer,
   },
 });
@@ -34,27 +45,40 @@ export const {
   todoColorChanged,
   completedTodosCleared,
   allTodosCompleted,
-  todoCompliedToggled,
+  todoToggled,
   todoDeleted,
 } = todosSlice.actions;
 
-const selectTodos = (state: RootState): Todo[] => state.TODOS.todos;
+const todosSelectors = todosAdapter.getSelectors(
+  (state: RootState) => state.TODOS,
+);
+
+export const selectTodoById = (state: RootState, id: UniqueId): Todo => {
+  return todosSelectors.selectById(state, id) as Todo;
+};
 
 export const selectFilteredTodos = createSelector(
-  selectTodos,
+  todosSelectors.selectAll,
   (state: RootState) => state.FILTERS,
-  (todos, filters) => {
+  (todos, filters): Todo[] => {
     const filteredTodos = filterTodos(todos, filters);
     return filteredTodos;
   },
 );
 
-export const selectRemainingTodos = (state: RootState): number => {
-  const completedTodos = state.TODOS.todos.filter(
-    (todo) => todo.isCompleted === false,
-  );
+export const selectFilteredTodosIds = createSelector(
+  selectFilteredTodos,
+  (filteredTodos): UniqueId[] => {
+    return filteredTodos.map((filteredTodo) => filteredTodo.id);
+  },
+);
 
-  return completedTodos.length;
-};
+export const selectRemainingTodos = createSelector(
+  todosSelectors.selectAll,
+  (todos): number => {
+    const completedTodos = todos.filter((todo) => todo.isCompleted === false);
+    return completedTodos.length;
+  },
+);
 
 export default todosSlice.reducer;

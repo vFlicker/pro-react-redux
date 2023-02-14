@@ -1,7 +1,9 @@
-import { markTodosCompleted } from '~/domain/todos';
-
 import { State } from '../types';
 
 export const allTodosCompletedReducer = (state: State): void => {
-  state.todos = markTodosCompleted(state.todos);
+  const todos = Object.values(state.entities);
+
+  for (const todo of todos) {
+    if (todo) todo.isCompleted = true;
+  }
 };

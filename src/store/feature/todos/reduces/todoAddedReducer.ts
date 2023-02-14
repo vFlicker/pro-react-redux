@@ -1,7 +1,8 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 
-import { addTodo, createTodo } from '~/domain/todos';
+import { createTodo } from '~/domain/todos';
 
+import { todosAdapter } from '../helpers';
 import { State } from '../types';
 
 type Payload = {
@@ -12,10 +13,6 @@ export const todoAddedReducer = (
   state: State,
   action: PayloadAction<Payload>,
 ): void => {
-  const { todos } = state;
-  const { title } = action.payload;
-
-  const todo = createTodo(title);
-  const updatedTodos = addTodo(todos, todo);
-  state.todos = updatedTodos;
+  const todo = createTodo(action.payload.title);
+  todosAdapter.addOne(state, todo);
 };

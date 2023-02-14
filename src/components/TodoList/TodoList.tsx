@@ -1,15 +1,15 @@
 import { useAppSelector } from '~/store';
-import { selectFilteredTodos } from '~/store/feature/todos/todosSlice';
+import { selectFilteredTodosIds } from '~/store/feature/todos/todosSlice';
 
 import { TodoItem } from '../TodoItem';
 import classes from './TodoList.module.css';
 
 export function TodoList(): JSX.Element {
-  const todos = useAppSelector(selectFilteredTodos);
+  const todoIds = useAppSelector(selectFilteredTodosIds);
 
-  const todoList = todos.map((todo) => (
-    <li key={todo.id} className={classes.item}>
-      <TodoItem todo={todo} />
+  const todoList = todoIds.map((id) => (
+    <li key={id} className={classes.item}>
+      <TodoItem id={id} />
     </li>
   ));
 
