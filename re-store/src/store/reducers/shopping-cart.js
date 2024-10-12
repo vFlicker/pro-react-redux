@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 export const fetchBooks = createAsyncThunk(
   'SHOPPING_CART',
@@ -13,26 +13,19 @@ export const fetchBooks = createAsyncThunk(
 );
 
 const updateCartItem = (book, item = {}, quantity) => {
-  const {
-    id = book.id,
-    title = book.title,
-    count = 0,
-    total = 0
-  } = item;
+  const { id = book.id, title = book.title, count = 0, total = 0 } = item;
 
   return {
     id,
     title,
     count: count + quantity,
-    total: total + quantity * book.price
+    total: total + quantity * book.price,
   };
 };
 
 const updateCartItems = (cartItems, item, index) => {
   if (item.count === 0) return cartItems.splice(index, 1);
-
   if (index === -1) return cartItems.push(item);
-
   return cartItems.splice(index, 1, item);
 };
 
@@ -41,7 +34,6 @@ const updateOrder = (state, bookId, quantity) => {
   const book = books.find(({ id }) => id === bookId);
   const index = cartItems.findIndex((item) => item.id === bookId);
   const oldItem = cartItems[index];
-
   const newItem = updateCartItem(book, oldItem, quantity);
   updateCartItems(cartItems, newItem, index);
 };
@@ -52,14 +44,14 @@ const initialState = {
   orderTotal: 0,
   loading: true,
   error: null,
-}
+};
 
-const slice = createSlice({
+export const shoppingCartSlice = createSlice({
   name: 'shoppingCart',
   initialState,
   reducers: {
     bookAddedToCart: (state, action) => {
-      updateOrder(state, action.payload, 1)
+      updateOrder(state, action.payload, 1);
     },
     bookRemovedFormCart: (state, action) => {
       updateOrder(state, action.payload, -1);
@@ -69,7 +61,7 @@ const slice = createSlice({
       updateOrder(state, action.payload, -count);
     },
   },
-  extraReducers: ((builder) => {
+  extraReducers: (builder) => {
     builder
       .addCase(fetchBooks.pending, (state) => {
         state.loading = true;
@@ -84,8 +76,8 @@ const slice = createSlice({
         state.loading = false;
         state.error = action.payload;
       });
-  }),
+  },
 });
 
-export const { bookAddedToCart, bookRemovedFormCart, allBookRemovedFormCart } = slice.actions;
-export default slice;
+export const { bookAddedToCart, bookRemovedFormCart, allBookRemovedFormCart } =
+  shoppingCartSlice.actions;

@@ -1,20 +1,20 @@
-import React, { useLayoutEffect } from 'react';
+import './book-list.css';
+
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { bookAddedToCart, fetchBooks } from '../../store';
 import { BookItem } from '../book-item';
 import { QueryResult } from '../query-result';
 
-import './book-list.css';
-
-export const BookList = () => {
-  const { books, loading, error} = useSelector((state) => state.shoppingCart);
-
+export function BookList() {
   const dispatch = useDispatch();
 
-  useLayoutEffect(() => {
-    dispatch(fetchBooks())
+  useEffect(() => {
+    dispatch(fetchBooks());
   }, [dispatch]);
+
+  const { books, loading, error } = useSelector((state) => state.shoppingCart);
 
   return (
     <QueryResult error={error} loading={loading} data={books}>
@@ -29,5 +29,5 @@ export const BookList = () => {
         ))}
       </ul>
     </QueryResult>
-  )
-};
+  );
+}

@@ -6,13 +6,12 @@ import { rootReducer } from './reducers/root-reducer';
 const apiService = new ApiService();
 
 const middlewareConfiguration = {
-  thunk: {
-    extraArgument: apiService,
-  },
+  thunk: { extraArgument: apiService },
 };
 
 export const store = configureStore({
   reducer: rootReducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware(middlewareConfiguration),
+  middleware: (getDefaultMiddleware) => {
+    return getDefaultMiddleware(middlewareConfiguration);
+  },
 });

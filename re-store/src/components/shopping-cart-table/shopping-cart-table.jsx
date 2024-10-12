@@ -1,15 +1,14 @@
-import React from 'react';
+import './shopping-cart-table.css';
+
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
-  bookRemovedFormCart,
-  bookAddedToCart,
   allBookRemovedFormCart,
+  bookAddedToCart,
+  bookRemovedFormCart,
 } from '../../store';
 
-import './shopping-cart-table.css';
-
-export const ShoppingCartTable = () => {
+export function ShoppingCartTable() {
   const { cartItems, orderTotal } = useSelector((state) => state.shoppingCart);
 
   return (
@@ -28,19 +27,17 @@ export const ShoppingCartTable = () => {
 
         <tbody>
           {cartItems.map((item, index) => (
-            <Row item={item} index={index} />
+            <Row item={item} index={index} key={item.id} />
           ))}
         </tbody>
       </table>
 
-      <div className="total">
-        Total: ${orderTotal}
-      </div>
+      <div className="total">Total: ${orderTotal}</div>
     </div>
   );
-};
+}
 
-const Row = ({ item, index }) => {
+function Row({ item, index }) {
   const { id, title, count, total } = item;
 
   const dispatch = useDispatch();
@@ -54,17 +51,20 @@ const Row = ({ item, index }) => {
       <td>
         <button
           className="btn btn-outline-warning btn-sm"
-          onClick={() => dispatch(bookRemovedFormCart(id))}>
+          onClick={() => dispatch(bookRemovedFormCart(id))}
+        >
           <i className="fa fa-minus-circle" />
         </button>
         <button
           className="btn btn-outline-success btn-sm"
-          onClick={() => dispatch(bookAddedToCart(id))}>
+          onClick={() => dispatch(bookAddedToCart(id))}
+        >
           <i className="fa fa-plus-circle" />
         </button>
         <button
           className="btn btn-outline-danger btn-sm"
-          onClick={() => dispatch(allBookRemovedFormCart(id))}>
+          onClick={() => dispatch(allBookRemovedFormCart(id))}
+        >
           <i className="fa fa-trash-o" />
         </button>
       </td>

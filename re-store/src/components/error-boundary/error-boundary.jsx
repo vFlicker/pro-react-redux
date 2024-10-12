@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 
 import { ErrorIndicator } from '../error-indicator';
 
 export class ErrorBoundary extends Component {
   state = {
-    hasError: false
+    hasError: false,
   };
 
   componentDidCatch() {
@@ -13,7 +13,6 @@ export class ErrorBoundary extends Component {
 
   render() {
     if (this.state.hasError) return <ErrorIndicator />;
-
     return this.props.children;
   }
 }

@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
-import ShoppingCartSlice from './shopping-cart';
+import { shoppingCartSlice } from './shopping-cart';
 
 export const rootReducer = combineReducers({
-  shoppingCart: ShoppingCartSlice.reducer,
+  shoppingCart: shoppingCartSlice.reducer,
 });
