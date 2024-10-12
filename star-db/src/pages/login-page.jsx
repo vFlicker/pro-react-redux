@@ -1,6 +1,6 @@
 import { Navigate } from 'react-router-dom';
 
-export const LoginPage = ({ isLoggedIn, onLogin }) => {
+export function LoginPage({ isLoggedIn, onLogin }) {
   if (isLoggedIn) return <Navigate to="/" />;
 
   return (
@@ -11,4 +11,4 @@ export const LoginPage = ({ isLoggedIn, onLogin }) => {
       </button>
     </div>
   );
-};
+}

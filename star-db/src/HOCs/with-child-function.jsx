@@ -1,3 +1,5 @@
 export const withChildFunction = (fn) => (Wrapped) => {
-  return (props) => <Wrapped {...props}>{fn}</Wrapped>;
+  return function WithChildrenProp(props) {
+    return <Wrapped {...props}>{fn}</Wrapped>;
+  };
 };

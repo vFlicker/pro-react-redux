@@ -4,11 +4,12 @@ import { useCallback, useEffect, useState } from 'react';
 
 import { withApi } from '../../HOCs';
 import { useRequest } from '../../hooks';
+import { compose } from '../../utils';
 import { ErrorIndicator } from '../error-indicator';
 import { PlanetView } from '../planet-view';
 import { Spinner } from '../spinner';
 
-const RandomPlanet = ({ updateInterval, getPlanet }) => {
+function RandomPlanet({ updateInterval = 12000, getPlanet }) {
   const [time, setTime] = useState(Date.now());
 
   useEffect(() => {
@@ -19,31 +20,22 @@ const RandomPlanet = ({ updateInterval, getPlanet }) => {
   const getRandomPlanet = useCallback(() => {
     const id = Math.floor(Math.random() * 20) + 1;
     return getPlanet(id);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getPlanet, time]);
 
   const { data, loading, error } = useRequest(getRandomPlanet);
 
-  const hasData = !(loading || error);
-  const spinner = loading && <Spinner />;
-  const content = hasData && <PlanetView planet={data} />;
-  const errorMessage = error && <ErrorIndicator />;
+  let content = null;
+  if (loading) content = <Spinner />;
+  else if (error) content = <ErrorIndicator />;
+  else content = <PlanetView planet={data} />;
 
-  return (
-    <div className="random-planet jumbotron rounded">
-      {spinner}
-      {content}
-      {errorMessage}
-    </div>
-  );
-};
-
-RandomPlanet.defaultProps = {
-  updateInterval: 12000,
-};
+  return <div className="random-planet jumbotron rounded">{content}</div>;
+}
 
 const mapRandomPlanetMethodsToProps = (api) => ({
   getPlanet: (id) => api.getPlanet(id),
 });
 
-export default withApi(mapRandomPlanetMethodsToProps)(RandomPlanet);
+export const WrapperRandomPlanet = compose(
+  withApi(mapRandomPlanetMethodsToProps),
+)(RandomPlanet);

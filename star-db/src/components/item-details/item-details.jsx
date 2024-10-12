@@ -4,14 +4,7 @@ import { Children, cloneElement } from 'react';
 
 import { ErrorButton } from '../error-button';
 
-export const Record = ({ data, field, label }) => (
-  <li className="list-group-item">
-    <span className="term">{label}</span>
-    <span>{data[field]}</span>
-  </li>
-);
-
-export const ItemDetails = ({ data, children }) => {
+export function ItemDetails({ data, children }) {
   const { imageUrl, name } = data;
 
   const itemList = Children.map(children, (child) => {
@@ -28,4 +21,13 @@ export const ItemDetails = ({ data, children }) => {
       </div>
     </div>
   );
-};
+}
+
+export function Record({ data, field, label }) {
+  return (
+    <li className="list-group-item">
+      <span className="term">{label}</span>
+      <span>{data[field]}</span>
+    </li>
+  );
+}

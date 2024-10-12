@@ -2,7 +2,7 @@ import './error-button.css';
 
 import { useState } from 'react';
 
-export const ErrorButton = () => {
+export function ErrorButton() {
   const [renderError, setRenderError] = useState(false);
 
   if (renderError) this.foo.bar = 0;
@@ -15,4 +15,4 @@ export const ErrorButton = () => {
       Throw Error
     </button>
   );
-};
+}

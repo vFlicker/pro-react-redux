@@ -1,41 +1,43 @@
 import { useEffect, useMemo, useState } from 'react';
 
 export const useRequest = (request) => {
-  const initialState = useMemo(
-    () => ({
+  const initialState = useMemo(() => {
+    return {
       data: null,
       loading: true,
       error: false,
-    }),
-    [],
-  );
+    };
+  }, []);
 
   const [dateState, setDataState] = useState(initialState);
 
   useEffect(() => {
     let cancelled = false;
 
-    setDataState(initialState);
+    const fetchData = async () => {
+      setDataState(initialState);
 
-    request()
-      .then(
-        (data) =>
-          !cancelled &&
+      try {
+        const data = await request();
+        if (!cancelled) {
           setDataState({
             data,
             loading: false,
             error: false,
-          }),
-      )
-      .catch(
-        () =>
-          !cancelled &&
+          });
+        }
+      } catch {
+        if (!cancelled) {
           setDataState({
             data: null,
             loading: false,
             error: true,
-          }),
-      );
+          });
+        }
+      }
+    };
+
+    fetchData();
 
     return () => {
       cancelled = true;

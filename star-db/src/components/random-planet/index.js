@@ -1,1 +1,1 @@
-export { default as RandomPlanet } from './random-planet';
+export { WrapperRandomPlanet as RandomPlanet } from './random-planet';

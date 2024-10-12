@@ -1,30 +1,21 @@
-import { useParams } from 'react-router-dom';
-
-import { withApi, withData } from '../../HOCs';
+import { withApi, withData, withParamId } from '../../HOCs';
 import { compose } from '../../utils';
 import { ItemDetails, Record } from '../item-details';
 
-const StarshipDetails = (props) => (
-  <ItemDetails {...props}>
-    <Record field="model" label="Model" />
-    <Record field="length" label="Length" />
-    <Record field="costInCredits" label="cost" />
-  </ItemDetails>
-);
+function StarshipDetails(props) {
+  return (
+    <ItemDetails {...props}>
+      <Record field="model" label="Model" />
+      <Record field="length" label="Length" />
+      <Record field="costInCredits" label="cost" />
+    </ItemDetails>
+  );
+}
 
-const mapApiMethodsToProps = (api) => ({
-  getData: api.getStarship,
-});
+const mapApiMethodsToProps = (api) => ({ getData: api.getStarship });
 
-export const withId = (View) => {
-  return (props) => {
-    const { id } = useParams();
-    return <View itemId={id} {...props} />;
-  };
-};
-
-export default compose(
+export const WrappedStarshipDetails = compose(
   withApi(mapApiMethodsToProps),
-  withId,
+  withParamId,
   withData,
 )(StarshipDetails);

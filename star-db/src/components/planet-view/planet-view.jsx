@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 
-export const PlanetView = ({ planet }) => {
+export function PlanetView({ planet }) {
   const { id, name, population, rotationPeriod, diameter } = planet;
 
   return (
@@ -29,4 +29,4 @@ export const PlanetView = ({ planet }) => {
       </div>
     </Fragment>
   );
-};
+}

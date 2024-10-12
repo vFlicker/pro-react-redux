@@ -49,20 +49,12 @@ export class DummyApi {
   ];
 
   getAllPeople = async () => this.#people;
-
   getAllPlanets = async () => this.#planets;
-
   getAllStarships = async () => this.#starships;
-
   getPerson = async () => this.#people[0];
-
   getPlanet = async () => this.#planets[0];
-
   getStarship = async () => this.#starships[0];
-
   getPersonImage = () => `https://placeimg.com/400/500/people`;
-
   getStarshipImage = () => `https://placeimg.com/600/400/tech`;
-
   getPlanetImage = () => `https://placeimg.com/400/400/nature`;
 }

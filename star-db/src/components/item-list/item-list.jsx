@@ -1,6 +1,6 @@
 import './item-list.css';
 
-export const ItemList = ({ data, onItemSelected, children: renderLabel }) => {
+export function ItemList({ data, onItemSelected, children: renderLabel }) {
   const itemList = data.map((item) => {
     const { id } = item;
     const label = renderLabel(item);
@@ -17,4 +17,4 @@ export const ItemList = ({ data, onItemSelected, children: renderLabel }) => {
   });
 
   return <ul className="item-list list-group">{itemList}</ul>;
-};
+}

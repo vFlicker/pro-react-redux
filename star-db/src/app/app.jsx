@@ -1,13 +1,12 @@
 import './app.css';
 
 import { useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-import { browserHistory } from '../../browserHistory';
-import { Api, DummyApi } from '../../services';
-import { ApiProvider } from '../api-context';
-import { Header } from '../header';
-import { HistoryRouter } from '../history-router';
+import { ApiProvider } from '../components/api-context';
+import { Header } from '../components/header';
+import { RandomPlanet } from '../components/random-planet';
+import { StarshipDetails } from '../components/sw-components';
 import {
   LoginPage,
   PeoplePage,
@@ -15,24 +14,30 @@ import {
   SecretPage,
   StarshipsPage,
 } from '../pages';
-import { RandomPlanet } from '../random-planet';
-import { StarshipDetails } from '../sw-components';
+import { Api, DummyApi } from '../services';
 
-export const App = () => {
-  const [api, setApi] = useState(new Api() || new DummyApi());
+export function App() {
+  const apiInstance = new Api();
+  const dummyApiInstance = new DummyApi();
+  const [api, setApi] = useState(apiInstance || dummyApiInstance);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const onServiceChange = () =>
+  const handleServiceChange = () => {
     setApi((prevApi) => {
       const Service = prevApi instanceof Api ? DummyApi : Api;
       return new Service();
     });
+  };
+
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+  };
 
   return (
     <ApiProvider value={api}>
-      <HistoryRouter history={browserHistory}>
+      <Router>
         <div className="container">
-          <Header onServiceChange={onServiceChange} />
+          <Header onServiceChange={handleServiceChange} />
 
           <RandomPlanet />
 
@@ -49,17 +54,14 @@ export const App = () => {
             <Route
               path="/login"
               element={
-                <LoginPage
-                  isLoggedIn={isLoggedIn}
-                  onLogin={() => setIsLoggedIn(true)}
-                />
+                <LoginPage isLoggedIn={isLoggedIn} onLogin={handleLogin} />
               }
             />
 
-            <Route element={<h2>Page not found</h2>} />
+            <Route path="*" element={<h2>Page not found</h2>} />
           </Routes>
         </div>
-      </HistoryRouter>
+      </Router>
     </ApiProvider>
   );
-};
+}

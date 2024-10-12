@@ -47,12 +47,6 @@ export class Api {
     return this.#transformStarship(starship);
   };
 
-  #getPersonImage = (id) => `${this.#imageBase}/characters/${id}.jpg`;
-
-  #getPlanetImage = (id) => `${this.#imageBase}/planets/${id}.jpg`;
-
-  #getStarshipImage = (id) => `${this.#imageBase}/starships/${id}.jpg`;
-
   #getResource = async (url) => {
     const res = await fetch(`${this.#apiBase}${url}`);
 
@@ -63,10 +57,9 @@ export class Api {
     return await res.json();
   };
 
-  #extractId = (item) => {
-    const idRegExp = /\/([0-9]*)\/$/;
-    return item.url.match(idRegExp)[1];
-  };
+  #getPersonImage = (id) => `${this.#imageBase}/characters/${id}.jpg`;
+  #getPlanetImage = (id) => `${this.#imageBase}/planets/${id}.jpg`;
+  #getStarshipImage = (id) => `${this.#imageBase}/starships/${id}.jpg`;
 
   #transformPerson = (person) => ({
     id: this.#extractId(person),
@@ -98,4 +91,9 @@ export class Api {
     cargoCapacity: starship.cargo_capacity,
     imageUrl: starship.imageUrl,
   });
+
+  #extractId = (item) => {
+    const idRegExp = /\/([0-9]*)\/$/;
+    return item.url.match(idRegExp)[1];
+  };
 }
