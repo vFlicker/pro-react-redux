@@ -1,7 +1,8 @@
-import { compose } from "../../utils";
-import { withApi, withData } from "../../HOCs";
-import { ItemDetails, Record } from "../item-details";
-import { useParams } from "react-router-dom";
+import { useParams } from 'react-router-dom';
+
+import { withApi, withData } from '../../HOCs';
+import { compose } from '../../utils';
+import { ItemDetails, Record } from '../item-details';
 
 const StarshipDetails = (props) => (
   <ItemDetails {...props}>
@@ -25,5 +26,5 @@ export const withId = (View) => {
 export default compose(
   withApi(mapApiMethodsToProps),
   withId,
-  withData
+  withData,
 )(StarshipDetails);

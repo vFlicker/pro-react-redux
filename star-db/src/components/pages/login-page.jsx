@@ -1,4 +1,4 @@
-import { Navigate } from "react-router-dom";
+import { Navigate } from 'react-router-dom';
 
 export const LoginPage = ({ isLoggedIn, onLogin }) => {
   if (isLoggedIn) return <Navigate to="/" />;

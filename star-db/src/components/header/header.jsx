@@ -1,7 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-
 import './header.css';
+
+import { Link } from 'react-router-dom';
 
 export const Header = ({ onServiceChange }) => (
   <div className="header d-flex">
@@ -25,9 +24,7 @@ export const Header = ({ onServiceChange }) => (
         <Link to="/login">Login</Link>
       </li>
     </ul>
-    <button
-      className="btn btn-primary btn-sm"
-      onClick={onServiceChange}>
+    <button className="btn btn-primary btn-sm" onClick={onServiceChange}>
       Change Service
     </button>
   </div>

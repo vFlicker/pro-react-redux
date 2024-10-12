@@ -1,6 +1,6 @@
-import { StarshipList } from "../sw-components";
-import { ErrorBoundary } from "../error-boundary";
-import { browserHistory } from "../../browserHistory";
+import { browserHistory } from '../../browserHistory';
+import { ErrorBoundary } from '../error-boundary';
+import { StarshipList } from '../sw-components';
 
 export const StarshipsPage = () => {
   return (

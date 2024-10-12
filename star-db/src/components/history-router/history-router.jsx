@@ -1,5 +1,5 @@
-import { useLayoutEffect, useState } from "react";
-import { Router } from "react-router-dom";
+import { useLayoutEffect, useState } from 'react';
+import { Router } from 'react-router-dom';
 
 export function HistoryRouter({ basename, children, history }) {
   const [state, setState] = useState({

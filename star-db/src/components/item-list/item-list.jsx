@@ -1,5 +1,3 @@
-import React from 'react';
-
 import './item-list.css';
 
 export const ItemList = ({ data, onItemSelected, children: renderLabel }) => {
@@ -11,15 +9,12 @@ export const ItemList = ({ data, onItemSelected, children: renderLabel }) => {
       <li
         className="list-group-item"
         key={id}
-        onClick={onItemSelected.bind(null, id)}>
-        { label }
+        onClick={onItemSelected.bind(null, id)}
+      >
+        {label}
       </li>
     );
   });
 
-  return (
-    <ul className="item-list list-group">
-      {itemList}
-    </ul>
-  );
+  return <ul className="item-list list-group">{itemList}</ul>;
 };

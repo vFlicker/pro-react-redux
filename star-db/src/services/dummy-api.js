@@ -5,7 +5,7 @@ export class DummyApi {
       name: 'Bilbo Baggins [TEST DATA]',
       gender: 'male',
       birthYear: 'long ago',
-      eyeColor: 'dark brown'
+      eyeColor: 'dark brown',
     },
 
     {
@@ -13,8 +13,8 @@ export class DummyApi {
       name: 'Frodo Baggins [TEST DATA]',
       gender: 'male',
       birthYear: 'long ago',
-      eyeColor: 'dark brown'
-    }
+      eyeColor: 'dark brown',
+    },
   ];
 
   #planets = [
@@ -23,15 +23,15 @@ export class DummyApi {
       name: 'Earth [TEST DATA]',
       population: '7.530.000.000',
       rotationPeriod: '23 hours 56 seconds',
-      diameter: '12.742 km'
+      diameter: '12.742 km',
     },
     {
       id: 2,
       name: 'Venus [TEST DATA]',
       population: 'not known',
       rotationPeriod: '243 days',
-      diameter: '12.104 km'
-    }
+      diameter: '12.104 km',
+    },
   ];
 
   #starships = [
@@ -44,8 +44,8 @@ export class DummyApi {
       length: 'approx 300 meters',
       crew: 1000,
       passengers: 50,
-      cargoCapacity: 100
-    }
+      cargoCapacity: 100,
+    },
   ];
 
   getAllPeople = async () => this.#people;
@@ -56,13 +56,13 @@ export class DummyApi {
 
   getPerson = async () => this.#people[0];
 
-  getPlanet = async () => this.#planets[0]
+  getPlanet = async () => this.#planets[0];
 
   getStarship = async () => this.#starships[0];
 
-  getPersonImage = () => `https://placeimg.com/400/500/people`
+  getPersonImage = () => `https://placeimg.com/400/500/people`;
 
   getStarshipImage = () => `https://placeimg.com/600/400/tech`;
 
-  getPlanetImage = () => `https://placeimg.com/400/400/nature`
+  getPlanetImage = () => `https://placeimg.com/400/400/nature`;
 }

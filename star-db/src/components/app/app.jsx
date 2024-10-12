@@ -1,22 +1,22 @@
-import { useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import './app.css';
 
-import { Api, DummyApi } from "../../services";
-import { ApiProvider } from "../api-context";
-import { Header } from "../header";
-import { RandomPlanet } from "../random-planet";
-import { StarshipDetails } from "../sw-components";
+import { useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
+
+import { browserHistory } from '../../browserHistory';
+import { Api, DummyApi } from '../../services';
+import { ApiProvider } from '../api-context';
+import { Header } from '../header';
+import { HistoryRouter } from '../history-router';
 import {
   LoginPage,
   PeoplePage,
   PlanetsPage,
   SecretPage,
   StarshipsPage,
-} from "../pages";
-
-import "./app.css";
-import { HistoryRouter } from "../history-router";
-import { browserHistory } from "../../browserHistory";
+} from '../pages';
+import { RandomPlanet } from '../random-planet';
+import { StarshipDetails } from '../sw-components';
 
 export const App = () => {
   const [api, setApi] = useState(new Api() || new DummyApi());

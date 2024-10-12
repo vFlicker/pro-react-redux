@@ -1,8 +1,8 @@
-import { useCallback } from "react";
+import { useCallback } from 'react';
 
-import { useRequest } from "../hooks";
-import { Spinner } from "../components/spinner";
-import { ErrorIndicator } from "../components/error-indicator";
+import { ErrorIndicator } from '../components/error-indicator';
+import { Spinner } from '../components/spinner';
+import { useRequest } from '../hooks';
 
 export const withData = (View) => {
   return ({ getData, itemId, ...props }) => {

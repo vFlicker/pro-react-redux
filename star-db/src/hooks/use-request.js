@@ -1,11 +1,14 @@
-import { useMemo, useState, useEffect } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 export const useRequest = (request) => {
-  const initialState = useMemo(() => ({
-    data: null,
-    loading: true,
-    error: false,
-  }), []);
+  const initialState = useMemo(
+    () => ({
+      data: null,
+      loading: true,
+      error: false,
+    }),
+    [],
+  );
 
   const [dateState, setDataState] = useState(initialState);
 
@@ -15,16 +18,24 @@ export const useRequest = (request) => {
     setDataState(initialState);
 
     request()
-      .then((data) => !cancelled && setDataState({
-        data,
-        loading: false,
-        error: false,
-      }))
-      .catch(() => !cancelled && setDataState({
-        data: null,
-        loading: false,
-        error: true,
-      }));
+      .then(
+        (data) =>
+          !cancelled &&
+          setDataState({
+            data,
+            loading: false,
+            error: false,
+          }),
+      )
+      .catch(
+        () =>
+          !cancelled &&
+          setDataState({
+            data: null,
+            loading: false,
+            error: true,
+          }),
+      );
 
     return () => {
       cancelled = true;
@@ -32,4 +43,4 @@ export const useRequest = (request) => {
   }, [request, initialState]);
 
   return dateState;
-}
+};

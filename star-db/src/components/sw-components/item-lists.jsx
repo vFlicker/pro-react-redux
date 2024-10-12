@@ -1,15 +1,13 @@
-import React from 'react';
-
+import { withApi, withChildFunction, withData } from '../../HOCs';
 import { compose } from '../../utils';
-import {
-  withData,
-  withApi,
-  withChildFunction,
-} from '../../HOCs';
 import { ItemList } from '../item-list';
 
 const renderPersonItem = ({ name, birthYear }) => {
-  return <span>{name} ({birthYear})</span>;
+  return (
+    <span>
+      {name} ({birthYear})
+    </span>
+  );
 };
 
 const renderPlanetItem = ({ name }) => {
@@ -17,7 +15,11 @@ const renderPlanetItem = ({ name }) => {
 };
 
 const renderStarshipItem = ({ name, costInCredits }) => {
-  return <span>{name} ({costInCredits})</span>;
+  return (
+    <span>
+      {name} ({costInCredits})
+    </span>
+  );
 };
 
 const mapPersonMethodsToProps = (api) => ({
@@ -35,17 +37,17 @@ const mapStarshipMethodsToProps = (api) => ({
 export const PersonList = compose(
   withApi(mapPersonMethodsToProps),
   withData,
-  withChildFunction(renderPersonItem)
+  withChildFunction(renderPersonItem),
 )(ItemList);
 
 export const PlanetList = compose(
   withApi(mapPlanetMethodsToProps),
   withData,
-  withChildFunction(renderPlanetItem)
+  withChildFunction(renderPlanetItem),
 )(ItemList);
 
 export const StarshipList = compose(
   withApi(mapStarshipMethodsToProps),
   withData,
-  withChildFunction(renderStarshipItem)
+  withChildFunction(renderStarshipItem),
 )(ItemList);

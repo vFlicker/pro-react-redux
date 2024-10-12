@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-
 import './error-button.css';
+
+import { useState } from 'react';
 
 export const ErrorButton = () => {
   const [renderError, setRenderError] = useState(false);
@@ -10,8 +10,9 @@ export const ErrorButton = () => {
   return (
     <button
       className="btn error-button btn-danger btn-lg"
-      onClick={() => setRenderError(true)}>
+      onClick={() => setRenderError(true)}
+    >
       Throw Error
     </button>
   );
-}
+};
