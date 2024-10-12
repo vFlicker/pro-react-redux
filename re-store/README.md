@@ -15,6 +15,5 @@ npm install
 ## Running application
 
 ```
-npm start
+npm dev
 ```
-

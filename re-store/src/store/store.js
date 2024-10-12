@@ -13,5 +13,6 @@ const middlewareConfiguration = {
 
 export const store = configureStore({
   reducer: rootReducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware(middlewareConfiguration)
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware(middlewareConfiguration),
 });
