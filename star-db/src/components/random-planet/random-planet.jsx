@@ -24,10 +24,9 @@ function RandomPlanet({ updateInterval = 12000, getPlanet }) {
 
   const { data, loading, error } = useRequest(getRandomPlanet);
 
-  let content = null;
+  let content = <PlanetView planet={data} />;
   if (loading) content = <Spinner />;
   else if (error) content = <ErrorIndicator />;
-  else content = <PlanetView planet={data} />;
 
   return <div className="random-planet jumbotron rounded">{content}</div>;
 }

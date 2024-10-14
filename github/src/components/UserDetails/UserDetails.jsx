@@ -1,17 +1,19 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
-import { Timer } from "../Timer";
+import { Timer } from '../Timer';
 
 export function UserDetails({ selectedUser }) {
   const [userDetails, setUserDetails] = useState(null);
 
   useEffect(() => {
-    if (selectedUser) {
-      axios
-        .get(`https://api.github.com/users/${selectedUser.login}`)
-        .then(({ data }) => setUserDetails(data));
-    }
+    const fetchUserDetails = async () => {
+      const url = `https://api.github.com/users/${selectedUser.login}`;
+      const { data } = await axios.get(url);
+      setUserDetails(data);
+    };
+
+    if (selectedUser) fetchUserDetails();
   }, [selectedUser]);
 
   if (!userDetails) return null;

@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from 'react';
 
 export function Timer({ id, defaultSeconds = 10, callback }) {
   const [seconds, setSeconds] = useState(defaultSeconds);

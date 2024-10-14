@@ -1,15 +1,14 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-import { SearchList } from "./components/SearchList";
-import { UserDetails } from "./components/UserDetails";
-
-import styles from "./App.module.css";
+import { SearchList } from '../components/SearchList';
+import { UserDetails } from '../components/UserDetails';
+import classes from './App.module.css';
 
 export function App() {
   const [selectedUser, setSelectedUser] = useState(null);
 
   return (
-    <div className={styles.container}>
+    <div className={classes.container}>
       <div>
         <SearchList
           selectedUser={selectedUser}

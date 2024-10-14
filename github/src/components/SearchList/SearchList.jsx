@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-import { Search } from "../Search";
-import { UserList } from "../UserList";
+import { Search } from '../Search';
+import { UserList } from '../UserList';
 
-const DEFAULT_USER_NAME = "user";
+const DEFAULT_USER_NAME = 'user';
 
 export function SearchList({ selectedUser, setSelectedUser }) {
   const [searchTerm, setSearchTerm] = useState(DEFAULT_USER_NAME);

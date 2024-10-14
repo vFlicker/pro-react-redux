@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
-import styles from "./UserList.module.css";
+import styles from './UserList.module.css';
 
 export function UserList({ searchTerm, selectedUser, onUserSelect }) {
   const [users, setUsers] = useState(null);
@@ -11,9 +11,13 @@ export function UserList({ searchTerm, selectedUser, onUserSelect }) {
   }, [selectedUser]);
 
   useEffect(() => {
-    axios
-      .get(`https://api.github.com/search/users?q=${searchTerm}`)
-      .then(({ data }) => setUsers(data.items));
+    const fetchUsers = async () => {
+      const url = `https://api.github.com/search/users?q=${searchTerm}`;
+      const { data } = await axios.get(url);
+      setUsers(data.items);
+    };
+
+    fetchUsers();
   }, [searchTerm]);
 
   if (!users) return null;
@@ -23,7 +27,7 @@ export function UserList({ searchTerm, selectedUser, onUserSelect }) {
       {users.map((user) => (
         <li
           key={user.id}
-          className={selectedUser?.id === user.id ? styles.selected : ""}
+          className={selectedUser?.id === user.id ? styles.selected : ''}
           onClick={() => onUserSelect(user)}
         >
           {user.login}
