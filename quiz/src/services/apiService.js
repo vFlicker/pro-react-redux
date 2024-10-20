@@ -1,4 +1,4 @@
-export default [
+const quizQuestions = [
   {
     id: 'q1',
     text: 'Which of the following definitions best describes React.js?',
@@ -70,3 +70,11 @@ export default [
     ],
   },
 ];
+
+export const fetchQuestions = () => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(quizQuestions);
+    }, 200);
+  });
+};
