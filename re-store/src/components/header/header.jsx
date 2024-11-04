@@ -1,18 +1,25 @@
 import './header.css';
 
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-export function Header({ numItems, total }) {
+import { AppRoute } from '../../constants';
+import { selectCartItems, selectOrderTotal } from '../../store';
+
+export function Header() {
+  const cartItems = useSelector(selectCartItems);
+  const orderTotal = useSelector(selectOrderTotal);
+
   return (
     <header className="header">
       <div className="container  header__container">
-        <Link to="/">
+        <Link to={AppRoute.HOME}>
           <h1 className="header__logo">ReStore</h1>
         </Link>
-        <Link to="/cart">
+        <Link to={AppRoute.CART}>
           <div className="shopping-cart">
             <i className="shopping-cart__icon fa fa-shopping-cart" />
-            {numItems} items (${total})
+            {cartItems.length} items (${orderTotal})
           </div>
         </Link>
       </div>

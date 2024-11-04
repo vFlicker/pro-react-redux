@@ -3,16 +3,18 @@ import './app.css';
 import { Route, Routes } from 'react-router-dom';
 
 import { Header } from '../components/header';
-import { CartPage, HomePage } from '../pages';
+import { AppRoute } from '../constants';
+import { CartPage } from '../pages/cart';
+import { HomePage } from '../pages/home';
 
 export function App() {
   return (
     <div className="wrapper">
-      <Header numItems={5} total={210} />
+      <Header />
       <main className="main">
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/cart" element={<CartPage />} />
+          <Route path={AppRoute.HOME} element={<HomePage />} />
+          <Route path={AppRoute.CART} element={<CartPage />} />
         </Routes>
       </main>
     </div>

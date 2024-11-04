@@ -10,11 +10,11 @@ import { store } from './store';
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Provider store={store}>
-      <ErrorBoundary>
-        <Router>
+      <Router>
+        <ErrorBoundary>
           <App />
-        </Router>
-      </ErrorBoundary>
+        </ErrorBoundary>
+      </Router>
     </Provider>
   </StrictMode>,
 );
