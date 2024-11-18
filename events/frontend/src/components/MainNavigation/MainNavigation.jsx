@@ -1,13 +1,8 @@
 import { NavLink } from 'react-router-dom';
 
-import { NewsletterSignup } from '../NewsletterSignup';
+import { NewsletterSignup } from '../newsletterSignup';
+import { navItems } from './config';
 import classes from './MainNavigation.module.css';
-
-const navItems = [
-  { to: '/', label: 'Home', end: true },
-  { to: '/events', label: 'Events' },
-  { to: '/newsletter', label: 'Newsletter' },
-];
 
 export function MainNavigation() {
   return (
@@ -18,9 +13,9 @@ export function MainNavigation() {
             <li key={item.to}>
               <NavLink
                 to={item.to}
-                className={({ isActive }) =>
-                  isActive ? classes.active : undefined
-                }
+                className={({ isActive }) => {
+                  return isActive ? classes.active : undefined;
+                }}
                 end={item.end}
               >
                 {item.label}

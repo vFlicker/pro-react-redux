@@ -1,24 +1,24 @@
 import { createBrowserRouter } from 'react-router-dom';
 
-import { createOrUpdateEventAction } from '../components/event/EventForm';
-import { ErrorPage } from '../pages/Error';
-import { EditEventPage } from '../pages/event/EditEvent';
+import { createOrUpdateEventAction } from '../components/event/eventForm';
+import { ErrorPage } from '../pages/error';
+import { EditEventPage } from '../pages/event/editEvent';
 import {
   deleteEventAction,
   eventDetailLoader,
   EventDetailPage,
-} from '../pages/event/EventDetail';
-import { eventsLoader, EventsPage } from '../pages/event/Events';
-import { EventsLayout } from '../pages/event/EventsLayout';
-import { NewEventPage } from '../pages/event/NewEvent';
-import { HomePage } from '../pages/Home';
-import { newsletterAction, NewsletterPage } from '../pages/Newsletter';
-import { RootLayout } from '../pages/Root';
+} from '../pages/event/eventDetail';
+import { eventsLoader, EventsPage } from '../pages/event/events';
+import { EventsLayout } from '../pages/event/eventsLayout';
+import { NewEventPage } from '../pages/event/newEvent';
+import { HomePage } from '../pages/home';
+import { MainLayout } from '../pages/mainLayout';
+import { newsletterAction, NewsletterPage } from '../pages/newsletter';
 
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <RootLayout />,
+    element: <MainLayout />,
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <HomePage /> },

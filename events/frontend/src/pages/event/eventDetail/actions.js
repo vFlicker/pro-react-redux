@@ -1,33 +1,4 @@
-import { Suspense } from 'react';
-import {
-  Await,
-  defer,
-  json,
-  redirect,
-  useRouteLoaderData,
-} from 'react-router-dom';
-
-import { EventItem } from '../../components/event/EventItem';
-import { EventsList } from '../../components/event/EventsList';
-
-export function EventDetailPage() {
-  const { event, events } = useRouteLoaderData('event-detail');
-
-  return (
-    <>
-      <Suspense fallback={<p style={{ textAlign: 'center' }}>Loading...</p>}>
-        <Await resolve={event}>
-          {(loadedEvent) => <EventItem event={loadedEvent} />}
-        </Await>
-      </Suspense>
-      <Suspense fallback={<p style={{ textAlign: 'center' }}>Loading...</p>}>
-        <Await resolve={events}>
-          {(loadedEvents) => <EventsList events={loadedEvents} />}
-        </Await>
-      </Suspense>
-    </>
-  );
-}
+import { defer, json, redirect } from 'react-router-dom';
 
 async function loadEvent(id) {
   const response = await fetch('http://localhost:8080/events/' + id);
