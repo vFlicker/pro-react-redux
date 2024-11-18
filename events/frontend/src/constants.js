@@ -1,3 +1,5 @@
+export const BASE_URL = 'http://localhost:8080';
+
 export const StatusCode = {
   OK: 200,
   CREATED: 201,
@@ -6,5 +8,18 @@ export const StatusCode = {
   UNAUTHORIZED: 401,
   FORBIDDEN: 403,
   NOT_FOUND: 404,
+  UNPROCESSABLE_ENTITY: 422,
   INTERNAL_SERVER_ERROR: 500,
+};
+
+export const HttpMethod = {
+  GET: 'GET',
+  POST: 'POST',
+  PUT: 'PUT',
+  PATCH: 'PATCH',
+  DELETE: 'DELETE',
+};
+
+export const ApiRoute = {
+  EVENTS: '/events',
 };

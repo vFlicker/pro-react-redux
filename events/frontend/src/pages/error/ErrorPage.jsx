@@ -4,22 +4,25 @@ import { MainNavigation } from '../../components/mainNavigation';
 import { PageContent } from '../../components/pageContent';
 import { StatusCode } from '../../constants';
 
+const responseData = {
+  default: {
+    title: 'An error occurred!',
+    message: 'Something went wrong!',
+  },
+  [StatusCode.UNAUTHORIZED]: {
+    title: 'Unauthorized!',
+    message: 'You are not authorized to access this page.',
+  },
+  [StatusCode.FORBIDDEN]: {
+    title: 'Forbidden!',
+    message: 'You do not have permission to access this page.',
+  },
+};
+
 export function ErrorPage() {
-  const error = useRouteError();
+  const { status } = useRouteError();
 
-  let title = 'An error occurred!';
-  let message = 'Something went wrong!';
-
-  switch (error.status) {
-    case StatusCode.NOT_FOUND:
-      title = 'Not found!';
-      message = 'Could not find resource or page.';
-      break;
-    case StatusCode.INTERNAL_SERVER_ERROR:
-      title = 'Internal server error!';
-      message = error.data.message;
-      break;
-  }
+  const { message, title } = responseData[status] || responseData.default;
 
   return (
     <>

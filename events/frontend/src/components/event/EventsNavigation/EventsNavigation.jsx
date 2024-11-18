@@ -8,16 +8,16 @@ export function EventsNavigation() {
     <header className={classes.header}>
       <nav>
         <ul className={classes.list}>
-          {navItems.map((item) => (
-            <li key={item.to}>
+          {navItems.map((navItem) => (
+            <li key={navItem.to}>
               <NavLink
-                to={item.to}
+                to={navItem.to}
                 className={({ isActive }) =>
                   isActive ? classes.active : undefined
                 }
-                end={item.end}
+                end={navItem.end}
               >
-                {item.label}
+                {navItem.label}
               </NavLink>
             </li>
           ))}

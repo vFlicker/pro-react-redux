@@ -5,6 +5,7 @@ import { createEventValidator } from './validators/createEventValidator.js';
 import { updateEventValidator } from './validators/updateEventValidator.js';
 
 const getAll = async (_req, res) => {
+  await wait(2000);
   const foundEvents = await eventService.getAll();
   res.json({ events: foundEvents });
 };

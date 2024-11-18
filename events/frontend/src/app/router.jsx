@@ -1,19 +1,22 @@
 import { createBrowserRouter } from 'react-router-dom';
 
-import { createOrUpdateEventAction } from '../components/event/eventForm';
-import { ErrorPage } from '../pages/error';
-import { EditEventPage } from '../pages/event/editEvent';
 import {
+  createEventAction,
   deleteEventAction,
   eventDetailLoader,
-  EventDetailPage,
-} from '../pages/event/eventDetail';
-import { eventsLoader, EventsPage } from '../pages/event/events';
+  eventsLoader,
+  newsletterAction,
+  updateEventAction,
+} from '../api-actions';
+import { ErrorPage } from '../pages/error';
+import { EditEventPage } from '../pages/event/editEvent';
+import { EventDetailPage } from '../pages/event/eventDetail';
+import { EventsPage } from '../pages/event/events';
 import { EventsLayout } from '../pages/event/eventsLayout';
 import { NewEventPage } from '../pages/event/newEvent';
 import { HomePage } from '../pages/home';
 import { MainLayout } from '../pages/mainLayout';
-import { newsletterAction, NewsletterPage } from '../pages/newsletter';
+import { NewsletterPage } from '../pages/newsletter';
 
 export const router = createBrowserRouter([
   {
@@ -44,14 +47,14 @@ export const router = createBrowserRouter([
               {
                 path: 'edit',
                 element: <EditEventPage />,
-                action: createOrUpdateEventAction,
+                action: updateEventAction,
               },
             ],
           },
           {
             path: 'new',
             element: <NewEventPage />,
-            action: createOrUpdateEventAction,
+            action: createEventAction,
           },
         ],
       },
