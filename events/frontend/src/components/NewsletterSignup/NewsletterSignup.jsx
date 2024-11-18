@@ -3,7 +3,7 @@ import { useFetcher } from 'react-router-dom';
 
 import classes from './NewsletterSignup.module.css';
 
-function NewsletterSignup() {
+export function NewsletterSignup() {
   const fetcher = useFetcher();
   const { data, state } = fetcher;
 
@@ -28,5 +28,3 @@ function NewsletterSignup() {
     </fetcher.Form>
   );
 }
-
-export default NewsletterSignup;

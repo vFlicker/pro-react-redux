@@ -1,15 +1,15 @@
 import {
   Form,
+  json,
+  redirect,
+  useActionData,
   useNavigate,
   useNavigation,
-  useActionData,
-  json,
-  redirect
 } from 'react-router-dom';
 
 import classes from './EventForm.module.css';
 
-function EventForm({ method, event }) {
+export function EventForm({ method, event }) {
   const data = useActionData();
   const navigate = useNavigate();
   const navigation = useNavigation();
@@ -81,8 +81,6 @@ function EventForm({ method, event }) {
   );
 }
 
-export default EventForm;
-
 export async function action({ request, params }) {
   const method = request.method;
   const data = await request.formData();
@@ -119,4 +117,3 @@ export async function action({ request, params }) {
 
   return redirect('/events');
 }
-

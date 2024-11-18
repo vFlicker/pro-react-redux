@@ -1,16 +1,16 @@
 import { Suspense } from 'react';
 import {
-  useRouteLoaderData,
+  Await,
+  defer,
   json,
   redirect,
-  defer,
-  Await,
+  useRouteLoaderData,
 } from 'react-router-dom';
 
-import EventItem from '../components/EventItem';
-import EventsList from '../components/EventsList';
+import { EventItem } from '../../components/event/EventItem';
+import { EventsList } from '../../components/event/EventsList';
 
-function EventDetailPage() {
+export function EventDetailPage() {
   const { event, events } = useRouteLoaderData('event-detail');
 
   return (
@@ -29,8 +29,6 @@ function EventDetailPage() {
   );
 }
 
-export default EventDetailPage;
-
 async function loadEvent(id) {
   const response = await fetch('http://localhost:8080/events/' + id);
 
@@ -39,7 +37,7 @@ async function loadEvent(id) {
       { message: 'Could not fetch details for selected event.' },
       {
         status: 500,
-      }
+      },
     );
   } else {
     const resData = await response.json();
@@ -59,7 +57,7 @@ async function loadEvents() {
       { message: 'Could not fetch events.' },
       {
         status: 500,
-      }
+      },
     );
   } else {
     const resData = await response.json();
@@ -87,7 +85,7 @@ export async function action({ params, request }) {
       { message: 'Could not delete event.' },
       {
         status: 500,
-      }
+      },
     );
   }
   return redirect('/events');

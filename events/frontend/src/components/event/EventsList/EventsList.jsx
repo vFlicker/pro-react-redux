@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import classes from './EventsList.module.css';
 
-function EventsList({events}) {
+export function EventsList({ events }) {
   // const events = useLoaderData();
 
   return (
@@ -25,5 +25,3 @@ function EventsList({events}) {
     </div>
   );
 }
-
-export default EventsList;
