@@ -65,19 +65,19 @@ async function loadEvents() {
   }
 }
 
-export async function loader({ request, params }) {
+export const eventDetailLoader = async ({ request, params }) => {
   const id = params.eventId;
 
   return defer({
     event: await loadEvent(id),
     events: loadEvents(),
   });
-}
+};
 
-export async function action({ params, request }) {
+export const deleteEventAction = async ({ params, request }) => {
   const eventId = params.eventId;
   const response = await fetch('http://localhost:8080/events/' + eventId, {
-    method: request.method,
+    method: 'DELETE',
   });
 
   if (!response.ok) {
@@ -89,4 +89,4 @@ export async function action({ params, request }) {
     );
   }
   return redirect('/events');
-}
+};

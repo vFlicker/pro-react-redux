@@ -16,9 +16,9 @@ export function EventForm({ method, event }) {
 
   const isSubmitting = navigation.state === 'submitting';
 
-  function cancelHandler() {
+  const cancelHandler = () => {
     navigate('..');
-  }
+  };
 
   return (
     <Form method={method} className={classes.form}>
@@ -81,7 +81,7 @@ export function EventForm({ method, event }) {
   );
 }
 
-export async function action({ request, params }) {
+export const createOrUpdateEventAction = async ({ request, params }) => {
   const method = request.method;
   const data = await request.formData();
 
@@ -116,4 +116,4 @@ export async function action({ request, params }) {
   }
 
   return redirect('/events');
-}
+};
