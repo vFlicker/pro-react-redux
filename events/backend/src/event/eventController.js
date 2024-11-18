@@ -1,4 +1,5 @@
 import { StatusCode } from '../constants.js';
+import { wait } from '../helpers/index.js';
 import { eventService } from './eventService.js';
 import { createEventValidator } from './validators/createEventValidator.js';
 import { updateEventValidator } from './validators/updateEventValidator.js';
@@ -9,11 +10,13 @@ const getAll = async (_req, res) => {
 };
 
 const getById = async (req, res) => {
+  await wait(2000);
   const foundEvent = await eventService.get(req.params.id);
   res.status(StatusCode.OK).json({ event: foundEvent });
 };
 
 const create = async (req, res) => {
+  await wait(2000);
   const event = req.body;
 
   const errors = createEventValidator(event);
@@ -28,6 +31,7 @@ const create = async (req, res) => {
 };
 
 const updateById = async (req, res) => {
+  await wait(2000);
   const event = req.body;
 
   const errors = updateEventValidator(event);
@@ -43,6 +47,7 @@ const updateById = async (req, res) => {
 };
 
 const deleteById = async (req, res) => {
+  await wait(2000);
   await eventService.remove(req.params.id);
   res.status(StatusCode.OK).json({ message: 'Event deleted.' });
 };
