@@ -1,6 +1,6 @@
 # Events
 
-This repository showcases the use of the React Router library alongside a custom useInput hook for form handling. It demonstrates the following features:
+This repository showcases the use of the React Router library. It demonstrates the following features:
 
 - Client-side routing with react-router-dom
 - Nested routing for better structure and organization
