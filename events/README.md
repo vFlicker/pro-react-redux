@@ -6,6 +6,7 @@ This repository showcases the use of the React Router library. It demonstrates t
 - Nested routing for better structure and organization
 - Error handling for improved user experience
 - Data fetching and submission via the router
+- Using the `useInput` hook
 
 ## Downloading
 
