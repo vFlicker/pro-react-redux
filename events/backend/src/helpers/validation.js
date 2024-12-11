@@ -10,3 +10,7 @@ export const isValidDate = (value) => {
 export const isValidImageUrl = (value) => {
   return value && value.startsWith('http');
 };
+
+export const isValidEmail = (value) => {
+  return value && value.includes('@');
+};

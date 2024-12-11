@@ -1,13 +1,15 @@
 import express from 'express';
 
 import { ExitCode, PORT } from './constants.js';
-import { eventRouter } from './event/index.js';
 import { corsMiddleware, errorMiddleware } from './middlewares/index.js';
+import { eventRouter } from './modules/event/index.js';
+import { userRouter } from './modules/user/index.js';
 
 const app = express();
 
 app.use(express.json());
 app.use(corsMiddleware);
+app.use('/user', userRouter);
 app.use('/events', eventRouter);
 app.use(errorMiddleware);
 

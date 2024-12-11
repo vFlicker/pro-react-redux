@@ -1,20 +1,8 @@
-import { StatusCode } from '../constants.js';
-import { wait } from '../helpers/index.js';
-import { eventService } from './eventService.js';
+import { StatusCode } from '../../constants.js';
+import { wait } from '../../helpers/index.js';
+import { eventRepository } from './eventRepository.js';
 import { createEventValidator } from './validators/createEventValidator.js';
 import { updateEventValidator } from './validators/updateEventValidator.js';
-
-const getAll = async (_req, res) => {
-  await wait(2000);
-  const foundEvents = await eventService.getAll();
-  res.json({ events: foundEvents });
-};
-
-const getById = async (req, res) => {
-  await wait(2000);
-  const foundEvent = await eventService.get(req.params.id);
-  res.status(StatusCode.OK).json({ event: foundEvent });
-};
 
 const create = async (req, res) => {
   await wait(2000);
@@ -27,8 +15,22 @@ const create = async (req, res) => {
     return;
   }
 
-  await eventService.add(event);
-  res.status(StatusCode.CREATED).json({ message: 'Event saved.', event });
+  const createdEvent = await eventRepository.add(event);
+  res
+    .status(StatusCode.CREATED)
+    .json({ message: 'Event saved.', event: createdEvent });
+};
+
+const getAll = async (_req, res) => {
+  await wait(2000);
+  const foundEvents = await eventRepository.findAll();
+  res.json(foundEvents);
+};
+
+const getById = async (req, res) => {
+  await wait(2000);
+  const foundEvent = await eventRepository.findById(req.params.id);
+  res.status(StatusCode.OK).json(foundEvent);
 };
 
 const updateById = async (req, res) => {
@@ -43,13 +45,15 @@ const updateById = async (req, res) => {
       .json({ message, errors });
   }
 
-  await eventService.replace(req.params.id, event);
-  res.status(StatusCode.OK).json({ message: 'Event updated.', event });
+  const updatedEvent = await eventRepository.update(req.params.id, event);
+  res
+    .status(StatusCode.OK)
+    .json({ message: 'Event updated.', event: updatedEvent });
 };
 
 const deleteById = async (req, res) => {
   await wait(2000);
-  await eventService.remove(req.params.id);
+  await eventRepository.remove(req.params.id);
   res.status(StatusCode.OK).json({ message: 'Event deleted.' });
 };
 

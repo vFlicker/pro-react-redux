@@ -2,10 +2,10 @@ import {
   isValidDate,
   isValidImageUrl,
   isValidText,
-} from '../../helpers/index.js';
+} from '../../../helpers/index.js';
 
-export const updateEventValidator = (data) => {
-  let errors = {};
+export const createEventValidator = (data) => {
+  const errors = {};
 
   if (!isValidText(data.title)) {
     errors.title = 'Invalid title.';
