@@ -1,8 +1,8 @@
 import { StatusCode } from '../constants.js';
 
-export class NotFoundError {
-  constructor(message) {
-    this.message = message;
-    this.status = StatusCode.NOT_FOUND;
+export class AuthenticationError {
+  constructor() {
+    this.message = 'Email or password is incorrect.';
+    this.status = StatusCode.UNAUTHORIZED;
   }
 }
