@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import {
+  checkAuthLoader,
   createEventAction,
   deleteEventAction,
   eventDetailLoader,
@@ -37,7 +38,7 @@ export const router = createBrowserRouter([
         path: 'auth',
         children: [
           {
-            path: 'sing-in',
+            path: 'sign-in',
             element: <SignInPage />,
             action: signInAction,
           },
@@ -75,6 +76,7 @@ export const router = createBrowserRouter([
                 path: 'edit',
                 element: <EditEventPage />,
                 action: updateEventAction,
+                loader: checkAuthLoader,
               },
             ],
           },
@@ -82,6 +84,7 @@ export const router = createBrowserRouter([
             path: 'new',
             element: <NewEventPage />,
             action: createEventAction,
+            loader: checkAuthLoader,
           },
         ],
       },
