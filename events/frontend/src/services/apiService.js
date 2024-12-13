@@ -1,6 +1,22 @@
 import { ApiRoute, BASE_URL, HttpMethod } from '../constants';
 
 export class ApiService {
+  async signIn(data) {
+    return this.#load({
+      url: ApiRoute.SIGN_IN,
+      method: HttpMethod.POST,
+      body: JSON.stringify(data),
+    });
+  }
+
+  async signUp(data) {
+    return this.#load({
+      url: ApiRoute.SIGN_UP,
+      method: HttpMethod.POST,
+      body: JSON.stringify(data),
+    });
+  }
+
   async getEvent(eventId) {
     return this.#load({ url: `${ApiRoute.EVENTS}/${eventId}` });
   }

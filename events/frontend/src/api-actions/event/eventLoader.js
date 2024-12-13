@@ -13,6 +13,6 @@ export const eventLoader = async (id) => {
     );
   }
 
-  const resData = await response.json();
-  return resData.event;
+  const event = await response.json();
+  return event;
 };

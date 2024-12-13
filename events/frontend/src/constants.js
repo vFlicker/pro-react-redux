@@ -8,6 +8,7 @@ export const StatusCode = {
   UNAUTHORIZED: 401,
   FORBIDDEN: 403,
   NOT_FOUND: 404,
+  CONFLICT: 409,
   UNPROCESSABLE_ENTITY: 422,
   INTERNAL_SERVER_ERROR: 500,
 };
@@ -22,4 +23,6 @@ export const HttpMethod = {
 
 export const ApiRoute = {
   EVENTS: '/events',
+  SIGN_IN: '/user/login',
+  SIGN_UP: '/user/register',
 };

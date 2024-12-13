@@ -15,8 +15,8 @@ app.use(errorMiddleware);
 
 const onListeningHandler = () => {
   const url = `http://localhost:${PORT}`;
-  const text = `Server is running on ${url}`;
-  console.log(text);
+  const serverStatusMessage = `Server is running on ${url}`;
+  console.log(serverStatusMessage);
 };
 
 const onErrorHandler = (err) => {

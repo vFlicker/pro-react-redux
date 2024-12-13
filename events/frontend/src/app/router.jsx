@@ -5,9 +5,15 @@ import {
   deleteEventAction,
   eventDetailLoader,
   eventsLoader,
+  logoutAction,
   newsletterAction,
+  signInAction,
+  signUpAction,
+  tokenLoader,
   updateEventAction,
 } from '../api-actions';
+import { SignInPage } from '../pages/auth/signIn';
+import { SignUpPage } from '../pages/auth/signUp';
 import { ErrorPage } from '../pages/error';
 import { EditEventPage } from '../pages/event/editEvent';
 import { EventDetailPage } from '../pages/event/eventDetail';
@@ -22,9 +28,30 @@ export const router = createBrowserRouter([
   {
     path: '/',
     element: <MainLayout />,
+    id: 'root',
+    loader: tokenLoader,
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <HomePage /> },
+      {
+        path: 'auth',
+        children: [
+          {
+            path: 'sing-in',
+            element: <SignInPage />,
+            action: signInAction,
+          },
+          {
+            path: 'sign-up',
+            element: <SignUpPage />,
+            action: signUpAction,
+          },
+          {
+            path: 'logout',
+            action: logoutAction,
+          },
+        ],
+      },
       {
         path: 'events',
         element: <EventsLayout />,
